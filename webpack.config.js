@@ -1,14 +1,14 @@
-const path              = require('path');
-const webpack           = require('webpack');
+const path = require('path');
+const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
+
 module.exports = {
     entry: './src/app.jsx',
-    output: {
+    output:{
         path: path.resolve(__dirname, 'dist'),
-        publicPath: '/dist/',
-        filename: 'js/app.js'
+        filename: 'app.js'
     },
     module: {
         rules: [
@@ -68,9 +68,8 @@ module.exports = {
         ]
     },
     plugins: [
-        // 处理html文件
         new HtmlWebpackPlugin({
-            template: './src/index.html'
+            template: './src/template.html',
         }),
         // 独立css文件
         new ExtractTextPlugin("css/[name].css"),

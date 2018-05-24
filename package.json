@@ -4,6 +4,10 @@
   "main": "index.js",
   "repository": "git@github.com:oonnnee/youcai-page-manage.git",
   "license": "MIT",
+  "scripts": {
+    "build": "node_modules/.bin/webpack",
+    "server": "node_modules/.bin/webpack-dev-server"
+  },
   "devDependencies": {
     "babel-core": "6.26.0",
     "babel-loader": "7.1.2",
