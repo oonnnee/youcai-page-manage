@@ -8,11 +8,15 @@ module.exports = {
     entry: './src/app.jsx',
     output:{
         path: path.resolve(__dirname, 'dist'),
+        publicPath: "/dist/",
         filename: 'app.js'
     },
     resolve: {
         alias: {
-            page: path.resolve(__dirname, 'src/page')
+            page: path.resolve(__dirname, 'src/page'),
+            style: path.resolve(__dirname, 'src/style'),
+            img: path.resolve(__dirname, 'src/img'),
+            layout: path.resolve(__dirname, 'src/page/layout')
         }
     },
     module: {
@@ -77,7 +81,7 @@ module.exports = {
             template: './src/template.html',
         }),
         // 独立css文件
-        new ExtractTextPlugin("css/[name].css"),
+        new ExtractTextPlugin("style/[name].css"),
         // 提出公共模块
         new webpack.optimize.CommonsChunkPlugin({
             name : 'common',
