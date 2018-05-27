@@ -1,0 +1,3 @@
+.be-user-nav > li.dropdown > a:focus{
+    display: block;
+}

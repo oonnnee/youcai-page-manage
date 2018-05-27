@@ -15,7 +15,9 @@ module.exports = {
         alias: {
             page: path.resolve(__dirname, 'src/page'),
             style: path.resolve(__dirname, 'src/style'),
+            js: path.resolve(__dirname, 'src/js'),
             img: path.resolve(__dirname, 'src/img'),
+            lib: path.resolve(__dirname, 'src/lib'),
             layout: path.resolve(__dirname, 'src/page/layout')
         }
     },

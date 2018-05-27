@@ -6,6 +6,9 @@ import Login from 'page/login.jsx'
 import Index from 'page/index.jsx'
 
 import 'style/style.css'
+import 'style/app.css'
+
+
 class App extends React.Component{
 
     constructor(props){
