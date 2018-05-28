@@ -5,31 +5,31 @@ class NavTop extends React.Component{
 
     render(){
         return (
-            <nav className="navbar navbar-default navbar-fixed-top be-top-header">
-                <div className="container-fluid">
-                    <div className="navbar-header"><a href="index.html" className="navbar-brand"></a></div>
-                    <div className="be-right-navbar">
-                        <ul className="nav navbar-nav navbar-right be-user-nav">
-                            <li className="dropdown">
-                                <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" className="dropdown-toggle">
-                                    <img src={require('img/avatar.png')} alt="Avatar"/>
-                                    <span className="user-name">Túpac Amaru</span></a>
-                                <ul role="menu" className="dropdown-menu">
-                                    <li>
-                                        <div className="user-info">
-                                            <div className="user-name">Túpac Amaru</div>
-                                            <div className="user-position online">Available</div>
-                                        </div>
-                                    </li>
-                                    <li><a href="#"><span className="icon mdi mdi-face"></span> Account</a></li>
-                                    <li><a href="#"><span className="icon mdi mdi-settings"></span> Settings</a></li>
-                                    <li><a href="#"><span className="icon mdi mdi-power"></span> Logout</a></li>
-                                </ul>
+            <nav className="navbar navbar-default top-navbar" role="navigation">
+                <div className="navbar-header">
+                    <button type="button" className="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                        <span className="sr-only">Toggle navigation</span>
+                        <span className="icon-bar"></span>
+                        <span className="icon-bar"></span>
+                        <span className="icon-bar"></span>
+                    </button>
+                    <a className="navbar-brand" href="index.html"> <strong>优菜网管理端</strong></a>
+                </div>
+
+                <ul className="nav navbar-top-links navbar-right">
+                    <li className="dropdown">
+                        <a className="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+                            <i className="fa fa-user fa-fw"></i> <i className="fa fa-caret-down"></i>
+                        </a>
+                        <ul className="dropdown-menu dropdown-user">
+                            <li><a href="#"><i className="fa fa-user fa-fw"></i> User Profile</a>
+                            </li>
+                            <li className="divider"></li>
+                            <li><a href="#"><i className="fa fa-sign-out fa-fw"></i> Logout</a>
                             </li>
                         </ul>
-                        <div className="page-title"><span>主页</span></div>
-                    </div>
-                </div>
+                    </li>
+                </ul>
             </nav>
         );
     }

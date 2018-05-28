@@ -5,9 +5,9 @@ import {Link, BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import Login from 'page/login.jsx'
 import Index from 'page/index.jsx'
 
-import 'style/style.css'
 import 'style/app.css'
 
+import 'js/app.js'
 
 class App extends React.Component{
 
