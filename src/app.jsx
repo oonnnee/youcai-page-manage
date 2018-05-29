@@ -5,9 +5,9 @@ import {Link, BrowserRouter as Router, Route, Switch, Redirect} from 'react-rout
 import Login from 'page/login.jsx'
 import Layout from 'page/layout.jsx'
 
-import 'style/app.css'
-
 import 'js/app.js'
+
+import 'style/app.css'
 
 class App extends React.Component{
 
@@ -20,8 +20,7 @@ class App extends React.Component{
             <Router>
                 <Switch>
                     <Route path="/login" component={Login}/>
-                    <Route exact path="/" component={Layout} />
-                    <Redirect from="*" to="/"/>
+                    <Route path="/" component={Layout}/>
                 </Switch>
             </Router>
         )

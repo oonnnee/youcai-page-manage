@@ -91,6 +91,9 @@ module.exports = {
         })
     ],
     devServer: {
-        port: 8088
+        port: 8088,
+        historyApiFallback: {
+            index: '/dist/index.html'
+        }
     }
 };

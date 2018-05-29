@@ -6,6 +6,18 @@ body {
     background: #e6e6e6;
 }
 
+/*-------------------------------
+        登录页面
+-------------------------------*/
+.login-panel {
+    margin-top: 15%;
+}
+
+.login-panel .login-title{
+    line-height: 60px;
+    font-size: 18px;
+}
+
 @media (min-width: 768px) {
     /*-------------------------------
             内容区
@@ -147,9 +159,6 @@ p {
     line-height:25px;
     padding-top:20px;
 }
-.panel{
-    border-radius:0px;
-}
 .navbar-side .nav > li > a > i{
     color: #FFFFFF;
     padding: 8px;
@@ -242,22 +251,8 @@ p {
     background-color:#fff;
 
 }
-.panel-default {
-    border-color: #ECECEC;
-}
-.panel-default > .panel-heading {
-    color: #000;
-    border-color: #FFF;
-    font-weight:bold;
-    background: #FFFFFF;
-    font-size: 16px;
-    padding: 15px 15px 0;}
-.panel-heading {
-    /* padding: 15px 15px 0px; */
-    border-bottom: 1px solid transparent;
-    border-top-left-radius: 3px;
-    border-top-right-radius: 3px;
-}
+
+
 .jumbotron{
     padding:20px;
 }
