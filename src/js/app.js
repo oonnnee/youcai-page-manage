@@ -212,12 +212,13 @@
                 $('.navbar-side').animate({left: '0px'});
                 $(this).removeClass('closed');
                 $('#page-wrapper').animate({'margin-left' : '260px'});
-
+                $('#sideNav').animate({left: '260px'});
             }
             else{
                 $(this).addClass('closed');
                 $('.navbar-side').animate({left: '-260px'});
                 $('#page-wrapper').animate({'margin-left' : '0px'});
+                $('#sideNav').animate({left: '0'});
             }
         });
     });

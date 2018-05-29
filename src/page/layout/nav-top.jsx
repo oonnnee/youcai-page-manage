@@ -19,7 +19,7 @@ class NavTop extends React.Component{
                 <ul className="nav navbar-top-links navbar-right">
                     <li className="dropdown">
                         <a className="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
-                            <i className="fa fa-user fa-fw"></i> <i className="fa fa-caret-down"></i>
+                            <i className="fa fa-user fa-fw"></i><i className="fa fa-caret-down"></i>
                         </a>
                         <ul className="dropdown-menu dropdown-user">
                             <li><a href="#"><i className="fa fa-user fa-fw"></i> User Profile</a>

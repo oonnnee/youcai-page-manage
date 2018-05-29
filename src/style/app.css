@@ -10,7 +10,7 @@ http://creativecommons.org/licenses/by/3.0/
 ------------------------------------------------*/
 body {
     font-family: 'Open Sans', sans-serif;
-    background: #32C2CD url(../img/bg-img.jpg) !important;
+    background: #e6e6e6;
 }
 
 #wrapper {
@@ -19,15 +19,12 @@ body {
 
 #page-wrapper {
     padding: 15px 15px;
-    min-height: 600px;
-    background: #E6E6E6;
 }
 #page-inner {
     width:100%;
     margin:10px 20px 10px 0px;
     background-color:transparent;
     padding:10px;
-    min-height:1200px;
 }
 
 .text-center {
@@ -83,7 +80,10 @@ p {
     z-index: 1;
     position: fixed;
     width: 260px;
-    top: 80px;
+    top: 60px;
+    bottom: 0;
+    overflow-y: auto;
+    padding-top: 20px;
 }
 #page-wrapper {
     position: relative;
@@ -552,12 +552,12 @@ ul.nav.nav-second-level.collapse.in {
     font-weight: 500;
 }
 #sideNav{
-    position: absolute;
-    right: -28px;
+    position: fixed;
+    left: 260px;
     z-index: 3;
     background-color: #CFCECE;
     padding: 3px 9px;
-    top: -11px;
+    top: 70px;
     color: #283643;
     cursor:pointer;
     border-radius: 0 15px 15px 0;
@@ -590,11 +590,7 @@ ul.dropdown-menu.dropdown-messages li a div {
     #page-wrapper{
         margin: 0 0 0 260px;
         padding: 15px 30px;
-
-        min-height: 1200px;
-
     }
-
 
     .navbar-side {
         width: 260px;
@@ -606,6 +602,8 @@ ul.dropdown-menu.dropdown-messages li a div {
     }
 
 }
+
+
 @media(max-width:480px) {
     .page-header small {
         display: block;
@@ -618,6 +616,10 @@ ul.dropdown-menu.dropdown-messages li a div {
         border-radius: 100%;
         overflow: hidden;
         margin: 14px;
+    }
+
+    .navbar-side {
+
     }
 }
 
