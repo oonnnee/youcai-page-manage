@@ -1,5 +1,12 @@
 import React from 'react'
 
+import LoginService from 'service/login-service.jsx'
+import AppUtil from 'util/app-util.jsx'
+
+
+const loginService = new LoginService();
+const appUtil = new AppUtil();
+
 class Login extends React.Component{
 
     constructor(props){
@@ -17,9 +24,9 @@ class Login extends React.Component{
                     <div className="panel-heading">
                         <div className="row">
                             <div className="col-md-3">
-                                <img src={require('img/brand.png')} className="img-responsive" />
+                                <img src={require('img/brand.png')} className="img-responsive center-block" />
                             </div>
-                            <div className="col-md-9 login-title">
+                            <div className="col-md-9 login-title text-center">
                                 欢迎登录 - 优菜网管理系统
                             </div>
                         </div>
@@ -42,6 +49,9 @@ class Login extends React.Component{
         );
     }
 
+    /*-------------------------------
+            用户名及密码输入框内容改变
+    -------------------------------*/
     handleInputChange(e){
         const target = e.target;
         switch (target.name){
@@ -54,15 +64,31 @@ class Login extends React.Component{
         }
     }
 
+    /*-------------------------------
+            登录
+    -------------------------------*/
     handleLogin(){
-        const id = this.state.id;
-        const pwd = this.state.pwd;
-        /*----- 1.校验 -----*/
-        if (id.trim() === ''){
-            alert("用户名不能为空");
-        }else if (pwd.trim() === ''){
-            alert('密码不能为空');
+        const loginInfo = {
+            id: this.state.id,
+            pwd: this.state.pwd
         }
+        /*----- 1.校验 -----*/
+        const checkResult = loginService.checkLoginInfo(loginInfo);
+        if (checkResult.status === false) {
+            appUtil.errorTip(checkResult.msg);
+            return;
+        }
+        /*----- 2.登录 -----*/
+        loginService.login(loginInfo).then((data) => {
+            /*----- 成功 -----*/
+            /*----- 1.添加用户信息到本地存储 -----*/
+            appUtil.setStorage('user', data);
+            /*----- 2.跳转到主页 -----*/
+            appUtil.redirectToIndex();
+        }, (msg) => {
+            /*----- 失败 -----*/
+            appUtil.errorTip(msg);
+        })
     }
 }
 

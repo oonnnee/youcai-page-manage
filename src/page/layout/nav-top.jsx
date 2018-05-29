@@ -1,5 +1,10 @@
 import React from 'react'
 
+import LoginService from 'service/login-service.jsx'
+import AppUtil from 'util/app-util.jsx'
+
+const loginService = new LoginService();
+const appUtil = new AppUtil();
 
 class NavTop extends React.Component{
 
@@ -13,19 +18,19 @@ class NavTop extends React.Component{
                         <span className="icon-bar"></span>
                         <span className="icon-bar"></span>
                     </button>
-                    <a className="navbar-brand" href="index.html"> <strong>优菜网管理端</strong></a>
+                    <a className="navbar-brand" href="index.html"> <strong>优菜网管理系统</strong></a>
                 </div>
 
                 <ul className="nav navbar-top-links navbar-right">
                     <li className="dropdown">
-                        <a className="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
-                            <i className="fa fa-user fa-fw"></i><i className="fa fa-caret-down"></i>
+                        <a className="dropdown-toggle" data-toggle="dropdown" href="javascript:;" aria-expanded="false">
+                            <i className="fa fa-user fa-fw"></i>欢迎, admin <i className="fa fa-caret-down"></i>
                         </a>
                         <ul className="dropdown-menu dropdown-user">
-                            <li><a href="#"><i className="fa fa-user fa-fw"></i> User Profile</a>
+                            <li><a href="javascript:;"><i className="fa fa-user fa-fw"></i> 用户信息</a>
                             </li>
                             <li className="divider"></li>
-                            <li><a href="#"><i className="fa fa-sign-out fa-fw"></i> Logout</a>
+                            <li><a href="javascript:;" onClick={() => this.handleLogout()}><i className="fa fa-sign-out fa-fw"></i> 退出登录</a>
                             </li>
                         </ul>
                     </li>
@@ -34,6 +39,14 @@ class NavTop extends React.Component{
         );
     }
 
+    handleLogout(){
+        loginService.logout().then(data => {
+            appUtil.successTip(data);
+            appUtil.doLogin();
+        }, errMsg => {
+            appUtil.errorTip(errMsg);
+        })
+    }
 }
 
 

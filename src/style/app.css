@@ -556,7 +556,8 @@ footer p{
     border-bottom: 1px solid rgba(107, 108, 109, 0.19);
 }
 ul.nav.nav-second-level.collapse.in {
-    background: #096E75;
+    /*background: #096E75;*/
+    opacity: .5;
 }
 .sidebar-collapse .nav > li > a:hover,
 .sidebar-collapse .nav > li > a:focus {

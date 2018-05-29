@@ -17,8 +17,9 @@ module.exports = {
             style: path.resolve(__dirname, 'src/style'),
             js: path.resolve(__dirname, 'src/js'),
             img: path.resolve(__dirname, 'src/img'),
-            lib: path.resolve(__dirname, 'src/lib'),
-            layout: path.resolve(__dirname, 'src/page/layout')
+            layout: path.resolve(__dirname, 'src/page/layout'),
+            util: path.resolve(__dirname, 'src/util'),
+            service: path.resolve(__dirname, 'src/service')
         }
     },
     module: {
@@ -94,6 +95,12 @@ module.exports = {
         port: 8088,
         historyApiFallback: {
             index: '/dist/index.html'
+        },
+        proxy : {
+            '/manage': {
+                target: 'http://localhost:8080',
+                changeOrigin: true
+            }
         }
     }
 };
