@@ -5,7 +5,7 @@ import NavTop from 'layout/nav-top.jsx'
 import NavSide from 'layout/nav-side.jsx'
 import Home from 'page/home.jsx'
 
-class Index extends React.Component{
+class Layout extends React.Component{
 
     render(){
         return (
@@ -22,4 +22,4 @@ class Index extends React.Component{
 }
 
 
-export default Index;
+export default Layout;

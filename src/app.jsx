@@ -1,9 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import {Link, BrowserRouter as Router, Route, Switch} from 'react-router-dom'
+import {Link, BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom'
 
 import Login from 'page/login.jsx'
-import Index from 'page/index.jsx'
+import Layout from 'page/layout.jsx'
 
 import 'style/app.css'
 
@@ -20,7 +20,8 @@ class App extends React.Component{
             <Router>
                 <Switch>
                     <Route path="/login" component={Login}/>
-                    <Route path="/" component={Index} />
+                    <Route exact path="/" component={Layout} />
+                    <Redirect from="*" to="/"/>
                 </Switch>
             </Router>
         )
