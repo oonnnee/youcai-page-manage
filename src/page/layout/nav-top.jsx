@@ -5,7 +5,7 @@ class NavTop extends React.Component{
 
     render(){
         return (
-            <nav className="navbar navbar-default top-navbar" role="navigation">
+            <nav className="navbar-default top-navbar" role="navigation">
                 <div className="navbar-header">
                     <button type="button" className="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
                         <span className="sr-only">Toggle navigation</span>

@@ -1,11 +1,4 @@
 /*----------------------------------------------
-Author : www.webthemez.com
-License: Commons Attribution 3.0
-http://creativecommons.org/licenses/by/3.0/
-------------------------------------------------*/
-
-
-/*----------------------------------------------
     COMMON  STYLES
 ------------------------------------------------*/
 body {
@@ -13,19 +6,117 @@ body {
     background: #e6e6e6;
 }
 
-#wrapper {
-    width: 100%;
+@media (min-width: 768px) {
+    /*-------------------------------
+            内容区
+    -------------------------------*/
+    #page-wrapper {
+        padding: 15px 30px;
+        position: relative;
+        top: 55px;
+        margin: 0 0 0 260px;
+    }
+    #page-inner {
+        width:100%;
+        margin:10px 20px 10px 0px;
+        background-color:transparent;
+        padding:10px;
+    }
+
+    /*-------------------------------
+            侧边栏导航区
+    -------------------------------*/
+    .navbar-side {
+        z-index: 1;
+        position: fixed;
+        width: 260px;
+        top: 60px;
+        bottom: 0;
+        overflow-y: auto;
+        padding-top: 20px;
+        border:none;
+        background: #32C2CD url(../img/bg-img.jpg) !important;
+    }
+    /*----- 收缩按钮 -----*/
+    #sideNav{
+        position: fixed;
+        left: 260px;
+        z-index: 3;
+        background-color: #CFCECE;
+        padding: 3px 9px;
+        top: 70px;
+        color: #283643;
+        cursor:pointer;
+        border-radius: 0 15px 15px 0;
+        width: 28px;
+        font-size: 16px;
+    }
+
+    /*-------------------------------
+            上边栏导航区
+    -------------------------------*/
+    .top-navbar{
+        position: fixed;
+        width: 100%;
+        z-index: 300;
+        -webkit-box-shadow: 0 3px 3px rgba(0, 0, 0, 0.05);
+        -moz-box-shadow: 0 3px 3px rgba(0, 0, 0, 0.05);
+        box-shadow: 0 3px 3px rgba(0, 0, 0, 0.05);
+        background: #4A4A4A;
+    }
+
+    .top-navbar .navbar-brand {
+        background: #24383A;
+    }
 }
 
-#page-wrapper {
-    padding: 15px 15px;
+@media (max-width: 768px) {
+    /*-------------------------------
+            内容区
+    -------------------------------*/
+    #page-wrapper {
+        padding: 15px 30px;
+        margin: 0;
+    }
+    #page-inner {
+        width:100%;
+        margin:10px 20px 10px 0px;
+        background-color:transparent;
+        padding:10px;
+    }
+
+    /*-------------------------------
+            侧边栏导航区
+    -------------------------------*/
+    .navbar-side {
+        width: 100%;
+        border:none;
+        background: #32C2CD url(../img/bg-img.jpg) !important;
+    }
+    /*----- 收缩按钮 -----*/
+    #sideNav{
+        display: none;
+    }
+
+    /*-------------------------------
+            上边栏导航区
+    -------------------------------*/
+    .top-navbar{
+        width: 100%;
+        -webkit-box-shadow: 0 3px 3px rgba(0, 0, 0, 0.05);
+        -moz-box-shadow: 0 3px 3px rgba(0, 0, 0, 0.05);
+        box-shadow: 0 3px 3px rgba(0, 0, 0, 0.05);
+        background: #4A4A4A;
+    }
+
+    .top-navbar .navbar-brand {
+        background: none;
+    }
 }
-#page-inner {
-    width:100%;
-    margin:10px 20px 10px 0px;
-    background-color:transparent;
-    padding:10px;
-}
+
+/*-------------------------------
+        其它
+-------------------------------*/
 
 .text-center {
     text-align:center;
@@ -56,9 +147,6 @@ p {
     line-height:25px;
     padding-top:20px;
 }
-.navbar-side {
-    z-index: 0;
-}
 .panel{
     border-radius:0px;
 }
@@ -68,27 +156,7 @@ p {
     width: 30px;
     text-align: center;
 }
-.top-navbar{
-    position: fixed;
-    width: 100%;
-    z-index: 300;
-    -webkit-box-shadow: 0 3px 3px rgba(0, 0, 0, 0.05);
-    -moz-box-shadow: 0 3px 3px rgba(0, 0, 0, 0.05);
-    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.05);
-}
-.navbar-side {
-    z-index: 1;
-    position: fixed;
-    width: 260px;
-    top: 60px;
-    bottom: 0;
-    overflow-y: auto;
-    padding-top: 20px;
-}
-#page-wrapper {
-    position: relative;
-    top: 55px;
-}
+
 .top-navbar .nav > li > a:hover, .top-navbar .nav > li > a:focus {
     text-decoration: none;
     background-color: #2497BA;
@@ -385,9 +453,6 @@ footer p{
     max-height:170px;
     max-width:170px;
 }
-.top-navbar{
-    margin:0px;
-}
 .top-navbar .navbar-brand {
     color: #fff;
     width: 260px;
@@ -397,7 +462,6 @@ footer p{
     font-weight: 700;
     text-transform: uppercase;
     line-height: 30px;
-    background: #24383A;
 }
 .navbar-brand b{
     color: #4BD28C;
@@ -505,14 +569,6 @@ ul.nav.nav-second-level.collapse.in {
     outline:0;
 }
 
-.navbar-side {
-    border:none;
-    background: #32C2CD url(../img/bg-img.jpg) !important;
-}
-.top-navbar {
-    background: #4A4A4A;
-    border-bottom:none;
-}
 .top-navbar .nav > li > a > i {
     margin-right: 2px;
 }
@@ -551,19 +607,7 @@ ul.nav.nav-second-level.collapse.in {
     display: inline-block;
     font-weight: 500;
 }
-#sideNav{
-    position: fixed;
-    left: 260px;
-    z-index: 3;
-    background-color: #CFCECE;
-    padding: 3px 9px;
-    top: 70px;
-    color: #283643;
-    cursor:pointer;
-    border-radius: 0 15px 15px 0;
-    width: 28px;
-    font-size: 16px;
-}
+
 ul.dropdown-menu.dropdown-messages li a div {
     padding: 2px 0;
 }
@@ -586,41 +630,10 @@ ul.dropdown-menu.dropdown-messages li a div {
     MEDIA QUERIES
 ------------------------------------------------*/
 
-@media(min-width:768px) {
-    #page-wrapper{
-        margin: 0 0 0 260px;
-        padding: 15px 30px;
-    }
-
-    .navbar-side {
-        width: 260px;
-        z-index: 1;
-    }
-
-    .navbar {
-        border-radius: 0px;
-    }
-
-}
-
 
 @media(max-width:480px) {
-    .page-header small {
-        display: block;
-        padding-top: 14px;
-        font-size: 19px;
-    }
-    .panel-left {
-        width: 85px;
-        height: 85px;
-        border-radius: 100%;
-        overflow: hidden;
-        margin: 14px;
-    }
 
-    .navbar-side {
 
-    }
 }
 
 
