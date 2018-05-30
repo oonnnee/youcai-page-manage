@@ -18,7 +18,7 @@ class NavTop extends React.Component{
                         <span className="icon-bar"></span>
                         <span className="icon-bar"></span>
                     </button>
-                    <a className="navbar-brand" href="index.html"> <strong>优菜网管理系统</strong></a>
+                    <a className="navbar-brand" href="/"> <strong>优菜网管理系统</strong></a>
                 </div>
 
                 <ul className="nav navbar-top-links navbar-right">

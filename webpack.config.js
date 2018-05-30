@@ -82,6 +82,7 @@ module.exports = {
     plugins: [
         new HtmlWebpackPlugin({
             template: './src/template.html',
+            favicon: './favicon.ico'
         }),
         // 独立css文件
         new ExtractTextPlugin("style/[name].css"),
@@ -101,6 +102,7 @@ module.exports = {
                 target: 'http://localhost:8080',
                 changeOrigin: true
             }
-        }
+        },
+        host:'192.168.1.175',
     }
 };

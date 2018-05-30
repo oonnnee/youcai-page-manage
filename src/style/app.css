@@ -126,6 +126,29 @@ body {
     }
 }
 
+
+/*-------------------------------
+            内容区
+-------------------------------*/
+.page-header-right {
+    position: absolute;
+    right: 15px;
+    top: 12px;
+}
+
+/*----- 搜索 -----*/
+.search-wrap{
+    margin-bottom: 20px;
+}
+.search-wrap .form-group{
+    margin-right: 10px;
+}
+
+/*----- 表格 -----*/
+.opear{
+    margin-right: 8px;
+}
+
 /*-------------------------------
         其它
 -------------------------------*/
@@ -532,7 +555,7 @@ footer p{
 }
 
 .nav-second-level li a {
-    padding-left: 37px;
+    padding-left: 40px;
 }
 
 .nav-third-level li a {
@@ -550,7 +573,7 @@ footer p{
     text-shadow:none;
 }
 .sidebar-collapse > .nav > li > a {
-    padding: 12px 10px;
+    padding: 9px 15px;
 }
 .sidebar-collapse > .nav > li {
     border-bottom: 1px solid rgba(107, 108, 109, 0.19);

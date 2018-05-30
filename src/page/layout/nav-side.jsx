@@ -24,7 +24,7 @@ class NavSide extends React.Component{
                             <a href="javascript:;"><i className="fa fa-desktop"></i>产品<span className="fa arrow"></span></a>
                             <ul className="nav nav-second-level collapse">
                                 <li>
-                                    <Link to="/">产品管理</Link>
+                                    <Link to="/product/manage">产品管理</Link>
                                 </li>
                             </ul>
                         </li>
