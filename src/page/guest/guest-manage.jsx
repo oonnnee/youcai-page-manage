@@ -37,10 +37,10 @@ class GuestManage extends React.Component {
     render() {
         const tableHeads = [
             {name: 'id', width: '15%'},
-            {name: '名称', width: '30%'},
+            {name: '名称', width: '27%'},
             {name: '地址', width: '25%'},
             {name: '手机号', width: '15%'},
-            {name: '操作', width: '15%'},
+            {name: '操作', width: '18%'},
         ];
         return (
             <div id="page-wrapper">

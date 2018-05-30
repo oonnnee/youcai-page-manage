@@ -38,9 +38,9 @@ class ProductManage extends React.Component {
             {name: 'id', width: '15%'},
             {name: '名称', width: '30%'},
             {name: '大类', width: '15%'},
-            {name: '单元', width: '5%'},
-            {name: '单价', width: '15%'},
-            {name: '操作', width: '20%'},
+            {name: '单元', width: '14%'},
+            {name: '单价/元', width: '10%'},
+            {name: '操作', width: '16%'},
         ];
         return (
             <div id="page-wrapper">
@@ -55,18 +55,18 @@ class ProductManage extends React.Component {
                     </PageTitle>
                     <DataGrid tableHeads={tableHeads}>
                         {
-                            this.state.content.map((guest, index) => {
-                                if(guest.id !== 'admin'){
+                            this.state.content.map((product, index) => {
+                                if(product.id !== 'admin'){
                                     return (
                                         <tr key={index}>
-                                            <td>{guest.id}</td>
-                                            <td>{guest.name}</td>
-                                            <td>{guest.addr}</td>
-                                            <td>{guest.phone}</td>
+                                            <td>{product.id}</td>
+                                            <td>{product.name}</td>
+                                            <td>{product.pcodeName}</td>
+                                            <td>{product.unit}</td>
+                                            <td>{product.price}</td>
                                             <td>
-                                                <Link className="opear" to={`/guest/detail/${guest.id}`}>详情</Link>
-                                                <Link className="opear" to={`/guest/edit/${guest.id}`}>编辑</Link>
-                                                <Link className="opear" to={`/guest/updatePwd/${guest.id}`}>修改密码</Link>
+                                                <Link className="opear" to={`/product/detail/${product.id}`}>详情</Link>
+                                                <Link className="opear" to={`/product/edit/${product.id}`}>编辑</Link>
                                             </td>
                                         </tr>
                                     );

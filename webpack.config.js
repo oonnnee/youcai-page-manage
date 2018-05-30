@@ -103,6 +103,5 @@ module.exports = {
                 changeOrigin: true
             }
         },
-        host:'192.168.1.175',
     }
 };
