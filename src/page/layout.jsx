@@ -7,6 +7,10 @@ import Home from 'page/home.jsx';
 
 import CategoryService from 'service/category-service.jsx';
 
+/*----- 用户 -----*/
+import UserProfile from 'page/user/user-profile.jsx';
+import UserEdit from 'page/user/user-edit.jsx';
+
 /*----- 客户 -----*/
 import GuestManage from 'page/guest/guest-manage.jsx'
 import GuestDetail from 'page/guest/guest-detail.jsx'
@@ -36,6 +40,9 @@ class Layout extends React.Component{
                     <NavSide/>
                     <Switch>
                         <Route exact path="/" component={Home}/>
+                        {/*----- 用户 -----*/}
+                        <Route exact path="/user/profile" component={UserProfile}/>
+                        <Route exact path="/user/edit" component={UserEdit}/>
                         {/*----- 客户 -----*/}
                         <Route exact path="/guest/manage" component={GuestManage}/>
                         <Route exact path="/guest/detail/:id" component={GuestDetail}/>

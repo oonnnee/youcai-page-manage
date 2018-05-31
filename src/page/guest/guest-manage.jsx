@@ -48,7 +48,7 @@ class GuestManage extends React.Component {
                     <PageTitle title="客户管理">
                         <div className="page-header-right">
                             <Link to="/guest/save" className="btn btn-primary">
-                                <i className="fa fa-plus"></i>
+                                <i className="fa fa-plus"></i>&nbsp;
                                 <span>新增客户</span>
                             </Link>
                         </div>

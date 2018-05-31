@@ -39,7 +39,7 @@ class ProductManage extends React.Component {
             {name: 'id', width: '15%'},
             {name: '名称', width: '30%'},
             {name: '大类', width: '15%'},
-            {name: '单元', width: '14%'},
+            {name: '单位', width: '14%'},
             {name: '单价/元', width: '10%'},
             {name: '操作', width: '16%'},
         ];
@@ -49,7 +49,7 @@ class ProductManage extends React.Component {
                     <PageTitle title="产品管理">
                         <div className="page-header-right">
                             <Link to="/product/save" className="btn btn-primary">
-                                <i className="fa fa-plus"></i>
+                                <i className="fa fa-plus"></i>&nbsp;
                                 <span>新增产品</span>
                             </Link>
                         </div>

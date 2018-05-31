@@ -56,7 +56,7 @@ class ProductDetail extends React.Component{
                                     </div>
                                 </div>
                                 <div className="form-group">
-                                    <label htmlFor="unit" className="col-sm-2 control-label">单元</label>
+                                    <label htmlFor="unit" className="col-sm-2 control-label">单位</label>
                                     <div className="col-sm-10">
                                         <input className="form-control" id="unit" type="text"
                                                value={this.state.unit} disabled />

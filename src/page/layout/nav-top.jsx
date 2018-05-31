@@ -1,7 +1,8 @@
-import React from 'react'
+import React from 'react';
+import {Link} from 'react-router-dom';
 
-import LoginService from 'service/login-service.jsx'
-import AppUtil from 'util/app-util.jsx'
+import LoginService from 'service/login-service.jsx';
+import AppUtil from 'util/app-util.jsx';
 
 const loginService = new LoginService();
 const appUtil = new AppUtil();
@@ -27,7 +28,7 @@ class NavTop extends React.Component{
                             <i className="fa fa-user fa-fw"></i>欢迎, admin <i className="fa fa-caret-down"></i>
                         </a>
                         <ul className="dropdown-menu dropdown-user">
-                            <li><a href="javascript:;"><i className="fa fa-user fa-fw"></i> 用户信息</a>
+                            <li><Link to="/user/profile"><i className="fa fa-user fa-fw"></i> 用户信息</Link>
                             </li>
                             <li className="divider"></li>
                             <li><a href="javascript:;" onClick={() => this.handleLogout()}><i className="fa fa-sign-out fa-fw"></i> 退出登录</a>
