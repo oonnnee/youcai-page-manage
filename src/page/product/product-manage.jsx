@@ -69,6 +69,7 @@ class ProductManage extends React.Component {
                                             <td>
                                                 <Link className="opear" to={`/product/detail/${product.id}`}>详情</Link>
                                                 <Link className="opear" to={`/product/edit/${product.id}`}>编辑</Link>
+                                                <a className="opear" href="javascript:;" onClick={() => {this.onDelete(product.id)}}>删除</a>
                                             </td>
                                         </tr>
                                     );
@@ -131,6 +132,17 @@ class ProductManage extends React.Component {
         }, () => {
             this.loadList();
         });
+    }
+
+    onDelete(productId){
+        if(confirm('确认删除id为 '+productId+' 的产品吗？')){
+            productService.delete(productId).then(() => {
+                appUtil.successTip('删除成功');
+                window.location.reload(true);
+            }, errMsg => {
+                appUtil.errorTip(errMsg);
+            });
+        }
     }
 }
 

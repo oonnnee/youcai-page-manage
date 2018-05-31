@@ -22,6 +22,7 @@ class ProductDetail extends React.Component{
             note: '',
             pcode: '',
             pcodeName: '',
+            images: [],
             categories: [],
             categoryCode: '0200'
         }
@@ -85,7 +86,11 @@ class ProductDetail extends React.Component{
                                 <div className="form-group">
                                     <label htmlFor="imgfile" className="col-sm-2 control-label">图片</label>
                                     <div className="col-sm-10">
-                                        <img src={this.state.imgfile} class="img-responsive" />
+                                        {
+                                            this.state.images.map((image, key) => {
+                                                return <img src={"http://localhost:8080/"+image} className="img-responsive" />
+                                            })
+                                        }
                                     </div>
                                 </div>
                                 <div className="form-group">
@@ -106,6 +111,9 @@ class ProductDetail extends React.Component{
     loadProduct(){
         productService.findById(this.state.id).then(data => {
             this.setState(data);
+            this.setState({
+               images: data.imgfile.split(',')
+            });
         }, errMsg => {
             appUtil.errorTip(errMsg);
         })

@@ -1,9 +1,11 @@
-import React from 'react'
-import {BrowserRouter as Router, Route, Switch, Link} from 'react-router-dom'
+import React from 'react';
+import {BrowserRouter as Router, Route, Switch, Link} from 'react-router-dom';
 
-import NavTop from 'layout/nav-top.jsx'
-import NavSide from 'layout/nav-side.jsx'
-import Home from 'page/home.jsx'
+import NavTop from 'layout/nav-top.jsx';
+import NavSide from 'layout/nav-side.jsx';
+import Home from 'page/home.jsx';
+
+import CategoryService from 'service/category-service.jsx';
 
 /*----- 客户 -----*/
 import GuestManage from 'page/guest/guest-manage.jsx'
@@ -15,9 +17,16 @@ import GuestSave from 'page/guest/guest-save.jsx'
 /*----- 产品 -----*/
 import ProductManage from 'page/product/product-manage.jsx'
 import ProductDetail from 'page/product/product-detail.jsx'
+import ProductSave from 'page/product/product-save.jsx'
+import ProductEdit from 'page/product/product-edit.jsx'
 
+const categoryService = new CategoryService();
 
 class Layout extends React.Component{
+
+    componentDidMount(){
+        categoryService.list();
+    }
 
     render(){
         return (
@@ -36,6 +45,8 @@ class Layout extends React.Component{
                         {/*----- 产品 -----*/}
                         <Route exact path="/product/manage" component={ProductManage}/>
                         <Route exact path="/product/detail/:id" component={ProductDetail}/>
+                        <Route exact path="/product/save" component={ProductSave}/>
+                        <Route exact path="/product/edit/:id" component={ProductEdit}/>
                     </Switch>
                 </div>
             </Router>

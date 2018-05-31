@@ -38,24 +38,32 @@ class ProductService{
             }
         });
     }
-    //
-    // // 新增产品
-    // save(product){
-    //     return appUtil.request({
-    //         type    : 'post',
-    //         url     : '/manage/product/save',
-    //         data    : product
-    //     });
-    // }
-    //
-    // // 更新产品
-    // update(product){
-    //     return appUtil.request({
-    //         type    : 'post',
-    //         url     : '/manage/product/update',
-    //         data    : product
-    //     });
-    // }
+
+    // 新增产品
+    save(product){
+        return appUtil.request({
+            type    : 'post',
+            url     : '/manage/product/save',
+            data    : product
+        });
+    }
+
+    // 更新产品
+    update(product){
+        return appUtil.request({
+            type    : 'post',
+            url     : '/manage/product/update',
+            data    : product
+        });
+    }
+
+    delete(productId){
+        return appUtil.request({
+            type    : 'post',
+            url     : '/manage/product/delete',
+            data    : {id: productId}
+        });
+    }
 
 }
 
