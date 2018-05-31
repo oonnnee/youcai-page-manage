@@ -14,6 +14,7 @@ import GuestSave from 'page/guest/guest-save.jsx'
 
 /*----- 产品 -----*/
 import ProductManage from 'page/product/product-manage.jsx'
+import ProductDetail from 'page/product/product-detail.jsx'
 
 
 class Layout extends React.Component{
@@ -34,6 +35,7 @@ class Layout extends React.Component{
                         <Route exact path="/guest/save" component={GuestSave}/>
                         {/*----- 产品 -----*/}
                         <Route exact path="/product/manage" component={ProductManage}/>
+                        <Route exact path="/product/detail/:id" component={ProductDetail}/>
                     </Switch>
                 </div>
             </Router>

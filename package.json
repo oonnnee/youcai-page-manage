@@ -25,7 +25,9 @@
     "webpack-dev-server": "2.9.7"
   },
   "dependencies": {
+    "layui-src": "^2.3.0",
     "prop-types": "15.6.0",
+    "rc-checkbox": "2.1.5",
     "rc-pagination": "1.15.1",
     "rc-select": "8.0.9",
     "react": "16.2.0",

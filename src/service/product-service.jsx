@@ -5,7 +5,7 @@ const appUtil = new AppUtil();
 class ProductService{
 
     // 获取产品列表
-    findList(param){
+    list(param){
         let url     = '',
             data    = {};
         data.page = param.page;
@@ -28,32 +28,32 @@ class ProductService{
         });
     }
 
-    // // 获取产品详情
-    // findById(id){
-    //     return appUtil.request({
-    //         type    : 'get',
-    //         url     : '/manage/guest/find',
-    //         data    : {
-    //             id : id
-    //         }
-    //     });
-    // }
+    // 获取产品详情
+    findById(id){
+        return appUtil.request({
+            type    : 'get',
+            url     : '/manage/product/find',
+            data    : {
+                id : id
+            }
+        });
+    }
     //
     // // 新增产品
-    // save(guest){
+    // save(product){
     //     return appUtil.request({
     //         type    : 'post',
-    //         url     : '/manage/guest/save',
-    //         data    : guest
+    //         url     : '/manage/product/save',
+    //         data    : product
     //     });
     // }
     //
     // // 更新产品
-    // update(guest){
+    // update(product){
     //     return appUtil.request({
     //         type    : 'post',
-    //         url     : '/manage/guest/update',
-    //         data    : guest
+    //         url     : '/manage/product/update',
+    //         data    : product
     //     });
     // }
 

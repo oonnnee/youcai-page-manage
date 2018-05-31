@@ -99,6 +99,21 @@ class AppUtil{
     redirectToIndex(){
         window.location.href = '/';
     }
+
+    /*-------------------------------
+            删除数组中指定元素
+    -------------------------------*/
+    removeElementInArray(arr, e){
+        let index = -1;
+        for (let i = 0; i < arr.length; i++) {
+            if (arr[i] === e){
+                index = i;
+            }
+        }
+        if (index != -1){
+            arr.splice(index, 1);
+        }
+    }
 }
 
 

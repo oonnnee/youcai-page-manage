@@ -111,7 +111,7 @@ class GuestManage extends React.Component {
         let type = searchKeyword === '' ? 'list' : 'search';
         this.setState({
             type: type,
-            page: 0,
+            number: 0,
             searchType: searchType,
             searchKeyword: searchKeyword
         }, () => {
@@ -121,7 +121,6 @@ class GuestManage extends React.Component {
 
     // 页数或pageSize发生变化的时候
     onChange(current, pageSize) {
-        console.log(pageSize);
         this.setState({
             number: current - 1,
             size: pageSize
