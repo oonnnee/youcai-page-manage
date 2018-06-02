@@ -28,6 +28,14 @@ class NavSide extends React.Component{
                                 </li>
                             </ul>
                         </li>
+                        <li>
+                            <a href="javascript:;"><i className="fa fa-product-hunt"></i>报价<span className="fa arrow"></span></a>
+                            <ul className="nav nav-second-level collapse">
+                                <li>
+                                    <Link to="/pricelist/manage">报价管理</Link>
+                                </li>
+                            </ul>
+                        </li>
                     </ul>
 
                 </div>

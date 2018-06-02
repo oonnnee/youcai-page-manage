@@ -2,11 +2,13 @@ import React from 'react';
 
 import AppUtil from 'util/app-util.jsx';
 import GuestService from 'service/guest-service.jsx';
+import LoginService from 'service/login-service.jsx';
 
 import PageTitle from 'page/part/page-title.jsx';
 
 const appUtil = new AppUtil();
 const guestService = new GuestService();
+const loginService = new LoginService();
 
 class UserEdit extends React.Component{
     constructor(props){
@@ -35,7 +37,7 @@ class UserEdit extends React.Component{
                                 <div className="form-group">
                                     <label htmlFor="id" className="col-sm-2 control-label">id</label>
                                     <div className="col-sm-10">
-                                        <input className="form-control" id="id" type="text"
+                                        <input className="form-control" id="id" type="text" disabled
                                                value={this.state.id} onChange={e => this.onInputChange(e)} />
                                     </div>
                                 </div>
@@ -95,7 +97,27 @@ class UserEdit extends React.Component{
     }
 
     onUpdate(){
-        console.log(this.state);
+        const guest = {
+            id: this.state.id,
+            name: this.state.name,
+            addr: this.state.addr,
+            phone: this.state.phone,
+            leader1: '',
+            mobile1: '',
+            leader2: '',
+            mobile2: '',
+            note: this.state.note
+        }
+        guestService.update(guest).then(() =>  {
+            appUtil.successTip('更新用户信息成功, 请重新登录');
+            loginService.logout().then(() => {
+                appUtil.doLogin();
+            }, errMsg => {
+                appUtil.errorTip(errMsg);
+            });
+        }, errMsg => {
+            appUtil.errorTip(errMsg);
+        });
     }
 }
 export default UserEdit;
