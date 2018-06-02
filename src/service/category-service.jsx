@@ -20,6 +20,12 @@ class CategoryService{
         });
     }
 
+    listWithProducts(){
+        return appUtil.request({
+            type: 'get',
+            url: '/manage/category/listWithProducts'
+        });
+    }
 }
 
 export default CategoryService;

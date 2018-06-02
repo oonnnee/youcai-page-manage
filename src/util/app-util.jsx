@@ -114,6 +114,18 @@ class AppUtil{
             arr.splice(index, 1);
         }
     }
+
+    /*-------------------------------
+            日期转换
+    -------------------------------*/
+    getDateString(date){
+        const f = {
+            format: data => {
+                return data<10 ? `0${data}`:`${data}`;
+            }
+        }
+        return `${date.getFullYear()+'-'+f.format(date.getMonth()+1)+'-'+f.format(date.getDate())}`;
+    }
 }
 
 

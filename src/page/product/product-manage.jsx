@@ -58,22 +58,20 @@ class ProductManage extends React.Component {
                     <DataGrid tableHeads={tableHeads}>
                         {
                             this.state.content.map((product, index) => {
-                                if(product.id !== 'admin'){
-                                    return (
-                                        <tr key={index}>
-                                            <td>{product.id}</td>
-                                            <td>{product.name}</td>
-                                            <td>{product.pcodeName}</td>
-                                            <td>{product.unit}</td>
-                                            <td>{product.price}</td>
-                                            <td>
-                                                <Link className="opear" to={`/product/detail/${product.id}`}>详情</Link>
-                                                <Link className="opear" to={`/product/edit/${product.id}`}>编辑</Link>
-                                                <a className="opear" href="javascript:;" onClick={() => {this.onDelete(product.id)}}>删除</a>
-                                            </td>
-                                        </tr>
-                                    );
-                                }
+                                return (
+                                    <tr key={index}>
+                                        <td>{product.id}</td>
+                                        <td>{product.name}</td>
+                                        <td>{product.pcodeName}</td>
+                                        <td>{product.unit}</td>
+                                        <td>{product.price}</td>
+                                        <td>
+                                            <Link className="opear" to={`/product/detail/${product.id}`}>详情</Link>
+                                            <Link className="opear" to={`/product/edit/${product.id}`}>编辑</Link>
+                                            <a className="opear" href="javascript:;" onClick={() => {this.onDelete(product.id)}}>删除</a>
+                                        </td>
+                                    </tr>
+                                );
                             })
                         }
                     </DataGrid>

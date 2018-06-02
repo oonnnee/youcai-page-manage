@@ -26,6 +26,7 @@ import ProductEdit from 'page/product/product-edit.jsx'
 
 /*----- 报价 -----*/
 import PricelistManage from 'page/pricelist/pricelist-manage.jsx';
+import PricelistSave from 'page/pricelist/pricelist-save.jsx';
 
 const categoryService = new CategoryService();
 
@@ -59,6 +60,7 @@ class Layout extends React.Component{
                         <Route exact path="/product/edit/:id" component={ProductEdit}/>
                         {/*----- 报价 -----*/}
                         <Route exact path="/pricelist/manage" component={PricelistManage}/>
+                        <Route exact path="/pricelist/save/:guestId" component={PricelistSave}/>
                     </Switch>
                 </div>
             </Router>
