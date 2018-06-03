@@ -1,44 +1,59 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 
-import AppUtil from 'util/app-util.jsx';
+import AppUtil from 'util/app-util.jsx'
+import DriverService from 'service/driver-service.jsx'
 
 import PageTitle from 'page/part/page-title.jsx';
+import BreadCrumb from 'page/part/bread-crumb.jsx';
 
 const appUtil = new AppUtil();
+const driverService = new DriverService();
 
-class UserProfile extends React.Component{
+class DriverDetail  extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            id: '',
+            id: this.props.match.params.id,
             name: '',
-            addr: '',
-            phone: '',
-            note: ''
+            cardid: '',
+            mobile: '',
+            note: '',
         }
     }
 
     componentDidMount(){
-        this.loadProfile();
+        this.loadDriver();
     }
 
+    // 加载司机详情
+    loadDriver(){
+        driverService.findById(this.state.id).then(data => {
+            this.setState(data);
+        }, errMsg => {
+            appUtil.errorTip(errMsg);
+        })
+    }
     render(){
+        const path = [
+            {name: '司机管理', href: '#'},
+        ];
         return (
             <div id="page-wrapper">
                 <div id="page-inner">
-                    <PageTitle title="用户信息" >
+                    <PageTitle title="司机详情" >
                         <div className="page-header-right">
-                            <Link to="/user/edit" className="btn btn-primary" style={{marginRight: '20px'}}>
+                            <Link to={"/driver/edit/"+this.state.id} className="btn btn-primary">
                                 <i className="fa fa-edit"></i>&nbsp;
                                 <span>编辑</span>
                             </Link>
-                            <Link to="/user/updatePwd" className="btn btn-primary">
-                                <i className="fa fa-key"></i>&nbsp;
-                                <span>修改密码</span>
-                            </Link>
+                            <a href="javascript:;" className="btn btn-danger" onClick={() => this.onDelete()}>
+                                <i className="fa fa-trash-o"></i>&nbsp;
+                                <span>删除</span>
+                            </a>
                         </div>
                     </PageTitle>
+                    <BreadCrumb path={path} current="司机详情"/>
                     <div className="row">
                         <div className="col-md-12 column">
                             <form className="form-horizontal" role="form">
@@ -50,24 +65,24 @@ class UserProfile extends React.Component{
                                     </div>
                                 </div>
                                 <div className="form-group">
-                                    <label htmlFor="name" className="col-sm-2 control-label">名称</label>
+                                    <label htmlFor="name" className="col-sm-2 control-label">姓名</label>
                                     <div className="col-sm-10">
                                         <input className="form-control" id="name" type="text"
                                                value={this.state.name} readOnly />
                                     </div>
                                 </div>
                                 <div className="form-group">
-                                    <label htmlFor="addr" className="col-sm-2 control-label">地址</label>
+                                    <label htmlFor="cardid" className="col-sm-2 control-label">身份证</label>
                                     <div className="col-sm-10">
-                                        <input className="form-control" id="addr" type="text"
-                                               value={this.state.addr} readOnly />
+                                        <input className="form-control" id="cardid" type="text"
+                                               value={this.state.cardid} readOnly />
                                     </div>
                                 </div>
                                 <div className="form-group">
-                                    <label htmlFor="phone" className="col-sm-2 control-label">联系电话</label>
+                                    <label htmlFor="mobile" className="col-sm-2 control-label">手机号码</label>
                                     <div className="col-sm-10">
-                                        <input className="form-control" id="phone" type="text"
-                                               value={this.state.phone} readOnly />
+                                        <input className="form-control" id="mobile" type="text"
+                                               value={this.state.mobile} readOnly />
                                     </div>
                                 </div>
                                 <div className="form-group">
@@ -84,11 +99,16 @@ class UserProfile extends React.Component{
         )
     }
 
-    // 加载用户信息
-    loadProfile(){
-        const profile = appUtil.getStorage('user');
-        this.setState(profile);
-    }
+    onDelete(){
+        if (confirm('确认删除吗？')){
+            driverService.delete(this.state.id).then(() => {
+                appUtil.successTip('删除成功');
+                window.location.href = '/driver/manage';
+            }, err => {
+                appUtil.errorTip(err);
+            })
+        }
 
+    }
 }
-export default UserProfile;
+export default DriverDetail;

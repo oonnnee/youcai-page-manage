@@ -50,14 +50,21 @@ class PricelistManage extends React.Component {
                         {
                             this.state.content.map((pricelist, index) => {
                                 let date;
+                                let detail;
                                 if (pricelist.dates.length != 0){
                                     let d = appUtil.getDateString(new Date(pricelist.dates[0]));
                                     date = (
                                         <td>{d}</td>
                                     );
+                                    detail = (
+                                        <Link className="opear" to={`/pricelist/detail/${pricelist.guestId}/${appUtil.getDateString(new Date(pricelist.dates[0]))}`}>查看</Link>
+                                    );
                                 } else {
                                     date = (
                                         <td>暂无报价</td>
+                                    );
+                                    detail = (
+                                        <span className="opear">查看</span>
                                     );
                                 }
                                 return (
@@ -66,7 +73,7 @@ class PricelistManage extends React.Component {
                                         <td>{pricelist.guestName}</td>
                                         {date}
                                         <td>
-                                            <Link className="opear" to={`/pricelist/detail/${pricelist.guestId}`}>查看</Link>
+                                            {detail}
                                             <Link className="opear" to={`/pricelist/save/${pricelist.guestId}`}>新增</Link>
                                         </td>
                                     </tr>

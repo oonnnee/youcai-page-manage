@@ -83,6 +83,12 @@ class GuestService{
         });
     }
 
+    count(){
+        return appUtil.request({
+            type    : 'get',
+            url     : '/manage/guest/count',
+        });
+    }
 }
 
 export default GuestService;

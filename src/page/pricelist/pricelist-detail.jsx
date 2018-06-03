@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom'
 
 import PageTitle from 'page/part/page-title.jsx';
 
@@ -36,7 +37,18 @@ class PricelistDetail extends React.Component{
         return (
             <div id="page-wrapper">
                 <div id="page-inner">
-                    <PageTitle title="查看报价" />
+                    <PageTitle title="查看报价" >
+                        <div className="page-header-right">
+                            <Link to={"/pricelist/edit/"+this.state.guestId+"/"+this.state.pdate} className="btn btn-primary">
+                                <i className="fa fa-edit"></i>&nbsp;
+                                <span>编辑</span>
+                            </Link>
+                            <a href="javascript:;" className="btn btn-danger" onClick={() => this.onDelete()}>
+                                <i className="fa fa-trash-o"></i>&nbsp;
+                                <span>删除</span>
+                            </a>
+                        </div>
+                    </PageTitle>
                     <div className="row">
                         <div className="col-md-12">
                             <div className="form-inline">
@@ -44,19 +56,22 @@ class PricelistDetail extends React.Component{
                                     <label htmlFor="guestId">客户id&nbsp;</label>
                                     <input className="form-control" id="guestId" type="text"
                                            value={this.state.guestId} readOnly
-                                           disabled />
+                                           readOnly />
                                 </div>
                                 <div className="form-group" style={{marginRight: '20px'}}>
                                     <label htmlFor="guestName">客户名称&nbsp;</label>
                                     <input className="form-control" id="guestName" type="text"
                                            value={this.state.guestName} readOnly
-                                           disabled />
+                                           readOnly />
                                 </div>
                                 <div className="form-group">
                                     <label htmlFor="pdate">报价日期&nbsp;</label>
-                                    <select id="pdate">
-                                        <option>2018-05-12</option>
-                                        <option>2018-05-05</option>
+                                    <select id="pdate" value={this.state.pdate} onChange={e => this.onPdateChange(e)}>
+                                        {
+                                            this.state.pdates.map((value, index) => {
+                                                return <option key={index} value={value}>{value}</option>
+                                            })
+                                        }
                                     </select>
                                 </div>
                             </div>
@@ -104,7 +119,7 @@ class PricelistDetail extends React.Component{
                                                                                 <div className="col-sm-8">
                                                                                     <input type="text" className="form-control" id="price"
                                                                                            categoryindex={categoryindex} productindex={productindex}
-                                                                                           value={product.price} onChange={e => this.onInputChange(e)} />
+                                                                                           value={product.price} readOnly />
                                                                                 </div>
                                                                             </div>
                                                                             <div className="form-group">
@@ -112,7 +127,7 @@ class PricelistDetail extends React.Component{
                                                                                 <div className="col-sm-8">
                                                                                     <input type="text" className="form-control" id="note"
                                                                                            categoryindex={categoryindex} productindex={productindex}
-                                                                                           value={product.note} onChange={e => this.onInputChange(e)} />
+                                                                                           value={product.note} readOnly />
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -128,9 +143,6 @@ class PricelistDetail extends React.Component{
                                 );
                             })
                         }
-                    </div>
-                    <div className="col-md-12">
-                        <button className="btn btn-primary btn-lg btn-block" onClick={(e) => this.onSave(e)}>保存</button>
                     </div>
                 </div>
             </div>
@@ -158,56 +170,35 @@ class PricelistDetail extends React.Component{
     }
 
     loadCategoryWithProducts(){
-
+        pricelistService.findByGuestIdAndPdate(this.state.guestId, this.state.pdate)
+            .then(data => {
+                this.setState({
+                    categoryWithProducts: data
+                })
+            }, errMsg => {
+                appUtil.errorTip(errMsg);
+            })
     }
 
     onPdateChange(e){
-        this.setState({
-            pdate: e.target.value
-        })
+        // this.setState({
+        //     pdate: e.target.value
+        // }, () => {
+        //     this.loadCategoryWithProducts()
+        // })
+        window.location.href = `/pricelist/detail/${this.state.guestId}/${e.target.value}`;
     }
 
-    onInputChange(e){
-        const categoryIndex = e.target.getAttribute('categoryindex');
-        const productIndex = e.target.getAttribute('productindex');
-        const item = e.target.id;
-
-        let categoryWithProducts = this.state.categoryWithProducts;
-        categoryWithProducts[categoryIndex].products[productIndex][item] = e.target.value;
-        this.setState({
-            categoryWithProducts: categoryWithProducts
-        });
-    }
-
-    onSave(e) {
-        let params = {};
-        params.guestId = this.state.guestId;
-        params.pdate = this.state.pdate;
-        let products = [];
-        for (let i=0; i<this.state.categoryWithProducts.length; i++){
-            const srcProducts = this.state.categoryWithProducts[i].products;
-            for (let j=0; j<srcProducts.length; j++) {
-                const price = Number(srcProducts[j].price);
-                if (price!=0 && isNaN(price)==false){
-                    products.push({});
-                    const index = products.length - 1;
-                    products[index].productId = srcProducts[j].id;
-                    products[index].price = srcProducts[j].price;
-                    products[index].note = srcProducts[j].note;
-                }
-            }
+    onDelete(){
+        if (confirm('确认删除此报价吗？')) {
+            pricelistService.delete(this.state.guestId, this.state.pdate)
+                .then(() => {
+                    appUtil.successTip('删除成功');
+                    window.location.href = '/pricelist/manage';
+                }, errMsg => {
+                    appUtil.errorTip(errMsg);
+                })
         }
-        params.products = JSON.stringify(products);
-
-        let target = e.target;
-        target.innerHTML = '保存中...';
-        pricelistService.save(params).then(() => {
-            target.innerHTML = '保存';
-            appUtil.successTip('新增报价成功');
-            window.location.href = '/pricelist/manage';
-        }, errMsg => {
-            appUtil.errorTip(errMsg);
-        });
     }
 
 }

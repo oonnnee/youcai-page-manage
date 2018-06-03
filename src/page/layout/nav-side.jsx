@@ -29,10 +29,18 @@ class NavSide extends React.Component{
                             </ul>
                         </li>
                         <li>
-                            <a href="javascript:;"><i className="fa fa-product-hunt"></i>报价<span className="fa arrow"></span></a>
+                            <a href="javascript:;"><i className="fa fa-reorder"></i>报价<span className="fa arrow"></span></a>
                             <ul className="nav nav-second-level collapse">
                                 <li>
                                     <Link to="/pricelist/manage">报价管理</Link>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="javascript:;"><i className="fa fa-blind"></i>司机<span className="fa arrow"></span></a>
+                            <ul className="nav nav-second-level collapse">
+                                <li>
+                                    <Link to="/driver/manage">司机管理</Link>
                                 </li>
                             </ul>
                         </li>

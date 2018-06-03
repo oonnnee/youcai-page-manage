@@ -18,7 +18,6 @@ class AppUtil{
                     }
                     // 没有登录状态，强制登录
                     else if(15 === resp.code){
-                        this.errorTip('未登录, 将跳转到登录页面');
                         this.doLogin();
                     }
                     else{

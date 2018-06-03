@@ -2,19 +2,19 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 
 import PageTitle from 'page/part/page-title.jsx';
-import Search from 'page/guest/guest-manage-search.jsx';
+import Search from 'page/driver/driver-manage-search.jsx';
 import DataGrid from 'page/part/data-grid.jsx';
 import Pagination from 'page/part/pagination.jsx';
 import BreadCrumb from 'page/part/bread-crumb.jsx';
 
-import GuestService from 'service/guest-service.jsx';
+import DriverService from 'service/driver-service.jsx';
 import AppUtil from 'util/app-util.jsx';
 
 
-const guestService = new GuestService();
+const driverService = new DriverService();
 const appUtil = new AppUtil();
 
-class GuestManage extends React.Component {
+class DriverManage extends React.Component {
 
     constructor(props) {
         super(props);
@@ -37,39 +37,39 @@ class GuestManage extends React.Component {
 
     render() {
         const tableHeads = [
-            {name: 'id', width: '15%'},
-            {name: '名称', width: '27%'},
-            {name: '地址', width: '25%'},
-            {name: '手机号', width: '15%'},
-            {name: '操作', width: '18%'},
+            {name: 'id', width: '10%'},
+            {name: '姓名', width: '20%'},
+            {name: '身份证', width: '30%'},
+            {name: '手机号', width: '20%'},
+            {name: '操作', width: '20%'},
         ];
         return (
             <div id="page-wrapper">
                 <div id="page-inner">
-                    <PageTitle title="客户管理">
+                    <PageTitle title="司机管理">
                         <div className="page-header-right">
-                            <Link to="/guest/save" className="btn btn-primary">
+                            <Link to="/driver/save" className="btn btn-primary">
                                 <i className="fa fa-plus"></i>&nbsp;
-                                <span>新增客户</span>
+                                <span>新增司机</span>
                             </Link>
                         </div>
                     </PageTitle>
-                    <BreadCrumb path={[]} current="客户管理"/>
-                    <Search onSearch={(searchType, searchKeyword) => {this.onSearch(searchType, searchKeyword)}}/>
+                    <BreadCrumb path={[]} current={"司机管理"}/>
+                    <Search onSearch={(driverName) => {this.onSearch(driverName)}}/>
                     <DataGrid tableHeads={tableHeads}>
                         {
-                            this.state.content.map((guest, index) => {
-                                if(guest.id !== 'admin'){
+                            this.state.content.map((driver, index) => {
+                                if(driver.id !== 'admin'){
                                     return (
                                         <tr key={index}>
-                                            <td>{guest.id}</td>
-                                            <td>{guest.name}</td>
-                                            <td>{guest.addr}</td>
-                                            <td>{guest.phone}</td>
+                                            <td>{driver.id}</td>
+                                            <td>{driver.name}</td>
+                                            <td>{driver.cardid}</td>
+                                            <td>{driver.mobile}</td>
                                             <td>
-                                                <Link className="opear" to={`/guest/detail/${guest.id}`}>详情</Link>
-                                                <Link className="opear" to={`/guest/edit/${guest.id}`}>编辑</Link>
-                                                <Link className="opear" to={`/guest/updatePwd/${guest.id}`}>修改密码</Link>
+                                                <Link className="opear" to={`/driver/detail/${driver.id}`}>详情</Link>
+                                                <Link className="opear" to={`/driver/edit/${driver.id}`}>编辑</Link>
+                                                <a className="opear" href="javascript:;" onClick={() => this.onDelete()}>删除</a>
                                             </td>
                                         </tr>
                                     );
@@ -86,7 +86,7 @@ class GuestManage extends React.Component {
         );
     }
 
-    // 加载客户列表
+    // 加载司机列表
     loadList() {
         let param = {};
         param.type = this.state.type;
@@ -94,11 +94,10 @@ class GuestManage extends React.Component {
         param.size = this.state.size;
         // 如果是搜索的话，需要传入搜索类型和搜索关键字
         if (this.state.type === 'search') {
-            param.searchType = this.state.searchType;
-            param.keyword = this.state.searchKeyword;
+            param.driverName = this.state.driverName;
         }
         // 请求接口
-        guestService.findList(param).then(data => {
+        driverService.findList(param).then(data => {
             this.setState(data);
         }, errMsg => {
             this.setState({
@@ -109,13 +108,12 @@ class GuestManage extends React.Component {
     }
 
     // 搜索
-    onSearch(searchType, searchKeyword){
-        let type = searchKeyword === '' ? 'list' : 'search';
+    onSearch(driverName){
+        let type = driverName === '' ? 'list' : 'search';
         this.setState({
             type: type,
             number: 0,
-            searchType: searchType,
-            searchKeyword: searchKeyword
+            driverName: driverName
         }, () => {
             this.loadList();
         });
@@ -130,7 +128,19 @@ class GuestManage extends React.Component {
             this.loadList();
         });
     }
+
+    onDelete(){
+        if (confirm('确认删除吗？')){
+            driverService.delete(this.state.id).then(() => {
+                appUtil.successTip('删除成功');
+                window.location.href = '/driver/manage';
+            }, err => {
+                appUtil.errorTip(err);
+            })
+        }
+
+    }
 }
 
 
-export default GuestManage;
+export default DriverManage;

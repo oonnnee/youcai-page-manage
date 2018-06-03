@@ -5,8 +5,6 @@ import NavTop from 'layout/nav-top.jsx';
 import NavSide from 'layout/nav-side.jsx';
 import Home from 'page/home.jsx';
 
-import CategoryService from 'service/category-service.jsx';
-
 /*----- 用户 -----*/
 import UserProfile from 'page/user/user-profile.jsx';
 import UserEdit from 'page/user/user-edit.jsx';
@@ -27,14 +25,17 @@ import ProductEdit from 'page/product/product-edit.jsx'
 /*----- 报价 -----*/
 import PricelistManage from 'page/pricelist/pricelist-manage.jsx';
 import PricelistSave from 'page/pricelist/pricelist-save.jsx';
+import PricelistDetail from 'page/pricelist/pricelist-detail.jsx';
+import PricelistEdit from 'page/pricelist/pricelist-edit.jsx';
 
-const categoryService = new CategoryService();
+/*----- 送货司机 -----*/
+import DriverManage from 'page/driver/driver-manage.jsx';
+import DriverDetail from 'page/driver/driver-detail.jsx';
+import DriverEdit from 'page/driver/driver-edit.jsx';
+import DriverSave from 'page/driver/driver-save.jsx';
+
 
 class Layout extends React.Component{
-
-    componentDidMount(){
-        categoryService.list();
-    }
 
     render(){
         return (
@@ -61,6 +62,13 @@ class Layout extends React.Component{
                         {/*----- 报价 -----*/}
                         <Route exact path="/pricelist/manage" component={PricelistManage}/>
                         <Route exact path="/pricelist/save/:guestId" component={PricelistSave}/>
+                        <Route exact path="/pricelist/detail/:guestId/:pdate" component={PricelistDetail}/>
+                        <Route exact path="/pricelist/edit/:guestId/:pdate" component={PricelistEdit}/>
+                        {/*----- 送货司机 -----*/}
+                        <Route exact path="/driver/manage" component={DriverManage}/>
+                        <Route exact path="/driver/detail/:id" component={DriverDetail}/>
+                        <Route exact path="/driver/edit/:id" component={DriverEdit}/>
+                        <Route exact path="/driver/save" component={DriverSave}/>
                     </Switch>
                 </div>
             </Router>

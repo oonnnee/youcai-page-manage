@@ -4,6 +4,7 @@ import AppUtil from 'util/app-util.jsx'
 import GuestService from 'service/guest-service.jsx'
 
 import PageTitle from 'page/part/page-title.jsx';
+import BreadCrumb from 'page/part/bread-crumb.jsx';
 
 const appUtil = new AppUtil();
 const guestService = new GuestService();
@@ -29,6 +30,7 @@ class GuestSave  extends React.Component{
             <div id="page-wrapper">
                 <div id="page-inner">
                     <PageTitle title="新增客户" />
+                    <BreadCrumb path={[{href: '/guest/manage', name: '客户管理'}]} current="新增客户"/>
                     <div className="row">
                         <div className="col-md-12 column">
                             <div className="form-horizontal">

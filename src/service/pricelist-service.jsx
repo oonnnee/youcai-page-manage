@@ -34,11 +34,35 @@ class PricelistService{
         });
     }
 
+    update(param){
+        return appUtil.request({
+            type    : 'post',
+            url     : '/manage/pricelist/update',
+            data    : param
+        });
+    }
+
     findPdatesByGuestId(guestId){
         return appUtil.request({
             type    : 'get',
             url     : '/manage/pricelist/findPdatesByGuestId',
             data    : {guestId: guestId}
+        });
+    }
+
+    findByGuestIdAndPdate(guestId, pdate){
+        return appUtil.request({
+            type    : 'get',
+            url     : '/manage/pricelist/findFullByGuestIdAndPdateWithCategory',
+            data    : {guestId: guestId, pdate: pdate}
+        });
+    }
+
+    delete(guestId, pdate){
+        return appUtil.request({
+            type    : 'post',
+            url     : '/manage/pricelist/delete',
+            data    : {guestId: guestId, pdate: pdate}
         });
     }
 }

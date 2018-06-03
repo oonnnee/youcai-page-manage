@@ -65,6 +65,12 @@ class ProductService{
         });
     }
 
+    count(){
+        return appUtil.request({
+            type    : 'get',
+            url     : '/manage/product/count',
+        });
+    }
 }
 
 export default ProductService;

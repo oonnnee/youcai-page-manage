@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom'
 
 import PageTitle from 'page/part/page-title.jsx';
 
@@ -13,20 +14,22 @@ const categoryService = new CategoryService();
 const pricelistService = new PricelistService();
 const appUtil = new AppUtil();
 
-class PricelistSave extends React.Component{
+class PricelistEdit extends React.Component{
 
     constructor(props){
         super(props);
         this.state = {
             guestId: this.props.match.params.guestId,
+            pdate: this.props.match.params.pdate,
             guestName: '',
-            pdate: appUtil.getDateString(new Date()),
+            pdates: [],
             categoryWithProducts: [],
         }
     }
 
     componentDidMount(){
         this.loadGuestName();
+        this.loadPdates();
         this.loadCategoryWithProducts();
     }
 
@@ -34,7 +37,7 @@ class PricelistSave extends React.Component{
         return (
             <div id="page-wrapper">
                 <div id="page-inner">
-                    <PageTitle title="新增报价" />
+                    <PageTitle title="更新报价" />
                     <div className="row">
                         <div className="col-md-12">
                             <div className="form-inline">
@@ -52,9 +55,13 @@ class PricelistSave extends React.Component{
                                 </div>
                                 <div className="form-group">
                                     <label htmlFor="pdate">报价日期&nbsp;</label>
-                                    <input className="form-control" id="pdate" type="date"
-                                           value={this.state.pdate}
-                                           onChange={e => this.onPdateChange(e)}/>
+                                    <select id="pdate" value={this.state.pdate} onChange={e => this.onPdateChange(e)}>
+                                        {
+                                            this.state.pdates.map((value, index) => {
+                                                return <option key={index} value={value}>{value}</option>
+                                            })
+                                        }
+                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -127,7 +134,7 @@ class PricelistSave extends React.Component{
                         }
                     </div>
                     <div className="col-md-12">
-                        <button className="btn btn-primary btn-lg btn-block" onClick={(e) => this.onSave(e)}>保存</button>
+                        <button className="btn btn-primary btn-lg btn-block" onClick={(e) => this.onSave(e)}>更新</button>
                     </div>
                 </div>
             </div>
@@ -144,35 +151,34 @@ class PricelistSave extends React.Component{
         })
     }
 
-    loadCategoryWithProducts(){
-        categoryService.listWithProducts().then(categoryWithProducts => {
-            let dest = [];
-            for (let i=0; i<categoryWithProducts.length; i++){
-                dest.push({});
-                dest[i].categoryCode = categoryWithProducts[i].categoryCode;
-                dest[i].categoryName = categoryWithProducts[i].categoryName;
-                dest[i].products = [];
-                const products = categoryWithProducts[i].products;
-                for (let j=0; j<products.length; j++) {
-                    dest[i].products.push({});
-                    dest[i].products[j].id = products[j].id;
-                    dest[i].products[j].name = products[j].name;
-                    dest[i].products[j].price = products[j].price;
-                    dest[i].products[j].note = '';
-                }
-            }
+    loadPdates(){
+        pricelistService.findPdatesByGuestId(this.state.guestId).then(pdates => {
             this.setState({
-                categoryWithProducts: dest
+                pdates: pdates
             })
         }, errMsg => {
             appUtil.errorTip(errMsg);
         })
     }
 
+    loadCategoryWithProducts(){
+        pricelistService.findByGuestIdAndPdate(this.state.guestId, this.state.pdate)
+            .then(data => {
+                this.setState({
+                    categoryWithProducts: data
+                })
+            }, errMsg => {
+                appUtil.errorTip(errMsg);
+            })
+    }
+
     onPdateChange(e){
-        this.setState({
-            pdate: e.target.value
-        })
+        // this.setState({
+        //     pdate: e.target.value
+        // }, () => {
+        //     this.loadCategoryWithProducts()
+        // })
+        window.location.href = `/pricelist/edit/${this.state.guestId}/${e.target.value}`;
     }
 
     onInputChange(e){
@@ -208,18 +214,17 @@ class PricelistSave extends React.Component{
         params.products = JSON.stringify(products);
 
         let target = e.target;
-        target.innerHTML = '保存中...';
+        target.innerHTML = '更新中...';
         target.disabled = true;
-        pricelistService.save(params).then(() => {
-            target.innerHTML = '保存';
-            appUtil.successTip('新增报价成功');
-            window.location.href = '/pricelist/manage';
+        pricelistService.update(params).then(() => {
+            target.innerHTML = '更新';
+            appUtil.successTip('更新报价成功');
+            window.location.href = `/pricelist/detail/${this.state.guestId}/${this.state.pdate}`;
         }, errMsg => {
             appUtil.errorTip(errMsg);
         });
     }
-
 }
 
 
-export default PricelistSave;
+export default PricelistEdit;

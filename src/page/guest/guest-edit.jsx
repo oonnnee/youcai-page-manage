@@ -4,6 +4,7 @@ import AppUtil from 'util/app-util.jsx'
 import GuestService from 'service/guest-service.jsx'
 
 import PageTitle from 'page/part/page-title.jsx';
+import BreadCrumb from 'page/part/bread-crumb.jsx';
 
 const appUtil = new AppUtil();
 const guestService = new GuestService();
@@ -33,6 +34,7 @@ class GuestEdit  extends React.Component{
             <div id="page-wrapper">
                 <div id="page-inner">
                     <PageTitle title="更新客户信息" />
+                    <BreadCrumb path={[{href: '/guest/manage', name: '客户管理'}]} current="更新客户信息"/>
                     <div className="row">
                         <div className="col-md-12 column">
                             <div className="form-horizontal">
@@ -40,7 +42,7 @@ class GuestEdit  extends React.Component{
                                     <label htmlFor="id" className="col-sm-2 control-label">id</label>
                                     <div className="col-sm-10">
                                         <input className="form-control" id="id" type="text"
-                                               value={this.state.id} disabled />
+                                               value={this.state.id} readOnly />
                                     </div>
                                 </div>
                                 <div className="form-group">

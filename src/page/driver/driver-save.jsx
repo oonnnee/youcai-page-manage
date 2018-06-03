@@ -1,21 +1,21 @@
 import React from 'react';
 
 import AppUtil from 'util/app-util.jsx'
-import GuestService from 'service/guest-service.jsx'
+import DriverService from 'service/driver-service.jsx'
 
 import PageTitle from 'page/part/page-title.jsx';
-import BreadCrumb from 'page/part/bread-crumb.jsx';
 
 const appUtil = new AppUtil();
-const guestService = new GuestService();
+const driverService = new DriverService();
 
-class GuestPwdUpdate  extends React.Component{
+class DriverSave  extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            id: this.props.match.params.id,
-            pwd: '',
-            rePwd: '',
+            name: '',
+            cardid: '',
+            mobile: '',
+            note: '',
         }
     }
 
@@ -23,38 +23,45 @@ class GuestPwdUpdate  extends React.Component{
         return (
             <div id="page-wrapper">
                 <div id="page-inner">
-                    <PageTitle title="更新客户密码" />
-                    <BreadCrumb path={[{href: '/guest/manage', name: '客户管理'}]} current="更新客户密码"/>
+                    <PageTitle title="新增司机" />
                     <div className="row">
                         <div className="col-md-12 column">
                             <div className="form-horizontal">
                                 <div className="form-group">
-                                    <label htmlFor="id" className="col-sm-2 control-label">id</label>
+                                    <label htmlFor="name" className="col-sm-2 control-label">姓名</label>
                                     <div className="col-sm-10">
-                                        <input className="form-control" id="id" type="text"
-                                               value={this.state.id} readOnly />
-                                    </div>
-                                </div>
-                                <div className="form-group">
-                                    <label htmlFor="pwd" className="col-sm-2 control-label">密码</label>
-                                    <div className="col-sm-10">
-                                        <input className="form-control" id="pwd" type="password"
+                                        <input className="form-control" id="name" type="text"
                                                onChange={e => this.onChange(e)}/>
                                     </div>
                                 </div>
                                 <div className="form-group">
-                                    <label htmlFor="rePwd" className="col-sm-2 control-label">再次输入密码</label>
+                                    <label htmlFor="cardid" className="col-sm-2 control-label">身份证</label>
                                     <div className="col-sm-10">
-                                        <input className="form-control" id="rePwd" type="password"
+                                        <input className="form-control" id="cardid" type="text"
                                                onChange={e => this.onChange(e)}/>
+                                    </div>
+                                </div>
+                                <div className="form-group">
+                                    <label htmlFor="mobile" className="col-sm-2 control-label">手机号码</label>
+                                    <div className="col-sm-10">
+                                        <input className="form-control" id="mobile" type="text"
+                                               onChange={e => this.onChange(e)}/>
+                                    </div>
+                                </div>
+                                <div className="form-group">
+                                    <label htmlFor="note" className="col-sm-2 control-label">备注</label>
+                                    <div className="col-sm-10">
+                                        <textarea className="form-control" id="note" rows="3"
+                                                  onChange={e => this.onChange(e)}/>
                                     </div>
                                 </div>
                                 <div className="form-group">
                                     <div className="col-sm-offset-2 col-sm-10">
                                         <button className="btn btn-primary btn-block btn-lg"
-                                                onClick={() => this.onUpdatePwd()}>确认修改</button>
+                                                onClick={() => this.onSave()}>新增</button>
                                     </div>
                                 </div>
+
                             </div>
                         </div>
                     </div>
@@ -70,23 +77,14 @@ class GuestPwdUpdate  extends React.Component{
         });
     }
 
-    // 点击修改按钮时
-    onUpdatePwd(){
-        const checkResult = guestService.checkPwd(this.state.pwd, this.state.rePwd);
-        if (checkResult.status === false){
-            appUtil.errorTip(checkResult.msg);
-            return;
-        }
-        const param = {
-            id: this.state.id,
-            pwd: this.state.pwd
-        }
-        guestService.updatePwd(param).then(data => {
-            appUtil.successTip('更新客户密码成功');
-            window.location.href = '/guest/manage';
+    // 点击新增按钮时
+    onSave(){
+        driverService.save(this.state).then(() => {
+            appUtil.successTip('新增司机成功');
+            window.location.reload(true);
         }, errMsg => {
             appUtil.errorTip(errMsg);
         });
     }
 }
-export default GuestPwdUpdate;
+export default DriverSave;

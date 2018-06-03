@@ -45,28 +45,28 @@ class ProductDetail extends React.Component{
                                     <label htmlFor="id" className="col-sm-2 control-label">id</label>
                                     <div className="col-sm-10">
                                         <input className="form-control" id="id" type="text"
-                                               value={this.state.id} disabled />
+                                               value={this.state.id} readOnly />
                                     </div>
                                 </div>
                                 <div className="form-group">
                                     <label htmlFor="name" className="col-sm-2 control-label">名称</label>
                                     <div className="col-sm-10">
                                         <input className="form-control" id="name" type="text"
-                                               value={this.state.name} disabled />
+                                               value={this.state.name} readOnly />
                                     </div>
                                 </div>
                                 <div className="form-group">
                                     <label htmlFor="unit" className="col-sm-2 control-label">单位</label>
                                     <div className="col-sm-10">
                                         <input className="form-control" id="unit" type="text"
-                                               value={this.state.unit} disabled />
+                                               value={this.state.unit} readOnly />
                                     </div>
                                 </div>
                                 <div className="form-group">
                                     <label htmlFor="price" className="col-sm-2 control-label">单价/元</label>
                                     <div className="col-sm-10">
                                         <input className="form-control" id="price" type="text"
-                                               value={this.state.price} disabled />
+                                               value={this.state.price} readOnly />
                                     </div>
                                 </div>
                                 <div className="form-group">
@@ -96,7 +96,7 @@ class ProductDetail extends React.Component{
                                 <div className="form-group">
                                     <label htmlFor="note" className="col-sm-2 control-label">备注</label>
                                     <div className="col-sm-10">
-                                        <textarea className="form-control" id="note" rows="3" value={this.state.note} disabled />
+                                        <textarea className="form-control" id="note" rows="3" value={this.state.note} readOnly />
                                     </div>
                                 </div>
                             </form>

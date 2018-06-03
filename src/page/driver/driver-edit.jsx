@@ -1,65 +1,66 @@
 import React from 'react';
 
-import AppUtil from 'util/app-util.jsx';
-import GuestService from 'service/guest-service.jsx';
-import LoginService from 'service/login-service.jsx';
+import AppUtil from 'util/app-util.jsx'
+import DriverService from 'service/driver-service.jsx'
 
 import PageTitle from 'page/part/page-title.jsx';
 
 const appUtil = new AppUtil();
-const guestService = new GuestService();
-const loginService = new LoginService();
+const driverService = new DriverService();
 
-class UserEdit extends React.Component{
+class DriverEdit  extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            id: '',
+            id: this.props.match.params.id,
             name: '',
-            addr: '',
-            phone: '',
-            note: ''
+            cardid: '',
+            mobile: '',
+            note: '',
         }
     }
 
     componentDidMount(){
-        this.loadProfile();
+        this.loadDriver();
     }
 
     render(){
         return (
             <div id="page-wrapper">
                 <div id="page-inner">
-                    <PageTitle title="更新用户信息" />
+                    <PageTitle title="更新司机信息" />
                     <div className="row">
                         <div className="col-md-12 column">
-                            <div className="form-horizontal" role="form">
+                            <div className="form-horizontal">
                                 <div className="form-group">
                                     <label htmlFor="id" className="col-sm-2 control-label">id</label>
                                     <div className="col-sm-10">
-                                        <input className="form-control" id="id" type="text" readOnly
-                                               value={this.state.id} onChange={e => this.onInputChange(e)} />
+                                        <input className="form-control" id="id" type="text"
+                                               value={this.state.id} readOnly />
                                     </div>
                                 </div>
                                 <div className="form-group">
-                                    <label htmlFor="name" className="col-sm-2 control-label">名称</label>
+                                    <label htmlFor="name" className="col-sm-2 control-label">姓名</label>
                                     <div className="col-sm-10">
                                         <input className="form-control" id="name" type="text"
-                                               value={this.state.name} onChange={e => this.onInputChange(e)} />
+                                               value={this.state.name}
+                                                onChange={e => this.onChange(e)}/>
                                     </div>
                                 </div>
                                 <div className="form-group">
-                                    <label htmlFor="addr" className="col-sm-2 control-label">地址</label>
+                                    <label htmlFor="cardid" className="col-sm-2 control-label">身份证</label>
                                     <div className="col-sm-10">
-                                        <input className="form-control" id="addr" type="text"
-                                               value={this.state.addr} onChange={e => this.onInputChange(e)} />
+                                        <input className="form-control" id="cardid" type="text"
+                                               value={this.state.cardid}
+                                               onChange={e => this.onChange(e)}/>
                                     </div>
                                 </div>
                                 <div className="form-group">
-                                    <label htmlFor="phone" className="col-sm-2 control-label">联系电话</label>
+                                    <label htmlFor="mobile" className="col-sm-2 control-label">手机号码</label>
                                     <div className="col-sm-10">
-                                        <input className="form-control" id="phone" type="text"
-                                               value={this.state.phone} onChange={e => this.onInputChange(e)} />
+                                        <input className="form-control" id="mobile" type="text"
+                                               value={this.state.mobile}
+                                               onChange={e => this.onChange(e)}/>
                                     </div>
                                 </div>
                                 <div className="form-group">
@@ -67,15 +68,16 @@ class UserEdit extends React.Component{
                                     <div className="col-sm-10">
                                         <textarea className="form-control" id="note" rows="3"
                                                   value={this.state.note}
-                                                  onChange={e => this.onInputChange(e)}/>
+                                                  onChange={e => this.onChange(e)}/>
                                     </div>
                                 </div>
                                 <div className="form-group">
                                     <div className="col-sm-offset-2 col-sm-10">
                                         <button className="btn btn-primary btn-block btn-lg"
-                                                onClick={() => this.onUpdate()}>更新</button>
+                                                onClick={() => this.onUpdate()}>确认修改</button>
                                     </div>
                                 </div>
+
                             </div>
                         </div>
                     </div>
@@ -84,40 +86,30 @@ class UserEdit extends React.Component{
         )
     }
 
-    // 加载用户信息
-    loadProfile(){
-        const profile = appUtil.getStorage('user');
-        this.setState(profile);
+    // 加载司机详情
+    loadDriver(){
+        driverService.findById(this.state.id).then(data => {
+            this.setState(data);
+        }, errMsg => {
+            appUtil.errorTip(errMsg);
+        })
     }
 
-    onInputChange(e){
+    // 表单内容修改时
+    onChange(e){
         this.setState({
             [e.target.id]: e.target.value
         });
     }
 
+    // 点击修改按钮时
     onUpdate(){
-        const guest = {
-            id: this.state.id,
-            name: this.state.name,
-            addr: this.state.addr,
-            phone: this.state.phone,
-            leader1: '',
-            mobile1: '',
-            leader2: '',
-            mobile2: '',
-            note: this.state.note
-        }
-        guestService.update(guest).then(() =>  {
-            appUtil.successTip('更新用户信息成功, 请重新登录');
-            loginService.logout().then(() => {
-                appUtil.doLogin();
-            }, errMsg => {
-                appUtil.errorTip(errMsg);
-            });
+        driverService.update(this.state).then(data => {
+            appUtil.successTip('更新司机信息成功');
+            window.location.reload(true);
         }, errMsg => {
             appUtil.errorTip(errMsg);
         });
     }
 }
-export default UserEdit;
+export default DriverEdit;
