@@ -33,6 +33,14 @@ class PricelistService{
             data    : param
         });
     }
+
+    findPdatesByGuestId(guestId){
+        return appUtil.request({
+            type    : 'get',
+            url     : '/manage/pricelist/findPdatesByGuestId',
+            data    : {guestId: guestId}
+        });
+    }
 }
 
 export default PricelistService;

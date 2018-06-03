@@ -35,8 +35,8 @@ class Search extends React.Component{
                             <select className="form-control"
                                     name="searchType"
                                     onChange={(e) => this.onValueChange(e)}>
-                                <option value="id">按客户id查询</option>
-                                <option value="name">按客户名称查询</option>
+                                <option value="guestId">按客户id查询</option>
+                                <option value="guestName">按客户名称查询</option>
                             </select>
                         </div>
                         <div className="form-group">
