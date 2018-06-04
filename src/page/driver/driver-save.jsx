@@ -4,6 +4,7 @@ import AppUtil from 'util/app-util.jsx'
 import DriverService from 'service/driver-service.jsx'
 
 import PageTitle from 'page/part/page-title.jsx';
+import BreadCrumb from 'page/part/bread-crumb.jsx';
 
 const appUtil = new AppUtil();
 const driverService = new DriverService();
@@ -24,6 +25,7 @@ class DriverSave  extends React.Component{
             <div id="page-wrapper">
                 <div id="page-inner">
                     <PageTitle title="新增司机" />
+                    <BreadCrumb path={[{href: '/driver/manage', name: '司机管理'}]} current="新增司机"/>
                     <div className="row">
                         <div className="col-md-12 column">
                             <div className="form-horizontal">

@@ -5,6 +5,7 @@ import PageTitle from 'page/part/page-title.jsx'
 import DataGrid from 'page/part/data-grid.jsx'
 import Pagination from 'page/part/pagination.jsx'
 import Search from 'page/pricelist/pricelist-manage-search.jsx';
+import BreadCrumb from 'page/part/bread-crumb.jsx';
 
 import PricelistService from 'service/pricelist-service.jsx'
 import AppUtil from 'util/app-util.jsx'
@@ -45,6 +46,7 @@ class PricelistManage extends React.Component {
             <div id="page-wrapper">
                 <div id="page-inner">
                     <PageTitle title="报价管理" />
+                    <BreadCrumb path={[]} current="报价管理"/>
                     <Search onSearch={(searchType, searchKeyword) => {this.onSearch(searchType, searchKeyword)}}/>
                     <DataGrid tableHeads={tableHeads}>
                         {
@@ -135,16 +137,6 @@ class PricelistManage extends React.Component {
         });
     }
 
-    // onDelete(productId){
-    //     if(confirm('确认删除id为 '+productId+' 的产品吗？')){
-    //         pricelistService.delete(productId).then(() => {
-    //             appUtil.successTip('删除成功');
-    //             window.location.reload(true);
-    //         }, errMsg => {
-    //             appUtil.errorTip(errMsg);
-    //         });
-    //     }
-    // }
 }
 
 

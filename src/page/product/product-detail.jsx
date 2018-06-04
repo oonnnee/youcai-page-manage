@@ -5,6 +5,7 @@ import ProductService from 'service/product-service.jsx';
 import CategoryService from 'service/category-service.jsx';
 
 import PageTitle from 'page/part/page-title.jsx';
+import BreadCrumb from 'page/part/bread-crumb.jsx';
 
 const appUtil = new AppUtil();
 const productService = new ProductService();
@@ -38,6 +39,7 @@ class ProductDetail extends React.Component{
             <div id="page-wrapper">
                 <div id="page-inner">
                     <PageTitle title="产品详情" />
+                    <BreadCrumb path={[{href: '/product/manage', name: '产品管理'}]} current="产品详情"/>
                     <div className="row">
                         <div className="col-md-12 column">
                             <form className="form-horizontal" role="form">

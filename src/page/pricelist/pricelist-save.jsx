@@ -1,6 +1,7 @@
 import React from 'react';
 
 import PageTitle from 'page/part/page-title.jsx';
+import BreadCrumb from 'page/part/bread-crumb.jsx';
 
 import AppUtil from 'util/app-util.jsx';
 import PricelistService from 'service/pricelist-service.jsx';
@@ -35,6 +36,7 @@ class PricelistSave extends React.Component{
             <div id="page-wrapper">
                 <div id="page-inner">
                     <PageTitle title="新增报价" />
+                    <BreadCrumb path={[{href: '/pricelist/manage', name: '报价管理'}]} current="新增报价"/>
                     <div className="row">
                         <div className="col-md-12">
                             <div className="form-inline">

@@ -1,7 +1,8 @@
 import React from 'react';
-import {Link} from 'react-router-dom'
+import {Link} from 'react-router-dom';
 
 import PageTitle from 'page/part/page-title.jsx';
+import BreadCrumb from 'page/part/bread-crumb.jsx';
 
 import AppUtil from 'util/app-util.jsx';
 import PricelistService from 'service/pricelist-service.jsx';
@@ -37,8 +38,12 @@ class PricelistDetail extends React.Component{
         return (
             <div id="page-wrapper">
                 <div id="page-inner">
-                    <PageTitle title="查看报价" >
+                    <PageTitle title="报价详情" >
                         <div className="page-header-right">
+                            <a href={"localhost:8080/manage/excel/pricelist/export?guestId="+this.state.guestId+"&"+"pdate="+this.state.pdate} target="_blank" className="btn btn-primary">
+                                <i className="fa fa-trash-o"></i>&nbsp;
+                                <span>导出excel</span>
+                            </a>
                             <Link to={"/pricelist/edit/"+this.state.guestId+"/"+this.state.pdate} className="btn btn-primary">
                                 <i className="fa fa-edit"></i>&nbsp;
                                 <span>编辑</span>
@@ -49,6 +54,7 @@ class PricelistDetail extends React.Component{
                             </a>
                         </div>
                     </PageTitle>
+                    <BreadCrumb path={[{href: '/pricelist/manage', name: '报价管理'}]} current="报价详情"/>
                     <div className="row">
                         <div className="col-md-12">
                             <div className="form-inline">

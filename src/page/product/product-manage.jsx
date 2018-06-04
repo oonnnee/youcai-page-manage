@@ -5,6 +5,7 @@ import PageTitle from 'page/part/page-title.jsx'
 import DataGrid from 'page/part/data-grid.jsx'
 import Pagination from 'page/part/pagination.jsx'
 import Search from 'page/product/product-manage-search.jsx'
+import BreadCrumb from 'page/part/bread-crumb.jsx';
 
 import ProductService from 'service/product-service.jsx'
 import AppUtil from 'util/app-util.jsx'
@@ -54,6 +55,7 @@ class ProductManage extends React.Component {
                             </Link>
                         </div>
                     </PageTitle>
+                    <BreadCrumb path={[]} current="产品管理"/>
                     <Search onSearch={(PCodes, name) => {this.onSearch(PCodes, name)}}/>
                     <DataGrid tableHeads={tableHeads}>
                         {

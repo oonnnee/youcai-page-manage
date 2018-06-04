@@ -35,9 +35,6 @@ class DriverDetail  extends React.Component{
         })
     }
     render(){
-        const path = [
-            {name: '司机管理', href: '#'},
-        ];
         return (
             <div id="page-wrapper">
                 <div id="page-inner">
@@ -53,7 +50,7 @@ class DriverDetail  extends React.Component{
                             </a>
                         </div>
                     </PageTitle>
-                    <BreadCrumb path={path} current="司机详情"/>
+                    <BreadCrumb path={[{href: '/driver/manage', name: '司机管理'}]} current="司机详情"/>
                     <div className="row">
                         <div className="col-md-12 column">
                             <form className="form-horizontal" role="form">
