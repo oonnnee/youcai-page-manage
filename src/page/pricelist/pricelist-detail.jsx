@@ -40,8 +40,8 @@ class PricelistDetail extends React.Component{
                 <div id="page-inner">
                     <PageTitle title="报价详情" >
                         <div className="page-header-right">
-                            <a href={"localhost:8080/manage/excel/pricelist/export?guestId="+this.state.guestId+"&"+"pdate="+this.state.pdate} target="_blank" className="btn btn-primary">
-                                <i className="fa fa-trash-o"></i>&nbsp;
+                            <a href={"localhost:8080/manage/excel/export/pricelist?guestId="+this.state.guestId+"&"+"pdate="+this.state.pdate} target="_blank" className="btn btn-primary">
+                                <i className="fa fa-cloud-download"></i>&nbsp;
                                 <span>导出excel</span>
                             </a>
                             <Link to={"/pricelist/edit/"+this.state.guestId+"/"+this.state.pdate} className="btn btn-primary">
@@ -61,14 +61,12 @@ class PricelistDetail extends React.Component{
                                 <div className="form-group" style={{marginRight: '20px'}}>
                                     <label htmlFor="guestId">客户id&nbsp;</label>
                                     <input className="form-control" id="guestId" type="text"
-                                           value={this.state.guestId} readOnly
-                                           readOnly />
+                                           value={this.state.guestId} readOnly/>
                                 </div>
                                 <div className="form-group" style={{marginRight: '20px'}}>
                                     <label htmlFor="guestName">客户名称&nbsp;</label>
                                     <input className="form-control" id="guestName" type="text"
-                                           value={this.state.guestName} readOnly
-                                           readOnly />
+                                           value={this.state.guestName} readOnly />
                                 </div>
                                 <div className="form-group">
                                     <label htmlFor="pdate">报价日期&nbsp;</label>
