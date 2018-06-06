@@ -72,7 +72,8 @@ class PricelistDetail extends React.Component{
                                 </div>
                                 <div className="form-group">
                                     <label htmlFor="pdate">报价日期&nbsp;</label>
-                                    <select id="pdate" value={this.state.pdate} onChange={e => this.onPdateChange(e)}>
+                                    <select id="pdate" value={this.state.pdate} className="form-control"
+                                            onChange={e => this.onPdateChange(e)}>
                                         {
                                             this.state.pdates.map((value, index) => {
                                                 return <option key={index} value={value}>{value}</option>

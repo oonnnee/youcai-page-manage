@@ -197,13 +197,14 @@ class PricelistSave extends React.Component{
         for (let i=0; i<this.state.categoryWithProducts.length; i++){
             const srcProducts = this.state.categoryWithProducts[i].products;
             for (let j=0; j<srcProducts.length; j++) {
+                products.push({});
+                const index = products.length - 1;
+                products[index].productId = srcProducts[j].id;
+                products[index].price = srcProducts[j].price;
+                products[index].note = srcProducts[j].note;
                 const price = Number(srcProducts[j].price);
-                if (price!=0 && isNaN(price)==false){
-                    products.push({});
-                    const index = products.length - 1;
-                    products[index].productId = srcProducts[j].id;
-                    products[index].price = srcProducts[j].price;
-                    products[index].note = srcProducts[j].note;
+                if (price==0 || isNaN(price)){
+                    products[index].price = 0;
                 }
             }
         }

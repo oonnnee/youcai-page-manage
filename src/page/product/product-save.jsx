@@ -17,7 +17,7 @@ class ProductSave extends React.Component{
         super(props);
         this.state = {
             name: '',
-            unit: '',
+            unit: '斤',
             price: 0.0,
             imgfile: '',
             note: '',
@@ -51,6 +51,7 @@ class ProductSave extends React.Component{
                                     <label htmlFor="unit" className="col-sm-2 control-label">单位</label>
                                     <div className="col-sm-10">
                                         <input className="form-control" id="unit" type="text"
+                                               value={this.state.unit}
                                                onChange={e => this.onInputChange(e)}/>
                                     </div>
                                 </div>

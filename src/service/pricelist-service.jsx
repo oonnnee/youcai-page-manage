@@ -53,7 +53,7 @@ class PricelistService{
     findByGuestIdAndPdate(guestId, pdate){
         return appUtil.request({
             type    : 'get',
-            url     : '/manage/pricelist/findFullByGuestIdAndPdateWithCategory',
+            url     : '/manage/pricelist/findByGuestIdAndPdateWithCategory',
             data    : {guestId: guestId, pdate: pdate}
         });
     }
