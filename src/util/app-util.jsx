@@ -17,7 +17,7 @@ class AppUtil{
                         typeof resolve === 'function' && resolve(resp.data, resp.msg);
                     }
                     // 没有登录状态，强制登录
-                    else if(15 === resp.code){
+                    else if(1 === resp.code){
                         this.doLogin();
                     }
                     else{
