@@ -1,7 +1,6 @@
 import React from 'react';
 import Checkbox from 'rc-checkbox';
 import 'rc-checkbox/assets/index.css';
-import 'layui-src/dist/css/layui.css';
 
 import CategoryService from 'service/category-service.jsx';
 import AppUtil from 'util/app-util.jsx';

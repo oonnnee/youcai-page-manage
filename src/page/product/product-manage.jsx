@@ -1,14 +1,14 @@
-import React from 'react'
-import {Link} from 'react-router-dom'
+import React from 'react';
+import {Link} from 'react-router-dom';
 
-import PageTitle from 'page/part/page-title.jsx'
-import DataGrid from 'page/part/data-grid.jsx'
-import Pagination from 'page/part/pagination.jsx'
-import Search from 'page/product/product-manage-search.jsx'
+import PageTitle from 'page/part/page-title.jsx';
+import DataGrid from 'page/part/data-grid.jsx';
+import Pagination from 'page/part/pagination.jsx';
+import Search from 'page/product/product-manage-search.jsx';
 import BreadCrumb from 'page/part/bread-crumb.jsx';
 
-import ProductService from 'service/product-service.jsx'
-import AppUtil from 'util/app-util.jsx'
+import ProductService from 'service/product-service.jsx';
+import AppUtil from 'util/app-util.jsx';
 
 
 const productService = new ProductService();
