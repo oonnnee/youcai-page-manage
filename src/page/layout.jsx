@@ -32,6 +32,9 @@ import PricelistEdit from 'page/pricelist/pricelist-edit.jsx';
 import OrderManage from 'page/order/order-manage.jsx';
 import OrderDetail from 'page/order/order-detail.jsx';
 
+/*----- 送货 -----*/
+import DeliverManage from 'page/deliver/deliver-manage.jsx';
+
 /*----- 送货司机 -----*/
 import DriverManage from 'page/driver/driver-manage.jsx';
 import DriverDetail from 'page/driver/driver-detail.jsx';
@@ -71,6 +74,8 @@ class Layout extends React.Component{
                         {/*----- 采购 -----*/}
                         <Route exact path="/order" component={OrderManage}/>
                         <Route exact path="/order/detail/:guestId/:date" component={OrderDetail}/>
+                        {/*----- 送货 -----*/}
+                        <Route exact path="/deliver" component={DeliverManage}/>
                         {/*----- 送货司机 -----*/}
                         <Route exact path="/driver" component={DriverManage}/>
                         <Route exact path="/driver/detail/:id" component={DriverDetail}/>
