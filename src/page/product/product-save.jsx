@@ -36,7 +36,7 @@ class ProductSave extends React.Component{
             <div id="page-wrapper">
                 <div id="page-inner">
                     <PageTitle title="新增产品" />
-                    <BreadCrumb path={[{href: '/product/manage', name: '产品管理'}]} current="新增产品"/>
+                    <BreadCrumb path={[{href: '/product', name: '产品管理'}]} current="新增产品"/>
                     <div className="row">
                         <div className="col-md-12 column">
                             <div className="form-horizontal">

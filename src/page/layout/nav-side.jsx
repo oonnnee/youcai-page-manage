@@ -13,37 +13,31 @@ class NavSide extends React.Component{
                             <NavLink exact activeClassName="active-menu" to="/"><i className="fa fa-home"></i> 主页</NavLink>
                         </li>
                         <li>
-                            <a href="javascript:;"><i className="fa fa-users"></i>客户<span className="fa arrow"></span></a>
-                            <ul className="nav nav-second-level collapse">
-                                <li>
-                                    <NavLink activeClassName="active-menu" to="/guest/manage">客户管理</NavLink>
-                                </li>
-                            </ul>
+                            <NavLink activeClassName="active-menu" to="/guest"><i className="fa fa-users"></i>客户</NavLink>
                         </li>
                         <li>
-                            <a href="javascript:;"><i className="fa fa-product-hunt"></i>产品<span className="fa arrow"></span></a>
-                            <ul className="nav nav-second-level collapse">
-                                <li>
-                                    <Link to="/product/manage">产品管理</Link>
-                                </li>
-                            </ul>
+                            <NavLink activeClassName="active-menu" to="/product"><i className="fa fa-product-hunt"></i>产品</NavLink>
                         </li>
                         <li>
-                            <a href="javascript:;"><i className="fa fa-reorder"></i>报价<span className="fa arrow"></span></a>
-                            <ul className="nav nav-second-level collapse">
-                                <li>
-                                    <Link to="/pricelist/manage">报价管理</Link>
-                                </li>
-                            </ul>
+                            <NavLink activeClassName="active-menu" to="/pricelist"><i className="fa fa-gg"></i>报价单</NavLink>
                         </li>
                         <li>
-                            <a href="javascript:;"><i className="fa fa-blind"></i>司机<span className="fa arrow"></span></a>
-                            <ul className="nav nav-second-level collapse">
-                                <li>
-                                    <Link to="/driver/manage">司机管理</Link>
-                                </li>
-                            </ul>
+                            <NavLink activeClassName="active-menu" to="/order"><i className="fa fa-reorder"></i>采购单</NavLink>
                         </li>
+                        <li>
+                            <NavLink activeClassName="active-menu" to="/deliver"><i className="fa fa-truck"></i>送货单</NavLink>
+                        </li>
+                        <li>
+                            <NavLink activeClassName="active-menu" to="/driver"><i className="fa fa-blind"></i>司机</NavLink>
+                        </li>
+                        {/*<li>*/}
+                            {/*<a href="javascript:;"><i className="fa fa-blind"></i>司机<span className="fa arrow"></span></a>*/}
+                            {/*<ul className="nav nav-second-level collapse">*/}
+                                {/*<li>*/}
+                                    {/*<Link to="/driver/manage">司机管理</Link>*/}
+                                {/*</li>*/}
+                            {/*</ul>*/}
+                        {/*</li>*/}
                     </ul>
 
                 </div>

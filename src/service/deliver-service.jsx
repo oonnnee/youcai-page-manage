@@ -2,7 +2,7 @@ import AppUtil from 'util/app-util.jsx'
 
 const appUtil = new AppUtil();
 
-class PricelistService{
+class DeliverService{
 
     list(param){
         let url     = '',
@@ -10,12 +10,12 @@ class PricelistService{
         data.page = param.page;
         data.size = param.size;
         if(param.type === 'list'){
-            url = '/manage/pricelist/list';
+            url = '/manage/deliver/list';
         }else if(param.type === 'search'){
-            if (param.searchType === 'guestId'){
-                url = '/manage/pricelist/listByGuestIdLike';
+            if (param.searchType === 'driverName'){
+                url = '/manage/deliver/listByGuestIdLike';
             }else if (param.searchType === 'guestName'){
-                url = '/manage/pricelist/listByGuestNameLike';
+                url = '/manage/deliver/listByGuestNameLike';
             }
             data[param.searchType]  = param.keyword;
         }
@@ -29,7 +29,7 @@ class PricelistService{
     save(param){
         return appUtil.request({
             type    : 'post',
-            url     : '/manage/pricelist/save',
+            url     : '/manage/deliver/save',
             data    : param
         });
     }
@@ -37,7 +37,7 @@ class PricelistService{
     update(param){
         return appUtil.request({
             type    : 'post',
-            url     : '/manage/pricelist/update',
+            url     : '/manage/deliver/update',
             data    : param
         });
     }
@@ -45,7 +45,7 @@ class PricelistService{
     findDatesByGuestId(guestId){
         return appUtil.request({
             type    : 'get',
-            url     : '/manage/pricelist/findDatesByGuestId',
+            url     : '/manage/deliver/findDatesByGuestId',
             data    : {guestId: guestId}
         });
     }
@@ -53,7 +53,7 @@ class PricelistService{
     findCategoriesByGuestIdAndDate(guestId, date){
         return appUtil.request({
             type    : 'get',
-            url     : '/manage/pricelist/findCategoriesByGuestIdAndDate',
+            url     : '/manage/deliver/findCategoriesByGuestIdAndDate',
             data    : {guestId: guestId, date: date}
         });
     }
@@ -61,10 +61,10 @@ class PricelistService{
     delete(guestId, date){
         return appUtil.request({
             type    : 'post',
-            url     : '/manage/pricelist/delete',
+            url     : '/manage/deliver/delete',
             data    : {guestId: guestId, date: date}
         });
     }
 }
 
-export default PricelistService;
+export default DeliverService;

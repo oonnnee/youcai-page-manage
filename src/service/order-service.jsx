@@ -2,7 +2,7 @@ import AppUtil from 'util/app-util.jsx'
 
 const appUtil = new AppUtil();
 
-class PricelistService{
+class OrderService{
 
     list(param){
         let url     = '',
@@ -10,12 +10,12 @@ class PricelistService{
         data.page = param.page;
         data.size = param.size;
         if(param.type === 'list'){
-            url = '/manage/pricelist/list';
+            url = '/manage/order/list';
         }else if(param.type === 'search'){
             if (param.searchType === 'guestId'){
-                url = '/manage/pricelist/listByGuestIdLike';
+                url = '/manage/order/listByGuestIdLike';
             }else if (param.searchType === 'guestName'){
-                url = '/manage/pricelist/listByGuestNameLike';
+                url = '/manage/order/listByGuestNameLike';
             }
             data[param.searchType]  = param.keyword;
         }
@@ -26,26 +26,10 @@ class PricelistService{
         });
     }
 
-    save(param){
-        return appUtil.request({
-            type    : 'post',
-            url     : '/manage/pricelist/save',
-            data    : param
-        });
-    }
-
-    update(param){
-        return appUtil.request({
-            type    : 'post',
-            url     : '/manage/pricelist/update',
-            data    : param
-        });
-    }
-
     findDatesByGuestId(guestId){
         return appUtil.request({
             type    : 'get',
-            url     : '/manage/pricelist/findDatesByGuestId',
+            url     : '/manage/order/findDatesByGuestId',
             data    : {guestId: guestId}
         });
     }
@@ -53,7 +37,7 @@ class PricelistService{
     findCategoriesByGuestIdAndDate(guestId, date){
         return appUtil.request({
             type    : 'get',
-            url     : '/manage/pricelist/findCategoriesByGuestIdAndDate',
+            url     : '/manage/order/findCategoriesByGuestIdAndDate',
             data    : {guestId: guestId, date: date}
         });
     }
@@ -61,10 +45,10 @@ class PricelistService{
     delete(guestId, date){
         return appUtil.request({
             type    : 'post',
-            url     : '/manage/pricelist/delete',
+            url     : '/manage/order/delete',
             data    : {guestId: guestId, date: date}
         });
     }
 }
 
-export default PricelistService;
+export default OrderService;

@@ -30,7 +30,7 @@ class DriverEdit  extends React.Component{
             <div id="page-wrapper">
                 <div id="page-inner">
                     <PageTitle title="更新司机信息" />
-                    <BreadCrumb path={[{href: '/driver/manage', name: '司机管理'}]} current="更新司机信息"/>
+                    <BreadCrumb path={[{href: '/driver', name: '司机管理'}]} current="更新司机信息"/>
                     <div className="row">
                         <div className="col-md-12 column">
                             <div className="form-horizontal">

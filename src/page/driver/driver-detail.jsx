@@ -50,7 +50,7 @@ class DriverDetail  extends React.Component{
                             </a>
                         </div>
                     </PageTitle>
-                    <BreadCrumb path={[{href: '/driver/manage', name: '司机管理'}]} current="司机详情"/>
+                    <BreadCrumb path={[{href: '/driver', name: '司机管理'}]} current="司机详情"/>
                     <div className="row">
                         <div className="col-md-12 column">
                             <form className="form-horizontal" role="form">
@@ -100,7 +100,7 @@ class DriverDetail  extends React.Component{
         if (confirm('确认删除吗？')){
             driverService.delete(this.state.id).then(() => {
                 appUtil.successTip('删除成功');
-                window.location.href = '/driver/manage';
+                window.location.href = '/driver';
             }, err => {
                 appUtil.errorTip(err);
             })

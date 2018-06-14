@@ -42,7 +42,7 @@ class GuestDetail  extends React.Component{
             <div id="page-wrapper">
                 <div id="page-inner">
                     <PageTitle title="客户详情" />
-                    <BreadCrumb path={[{href: '/guest/manage', name: '客户管理'}]} current="客户详情"/>
+                    <BreadCrumb path={[{href: '/guest', name: '客户管理'}]} current="客户详情"/>
                     <div className="row">
                         <div className="col-md-12 column">
                             <form className="form-horizontal" role="form">

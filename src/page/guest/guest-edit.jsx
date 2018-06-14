@@ -34,7 +34,7 @@ class GuestEdit  extends React.Component{
             <div id="page-wrapper">
                 <div id="page-inner">
                     <PageTitle title="更新客户信息" />
-                    <BreadCrumb path={[{href: '/guest/manage', name: '客户管理'}]} current="更新客户信息"/>
+                    <BreadCrumb path={[{href: '/guest', name: '客户管理'}]} current="更新客户信息"/>
                     <div className="row">
                         <div className="col-md-12 column">
                             <div className="form-horizontal">

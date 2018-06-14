@@ -24,7 +24,7 @@ class GuestPwdUpdate  extends React.Component{
             <div id="page-wrapper">
                 <div id="page-inner">
                     <PageTitle title="更新客户密码" />
-                    <BreadCrumb path={[{href: '/guest/manage', name: '客户管理'}]} current="更新客户密码"/>
+                    <BreadCrumb path={[{href: '/guest', name: '客户管理'}]} current="更新客户密码"/>
                     <div className="row">
                         <div className="col-md-12 column">
                             <div className="form-horizontal">
@@ -83,7 +83,7 @@ class GuestPwdUpdate  extends React.Component{
         }
         guestService.updatePwd(param).then(data => {
             appUtil.successTip('更新客户密码成功');
-            window.location.href = '/guest/manage';
+            window.location.href = '/guest';
         }, errMsg => {
             appUtil.errorTip(errMsg);
         });
