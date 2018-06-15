@@ -34,35 +34,19 @@ class DeliverService{
         });
     }
 
-    update(param){
-        return appUtil.request({
-            type    : 'post',
-            url     : '/manage/deliver/update',
-            data    : param
-        });
-    }
-
-    findDatesByGuestId(guestId){
+    findCategories(guestId, driverId, date){
         return appUtil.request({
             type    : 'get',
-            url     : '/manage/deliver/findDatesByGuestId',
-            data    : {guestId: guestId}
+            url     : '/manage/deliver/findCategories',
+            data    : {guestId: guestId, driverId: driverId, date: date}
         });
     }
 
-    findCategoriesByGuestIdAndDate(guestId, date){
-        return appUtil.request({
-            type    : 'get',
-            url     : '/manage/deliver/findCategoriesByGuestIdAndDate',
-            data    : {guestId: guestId, date: date}
-        });
-    }
-
-    delete(guestId, date){
+    delete(guestId, driverId, date){
         return appUtil.request({
             type    : 'post',
             url     : '/manage/deliver/delete',
-            data    : {guestId: guestId, date: date}
+            data    : {guestId: guestId, driverId: driverId, date: date}
         });
     }
 }

@@ -34,6 +34,8 @@ import OrderDetail from 'page/order/order-detail.jsx';
 
 /*----- 送货 -----*/
 import DeliverManage from 'page/deliver/deliver-manage.jsx';
+import DeliverDetail from 'page/deliver/deliver-detail.jsx';
+import DeliverSave from 'page/deliver/deliver-save.jsx';
 
 /*----- 送货司机 -----*/
 import DriverManage from 'page/driver/driver-manage.jsx';
@@ -76,6 +78,8 @@ class Layout extends React.Component{
                         <Route exact path="/order/detail/:guestId/:date" component={OrderDetail}/>
                         {/*----- 送货 -----*/}
                         <Route exact path="/deliver" component={DeliverManage}/>
+                        <Route exact path="/deliver/detail/:guestId/:driverId/:date" component={DeliverDetail}/>
+                        <Route exact path="/deliver/new/:guestId/:odate" component={DeliverSave}/>
                         {/*----- 送货司机 -----*/}
                         <Route exact path="/driver" component={DriverManage}/>
                         <Route exact path="/driver/detail/:id" component={DriverDetail}/>

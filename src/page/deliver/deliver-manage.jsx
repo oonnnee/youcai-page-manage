@@ -39,7 +39,7 @@ class DeliverManage extends React.Component {
         const tableHeads = [
             {name: '客户名称', width: '40%'},
             {name: '司机名称', width: '15%'},
-            {name: '送货日期(最近一次)', width15: '30%'},
+            {name: '送货日期', width15: '30%'},
             {name: '操作', width: '15%'},
         ];
         return (
@@ -51,31 +51,13 @@ class DeliverManage extends React.Component {
                     <DataGrid tableHeads={tableHeads}>
                         {
                             this.state.content.map((deliver, index) => {
-                                let date;
-                                let detail;
-                                if (deliver.dates.length != 0){
-                                    let d = appUtil.getDateString(new Date(deliver.dates[0]));
-                                    date = (
-                                        <td>{d}</td>
-                                    );
-                                    detail = (
-                                        <Link className="opear" to={`/deliver/detail/${deliver.guestId}/${deliver.driverId}/${appUtil.getDateString(new Date(deliver.dates[0]))}`}>查看</Link>
-                                    );
-                                } else {
-                                    date = (
-                                        <td>暂无送货</td>
-                                    );
-                                    detail = (
-                                        <span className="opear">查看</span>
-                                    );
-                                }
                                 return (
                                     <tr key={index}>
                                         <td>{deliver.guestName}</td>
                                         <td>{deliver.driverName}</td>
-                                        {date}
+                                        <td>{appUtil.getDateString(new Date(deliver.date))}</td>
                                         <td>
-                                            {detail}
+                                            <Link className="opear" to={`/deliver/detail/${deliver.guestId}/${deliver.driverId}/${appUtil.getDateString(new Date(deliver.date))}`}>查看</Link>
                                         </td>
                                     </tr>
                                 )

@@ -175,7 +175,7 @@ class PricelistDetail extends React.Component{
     }
 
     loadCategories(){
-        pricelistService.findCategoriesByGuestIdAndDate(this.state.guestId, this.state.date)
+        pricelistService.findCategories(this.state.guestId, this.state.date)
             .then(data => {
                 this.setState({
                     categories: data

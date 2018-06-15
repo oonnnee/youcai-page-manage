@@ -55,7 +55,7 @@ class OrderDetail extends React.Component{
     }
 
     loadCategories(){
-        orderService.findCategoriesByGuestIdAndDate(this.state.guestId, this.state.date)
+        orderService.findCategories(this.state.guestId, this.state.date)
             .then(data => {
                 this.setState({
                     categories: data
@@ -87,7 +87,7 @@ class OrderDetail extends React.Component{
                 <div id="page-inner">
                     <PageTitle title="采购详情" >
                         <div className="page-header-right">
-                            <Link to="/deliver/new" className="btn btn-primary">
+                            <Link to={`/deliver/new/${this.state.guestId}/${this.state.date}`} className="btn btn-primary">
                                 <i className="fa fa-truck"></i>&nbsp;
                                 <span>创建送货单</span>
                             </Link>

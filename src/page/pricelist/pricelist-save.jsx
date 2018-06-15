@@ -43,14 +43,12 @@ class PricelistSave extends React.Component{
                                 <div className="form-group" style={{marginRight: '20px'}}>
                                     <label htmlFor="guestId">客户id&nbsp;</label>
                                     <input className="form-control" id="guestId" type="text"
-                                           value={this.state.guestId} readOnly
-                                           readOnly />
+                                           value={this.state.guestId} readOnly/>
                                 </div>
                                 <div className="form-group" style={{marginRight: '20px'}}>
                                     <label htmlFor="guestName">客户名称&nbsp;</label>
                                     <input className="form-control" id="guestName" type="text"
-                                           value={this.state.guestName} readOnly
-                                           readOnly />
+                                           value={this.state.guestName} readOnly/>
                                 </div>
                                 <div className="form-group">
                                     <label htmlFor="date">报价日期&nbsp;</label>

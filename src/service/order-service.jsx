@@ -34,10 +34,10 @@ class OrderService{
         });
     }
 
-    findCategoriesByGuestIdAndDate(guestId, date){
+    findCategories(guestId, date){
         return appUtil.request({
             type    : 'get',
-            url     : '/manage/order/findCategoriesByGuestIdAndDate',
+            url     : '/manage/order/findCategories',
             data    : {guestId: guestId, date: date}
         });
     }

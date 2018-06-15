@@ -50,10 +50,10 @@ class PricelistService{
         });
     }
 
-    findCategoriesByGuestIdAndDate(guestId, date){
+    findCategories(guestId, date){
         return appUtil.request({
             type    : 'get',
-            url     : '/manage/pricelist/findCategoriesByGuestIdAndDate',
+            url     : '/manage/pricelist/findCategories',
             data    : {guestId: guestId, date: date}
         });
     }
