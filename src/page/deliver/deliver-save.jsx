@@ -5,13 +5,15 @@ import BreadCrumb from 'page/part/bread-crumb.jsx';
 
 import AppUtil from 'util/app-util.jsx';
 import DeliverService from 'service/deliver-service.jsx';
+import DriverService from 'service/driver-service.jsx';
 import GuestService from 'service/guest-service.jsx';
-import CategoryService from 'service/category-service.jsx';
+import OrderService from 'service/order-service.jsx';
 
 
 const guestService = new GuestService();
-const categoryService = new CategoryService();
+const driverService = new DriverService();
 const deliverService = new DeliverService();
+const orderService = new OrderService();
 const appUtil = new AppUtil();
 
 class DeliverSave extends React.Component{
@@ -22,14 +24,17 @@ class DeliverSave extends React.Component{
             guestId: this.props.match.params.guestId,
             odate: this.props.match.params.odate,
             guestName: '',
-            date: appUtil.getDateString(new Date()),
+            driverId: '',
+            ddate: appUtil.getDateString(new Date()),
             categories: [],
+            drivers: []
         }
     }
 
     componentDidMount(){
         this.loadGuestName();
         this.loadCategories();
+        this.loadDrivers();
     }
 
     loadGuestName(){
@@ -43,33 +48,30 @@ class DeliverSave extends React.Component{
     }
 
     loadCategories(){
-        categoryService.listWithProducts().then(categories => {
-            let dest = [];
-            for (let i=0; i<categories.length; i++){
-                dest.push({});
-                dest[i].code = categories[i].code;
-                dest[i].name = categories[i].name;
-                dest[i].products = [];
-                const products = categories[i].products;
-                for (let j=0; j<products.length; j++) {
-                    dest[i].products.push({});
-                    dest[i].products[j].id = products[j].id;
-                    dest[i].products[j].name = products[j].name;
-                    dest[i].products[j].price = products[j].price;
-                    dest[i].products[j].note = '';
-                }
-            }
-            this.setState({
-                categories: dest
+        orderService.findCategories(this.state.guestId, this.state.odate)
+            .then(data => {
+                this.setState({
+                    categories: data
+                });
+            }, err => {
+                appUtil.errorTip(err);
             })
-        }, errMsg => {
-            appUtil.errorTip(errMsg);
+    }
+
+    loadDrivers(){
+        driverService.findAll().then(data => {
+            this.setState({
+                drivers: data,
+                driverId: data[0].id
+            });
+        }, err => {
+            appUtil.errorTip(err);
         })
     }
 
-    onDateChange(e){
+    onDdateChange(e){
         this.setState({
-            date: e.target.value
+            ddate: e.target.value
         })
     }
 
@@ -88,34 +90,40 @@ class DeliverSave extends React.Component{
     onSave(e) {
         let params = {};
         params.guestId = this.state.guestId;
-        params.date = this.state.date;
+        params.driverId = this.state.driverId;
+        params.date = this.state.ddate;
         let products = [];
         for (let i=0; i<this.state.categories.length; i++){
             const srcProducts = this.state.categories[i].products;
             for (let j=0; j<srcProducts.length; j++) {
+                const srcProduct = srcProducts[j];
+                if (srcProduct.num==0 || isNaN(srcProduct.num)){
+                    continue;
+                }
                 products.push({});
                 const index = products.length - 1;
-                products[index].productId = srcProducts[j].id;
-                products[index].price = srcProducts[j].price;
-                products[index].note = srcProducts[j].note;
-                const price = Number(srcProducts[j].price);
-                if (price==0 || isNaN(price)){
-                    products[index].price = 0;
-                }
+                products[index].id = srcProduct.id;
+                products[index].price = srcProduct.price;
+                products[index].num = srcProduct.num;
+                products[index].note = srcProduct.note;
             }
         }
         params.products = JSON.stringify(products);
 
         let target = e.target;
-        target.innerHTML = '保存中...';
+        target.innerHTML = '创建中...';
         target.disabled = true;
         deliverService.save(params).then(() => {
-            target.innerHTML = '保存';
-            appUtil.successTip('新增报价成功');
-            window.location.href = '/deliver';
+            target.innerHTML = '创建';
+            appUtil.successTip('创建送货单成功');
+            window.location.href = '/order';
         }, errMsg => {
             appUtil.errorTip(errMsg);
         });
+    }
+
+    onDriverChange(e){
+        this.state.driverId = e.target.value;
     }
 
     render(){
@@ -129,24 +137,38 @@ class DeliverSave extends React.Component{
                     <div className="row">
                         <div className="form-horizontal">
                             <div className="form-group">
-                                <label htmlFor="guestId" class="col-md-2 control-label">客户id</label>
-                                <div class="col-md-6">
+                                <label htmlFor="guestId" className="col-md-2 control-label">客户id</label>
+                                <div className="col-md-6">
                                     <input className="form-control" id="guestId" type="text"
                                            value={this.state.guestId} readOnly/>
                                 </div>
                             </div>
                             <div className="form-group">
-                                <label htmlFor="guestName" class="col-md-2 control-label">客户名称</label>
-                                <div class="col-md-6">
+                                <label htmlFor="guestName" className="col-md-2 control-label">客户名称</label>
+                                <div className="col-md-6">
                                     <input className="form-control" id="guestName" type="text"
                                            value={this.state.guestName} readOnly/>
                                 </div>
                             </div>
                             <div className="form-group">
-                                <label htmlFor="date" class="col-md-2 control-label">送货日期</label>
-                                <div class="col-md-6">
-                                    <input className="form-control" id="date" type="date"
-                                           value={this.state.date}/>
+                                <label htmlFor="guestName" className="col-md-2 control-label">送货司机</label>
+                                <div className="col-md-6">
+                                    <select className="form-control" onChange={e => {this.onDriverChange(e)}}>
+                                        {
+                                            this.state.drivers.map((driver, index) => {
+                                                return (
+                                                    <option key={index} value={driver.id}>{driver.name}</option>
+                                                );
+                                            })
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                            <div className="form-group">
+                                <label htmlFor="ddate" className="col-md-2 control-label">送货日期</label>
+                                <div className="col-md-6">
+                                    <input className="form-control" id="ddate" type="date"
+                                           value={this.state.ddate} onChange={e => this.onDdateChange(e)}/>
                                 </div>
                             </div>
                         </div>
@@ -189,11 +211,26 @@ class DeliverSave extends React.Component{
                                                                                 </div>
                                                                             </div>
                                                                             <div className="form-group">
-                                                                                <label htmlFor="price" className="col-sm-4 control-label">报价/元</label>
+                                                                                <label htmlFor="amount" className="col-sm-4 control-label">金额/元</label>
+                                                                                <div className="col-sm-8">
+                                                                                    <input type="text" className="form-control" id="amount"
+                                                                                           value={(product.price*product.num).toFixed(2)} readOnly />
+                                                                                </div>
+                                                                            </div>
+                                                                            <div className="form-group">
+                                                                                <label htmlFor="price" className="col-sm-4 control-label">单价/元</label>
                                                                                 <div className="col-sm-8">
                                                                                     <input type="text" className="form-control" id="price"
                                                                                            categoryindex={categoryindex} productindex={productindex}
                                                                                            value={product.price} onChange={e => this.onInputChange(e)} />
+                                                                                </div>
+                                                                            </div>
+                                                                            <div className="form-group">
+                                                                                <label htmlFor="num" className="col-sm-4 control-label">数量/{product.unit}</label>
+                                                                                <div className="col-sm-8">
+                                                                                    <input type="text" className="form-control" id="num"
+                                                                                           categoryindex={categoryindex} productindex={productindex}
+                                                                                           value={product.num} onChange={e => this.onInputChange(e)} />
                                                                                 </div>
                                                                             </div>
                                                                             <div className="form-group">
@@ -219,7 +256,7 @@ class DeliverSave extends React.Component{
                         }
                     </div>
                     <div className="col-md-12">
-                        <button className="btn btn-primary btn-lg btn-block" onClick={(e) => this.onSave(e)}>保存</button>
+                        <button className="btn btn-primary btn-lg btn-block" onClick={(e) => this.onSave(e)}>创建</button>
                     </div>
                 </div>
             </div>

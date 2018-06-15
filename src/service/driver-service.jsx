@@ -22,6 +22,13 @@ class DriverService{
         });
     }
 
+    findAll(){
+        return appUtil.request({
+            type: 'get',
+            url: '/manage/driver/findAll'
+        });
+    }
+
     // 获取司机详情
     findById(id){
         return appUtil.request({
