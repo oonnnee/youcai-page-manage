@@ -13,7 +13,7 @@ class DeliverService{
             url = '/manage/deliver/list';
         }else if(param.type === 'search'){
             if (param.searchType === 'driverName'){
-                url = '/manage/deliver/listByGuestIdLike';
+                url = '/manage/deliver/listByDriverNameLike';
             }else if (param.searchType === 'guestName'){
                 url = '/manage/deliver/listByGuestNameLike';
             }
