@@ -161,7 +161,7 @@ class DeliverDetail extends React.Component{
                                                                                 </div>
                                                                             </div>
                                                                             <div className="form-group">
-                                                                                <label htmlFor="price" className="col-sm-4 control-label">数量/{product.unit}</label>
+                                                                                <label htmlFor="price" className="col-sm-4 control-label"><br/>({product.unit})</label>
                                                                                 <div className="col-sm-8">
                                                                                     <input type="text" className="form-control" id="num"
                                                                                            value={product.num} readOnly />

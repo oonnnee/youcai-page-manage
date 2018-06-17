@@ -226,7 +226,7 @@ class DeliverSave extends React.Component{
                                                                                 </div>
                                                                             </div>
                                                                             <div className="form-group">
-                                                                                <label htmlFor="num" className="col-sm-4 control-label">数量/{product.unit}</label>
+                                                                                <label htmlFor="num" className="col-sm-4 control-label"><br/>({product.unit})</label>
                                                                                 <div className="col-sm-8">
                                                                                     <input type="text" className="form-control" id="num"
                                                                                            categoryindex={categoryindex} productindex={productindex}
