@@ -91,7 +91,7 @@ class OrderDetail extends React.Component{
                                 <i className="fa fa-truck"></i>&nbsp;
                                 <span>创建送货单</span>
                             </Link>
-                            <a href={"localhost:8080/manage/excel/order/export?guestId="+this.state.guestId+"&"+"date="+this.state.date} target="_blank" className="btn btn-primary">
+                            <a href={"localhost:8080/manage/order/export?guestId="+this.state.guestId+"&"+"date="+this.state.date} target="_blank" className="btn btn-primary">
                                 <i className="fa fa-cloud-download"></i>&nbsp;
                                 <span>导出excel</span>
                             </a>
