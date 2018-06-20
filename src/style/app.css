@@ -93,7 +93,7 @@ body {
         overflow-y: auto;
         padding-top: 20px;
         border:none;
-        background: #32C2CD url(../img/bg-img.jpg) !important;
+        background: #31c5a7 !important;
     }
     /*----- 收缩按钮 -----*/
     #sideNav{
@@ -149,7 +149,7 @@ body {
     .navbar-side {
         width: 100%;
         border:none;
-        background: #32C2CD url(../img/bg-img.jpg) !important;
+        background: #31c5a7 !important;
     }
     /*----- 收缩按钮 -----*/
     #sideNav{
@@ -620,7 +620,7 @@ footer p{
     padding-top: 4px;
 }
 .active-menu {
-    background-color: #18A0A9 !important;
+    background-color: #98e2d3 !important;
     color: #fff !important;
 }
 .active-menu i{

@@ -66,6 +66,13 @@ class DriverService{
             data    : {id: id}
         });
     }
+
+    count(){
+        return appUtil.request({
+            type    : 'get',
+            url     : '/manage/driver/count',
+        });
+    }
 }
 
 export default DriverService;

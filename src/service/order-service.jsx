@@ -49,6 +49,7 @@ class OrderService{
             data    : {guestId: guestId, date: date}
         });
     }
+
 }
 
 export default OrderService;

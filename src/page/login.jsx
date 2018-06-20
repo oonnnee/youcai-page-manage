@@ -17,6 +17,12 @@ class Login extends React.Component{
         }
     }
 
+    onLoginKeyUp(e){
+        if (e.keyCode == 13){
+            this.handleLogin();
+        }
+    }
+
     render(){
         return (
             <div className="col-md-offset-4 col-md-4 login-panel">
@@ -38,7 +44,7 @@ class Login extends React.Component{
                         </div>
                         <div className="form-group">
                             <input type="password" name="pwd" className="form-control" placeholder="请输入密码"
-                                   onChange={e => this.handleInputChange(e)} />
+                                   onChange={e => this.handleInputChange(e)} onKeyUp={e => this.onLoginKeyUp(e)} />
                         </div>
                         <button className="btn btn-lg btn-primary btn-block"
                                 onClick={() => this.handleLogin()}>登录</button>

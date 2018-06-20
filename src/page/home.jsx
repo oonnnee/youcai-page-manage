@@ -5,10 +5,12 @@ import PageTitle from 'page/part/page-title.jsx';
 
 import GuestService from 'service/guest-service.jsx';
 import ProductService from 'service/product-service.jsx';
+import DriverService from 'service/driver-service.jsx';
 import AppUtil from 'util/app-util.jsx';
 
 const guestService = new GuestService();
 const productService = new ProductService();
+const driverService = new DriverService();
 const appUtil = new AppUtil();
 
 class Home extends React.Component{
@@ -18,6 +20,7 @@ class Home extends React.Component{
         this.state = {
             guestCount: '--',
             productCount: '--',
+            driverCount: '--',
         }
     }
 
@@ -29,7 +32,6 @@ class Home extends React.Component{
         return (
             <div id="page-wrapper">
                 <div id="page-inner">
-                    <PageTitle title="主页"/>
                     <div className="row">
                         <div className="col-md-4">
                             <Link to="/guest/manage" className="color-box brown">
@@ -46,6 +48,15 @@ class Home extends React.Component{
                                 <p className="desc">
                                     <i className="fa fa-list"></i>
                                     <span>产品总数</span>
+                                </p>
+                            </Link>
+                        </div>
+                        <div className="col-md-4">
+                            <Link to="/product/manage" className="color-box red">
+                                <p className="count">{this.state.driverCount}</p>
+                                <p className="desc">
+                                    <i className="fa fa-user-circle-o"></i>
+                                    <span>司机总数</span>
                                 </p>
                             </Link>
                         </div>
@@ -70,6 +81,14 @@ class Home extends React.Component{
             })
         }, () => {
             appUtil.errorTip('获取产品总数失败');
+        })
+
+        driverService.count().then(driverCount => {
+            this.setState({
+                driverCount: driverCount
+            })
+        }, () => {
+            appUtil.errorTip('获取司机总数失败');
         })
     }
 }
