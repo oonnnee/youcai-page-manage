@@ -5,7 +5,8 @@
   "repository": "git@github.com:oonnnee/youcai-page-manage.git",
   "license": "MIT",
   "scripts": {
-    "build": "node_modules/.bin/webpack -p",
+    "build": "set WEBPACK_ENV=online&& node_modules/.bin/webpack -p",
+    "dist": "node_modules/.bin/webpack -p",
     "server": "node_modules/.bin/webpack-dev-server"
   },
   "devDependencies": {
@@ -25,6 +26,8 @@
     "webpack-dev-server": "2.9.7"
   },
   "dependencies": {
+    "ejs": "^2.6.1",
+    "http-server": "^0.11.1",
     "prop-types": "15.6.0",
     "rc-checkbox": "2.1.5",
     "rc-pagination": "1.15.1",
