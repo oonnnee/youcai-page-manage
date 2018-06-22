@@ -133,7 +133,7 @@ class DriverManage extends React.Component {
         if (confirm('确认删除吗？')){
             driverService.delete(this.state.id).then(() => {
                 appUtil.successTip('删除成功');
-                window.location.href = '/driver/manage';
+                window.location.href = '/driver';
             }, err => {
                 appUtil.errorTip(err);
             })

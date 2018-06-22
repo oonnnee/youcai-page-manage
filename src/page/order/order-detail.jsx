@@ -101,7 +101,7 @@ class OrderDetail extends React.Component{
                             </a>
                         </div>
                     </PageTitle>
-                    <BreadCrumb path={[{href: '/order/manage', name: '采购管理'}]} current="采购详情"/>
+                    <BreadCrumb path={[{href: '/order', name: '采购管理'}]} current="采购详情"/>
                     <div className="row">
                         <div className="col-md-12">
                             <div className="form-inline">

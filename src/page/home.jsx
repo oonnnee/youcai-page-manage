@@ -34,7 +34,7 @@ class Home extends React.Component{
                 <div id="page-inner">
                     <div className="row">
                         <div className="col-md-4">
-                            <Link to="/guest/manage" className="color-box brown">
+                            <Link to="/guest" className="color-box brown">
                                 <p className="count">{this.state.guestCount}</p>
                                 <p className="desc">
                                     <i className="fa fa-users"></i>
@@ -43,7 +43,7 @@ class Home extends React.Component{
                             </Link>
                         </div>
                         <div className="col-md-4">
-                            <Link to="/product/manage" className="color-box green">
+                            <Link to="/product" className="color-box green">
                                 <p className="count">{this.state.productCount}</p>
                                 <p className="desc">
                                     <i className="fa fa-list"></i>
@@ -52,7 +52,7 @@ class Home extends React.Component{
                             </Link>
                         </div>
                         <div className="col-md-4">
-                            <Link to="/product/manage" className="color-box red">
+                            <Link to="/driver" className="color-box red">
                                 <p className="count">{this.state.driverCount}</p>
                                 <p className="desc">
                                     <i className="fa fa-user-circle-o"></i>
