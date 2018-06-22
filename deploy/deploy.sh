@@ -35,10 +35,10 @@ yarn run build
 if [ -d "./dist" ];
 then
     echo -e "---------clean Dest--------"
-    rm -rf $DEST_PATH/dist
+    rm -rf $DEST_PATH/$1/dist
 
     echo -e "---------copy Dest--------"
-    cp -R ./dist $DEST_PATH/$1/
+    cp -R ./dist $DEST_PATH/$1/dist
 
     echo -e "---------Deploy Success--------"
 else
