@@ -7,8 +7,8 @@ let WEBPACK_ENV = process.env.WEBPACK_ENV || 'dev';
 module.exports = {
     entry: './src/app.jsx',
     output:{
-        path: path.resolve(__dirname, 'views'),
-        publicPath: WEBPACK_ENV === 'dev' ? '/views/' : '//127.0.0.1:8080/youcai-page-manage/views/',
+        path: path.resolve(__dirname, 'dist'),
+        publicPath: WEBPACK_ENV === 'dev' ? '/dist/' : '//s.yangyawen.top/youcai-page-manage/dist/',
         filename: 'app.js'
     },
     resolve: {
@@ -95,7 +95,7 @@ module.exports = {
     devServer: {
         port: 8088,
         historyApiFallback: {
-            index: '/views/index.html'
+            index: '/dist/index.html'
         },
         proxy : {
             '/manage': {
