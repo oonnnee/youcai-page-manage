@@ -1,12 +1,12 @@
 
 
 GIT_HOME=/developer/git-repository/
-DEST_PATH=/product/front/
+DEST_PATH=/product
 
 if [ ! -n "$1" ];
 then
     echo -e "Please input a project name! You can input as follows:"
-    echo -e "./fe-deploy.sh youcai-page-manage"
+    echo -e "./deploy.sh youcai-page-manage"
     exit
 fi
 
