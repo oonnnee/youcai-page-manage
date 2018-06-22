@@ -90,7 +90,7 @@ class ProductDetail extends React.Component{
                                     <div className="col-sm-10">
                                         {
                                             this.state.images.map((image, key) => {
-                                                return <img key={key} src={"http://localhost:8080/manage/"+image} className="img-responsive" />
+                                                return <img key={key} src={"http://www.yangyawen.top:8080/manage/"+image} className="img-responsive" />
                                             })
                                         }
                                     </div>
