@@ -10,12 +10,12 @@ class GuestService{
         data.page = param.page;
         data.size = param.size;
         if(param.type === 'list'){
-            url = '/manage/guest/list';
+            url = '/manage/guest/findPage';
         }else if(param.type === 'search'){
             if (param.searchType === 'id'){
-                url = '/manage/guest/findByIdLike';
+                url = '/manage/guest/findPageByIdLike';
             }else if (param.searchType === 'name'){
-                url = '/manage/guest/findByNameLike';
+                url = '/manage/guest/findPageByNameLike';
             }
             data[param.searchType]  = param.keyword;
         }
@@ -30,7 +30,7 @@ class GuestService{
     findById(id){
         return appUtil.request({
             type    : 'get',
-            url     : '/manage/guest/find',
+            url     : '/manage/guest/findOne',
             data    : {
                 id : id
             }
@@ -86,7 +86,7 @@ class GuestService{
     count(){
         return appUtil.request({
             type    : 'get',
-            url     : '/manage/guest/count',
+            url     : '/manage/guest/countAll',
         });
     }
 }
