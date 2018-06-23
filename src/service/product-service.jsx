@@ -11,11 +11,11 @@ class ProductService{
         data.page = param.page;
         data.size = param.size;
         if(param.type === 'list'){
-            url = '/manage/product/list';
+            url = '/manage/product/findPage';
         }else if(param.type === 'search'){
-            url = '/manage/product/findBy';
+            url = '/manage/product/findPageByNameLikeAndCodeIn';
             if (typeof param.PCodes !== 'undefined'){
-                data.PCodes = param.PCodes;
+                data.codes = param.PCodes;
             }
             if (typeof param.name !== 'undefined'){
                 data.name = param.name;
@@ -32,7 +32,7 @@ class ProductService{
     findById(id){
         return appUtil.request({
             type    : 'get',
-            url     : '/manage/product/find',
+            url     : '/manage/product/findOne',
             data    : {
                 id : id
             }
@@ -68,7 +68,7 @@ class ProductService{
     count(){
         return appUtil.request({
             type    : 'get',
-            url     : '/manage/product/count',
+            url     : '/manage/product/countAll',
         });
     }
 }
