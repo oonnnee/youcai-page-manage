@@ -8,7 +8,7 @@ class CategoryService{
     map(){
         return appUtil.request({
             type: 'get',
-            url: '/manage/category/map'
+            url: '/manage/category/findMap'
         });
     }
 
@@ -16,14 +16,14 @@ class CategoryService{
     list(){
         return appUtil.request({
             type: 'get',
-            url: '/manage/category/list'
+            url: '/manage/category/findList'
         });
     }
 
     listWithProducts(){
         return appUtil.request({
             type: 'get',
-            url: '/manage/category/listWithProducts'
+            url: '/manage/category/findListWithProducts'
         });
     }
 }
