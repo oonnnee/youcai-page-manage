@@ -10,12 +10,12 @@ class PricelistService{
         data.page = param.page;
         data.size = param.size;
         if(param.type === 'list'){
-            url = '/manage/pricelist/list';
+            url = '/manage/pricelist/findPage';
         }else if(param.type === 'search'){
             if (param.searchType === 'guestId'){
-                url = '/manage/pricelist/listByGuestIdLike';
+                url = '/manage/pricelist/findPageByGuestIdLike';
             }else if (param.searchType === 'guestName'){
-                url = '/manage/pricelist/listByGuestNameLike';
+                url = '/manage/pricelist/findPageByGuestNameLike';
             }
             data[param.searchType]  = param.keyword;
         }
@@ -53,7 +53,7 @@ class PricelistService{
     findCategories(guestId, date){
         return appUtil.request({
             type    : 'get',
-            url     : '/manage/pricelist/findCategories',
+            url     : '/manage/pricelist/findOneWithCategories',
             data    : {guestId: guestId, date: date}
         });
     }

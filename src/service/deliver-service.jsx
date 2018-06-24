@@ -10,12 +10,12 @@ class DeliverService{
         data.page = param.page;
         data.size = param.size;
         if(param.type === 'list'){
-            url = '/manage/deliver/list';
+            url = '/manage/deliver/findPage';
         }else if(param.type === 'search'){
             if (param.searchType === 'driverName'){
-                url = '/manage/deliver/listByDriverNameLike';
+                url = '/manage/deliver/findPageByDriverNameLike';
             }else if (param.searchType === 'guestName'){
-                url = '/manage/deliver/listByGuestNameLike';
+                url = '/manage/deliver/findPageByGuestNameLike';
             }
             data[param.searchType]  = param.keyword;
         }
@@ -37,7 +37,7 @@ class DeliverService{
     findCategories(guestId, driverId, date){
         return appUtil.request({
             type    : 'get',
-            url     : '/manage/deliver/findCategories',
+            url     : '/manage/deliver/findOneWithCategories',
             data    : {guestId: guestId, driverId: driverId, date: date}
         });
     }

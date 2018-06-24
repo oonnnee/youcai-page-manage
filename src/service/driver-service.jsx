@@ -10,9 +10,9 @@ class DriverService{
         data.page = param.page;
         data.size = param.size;
         if(param.type === 'list'){
-            url = '/manage/driver/list';
+            url = '/manage/driver/findPage';
         }else if(param.type === 'search'){
-            url = '/manage/driver/findByNameLike';
+            url = '/manage/driver/findPageByNameLike';
             data.name = param.driverName;
         }
         return appUtil.request({
@@ -25,7 +25,7 @@ class DriverService{
     findAll(){
         return appUtil.request({
             type: 'get',
-            url: '/manage/driver/findAll'
+            url: '/manage/driver/findList'
         });
     }
 
@@ -33,7 +33,7 @@ class DriverService{
     findById(id){
         return appUtil.request({
             type    : 'get',
-            url     : '/manage/driver/find',
+            url     : '/manage/driver/findOne',
             data    : {
                 id : id
             }
@@ -70,7 +70,7 @@ class DriverService{
     count(){
         return appUtil.request({
             type    : 'get',
-            url     : '/manage/driver/count',
+            url     : '/manage/driver/countAll',
         });
     }
 }

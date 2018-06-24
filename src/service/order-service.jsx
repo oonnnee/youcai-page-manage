@@ -10,12 +10,12 @@ class OrderService{
         data.page = param.page;
         data.size = param.size;
         if(param.type === 'list'){
-            url = '/manage/order/list';
+            url = '/manage/order/findPage';
         }else if(param.type === 'search'){
             if (param.searchType === 'guestId'){
-                url = '/manage/order/listByGuestIdLike';
+                url = '/manage/order/findPageByGuestIdLike';
             }else if (param.searchType === 'guestName'){
-                url = '/manage/order/listByGuestNameLike';
+                url = '/manage/order/findPageByGuestNameLike';
             }
             data[param.searchType]  = param.keyword;
         }
@@ -37,7 +37,7 @@ class OrderService{
     findCategories(guestId, date){
         return appUtil.request({
             type    : 'get',
-            url     : '/manage/order/findCategories',
+            url     : '/manage/order/findOneWithCategories',
             data    : {guestId: guestId, date: date}
         });
     }

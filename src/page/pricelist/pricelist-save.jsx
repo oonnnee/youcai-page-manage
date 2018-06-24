@@ -214,7 +214,7 @@ class PricelistSave extends React.Component{
         pricelistService.save(params).then(() => {
             target.innerHTML = '保存';
             appUtil.successTip('新增报价成功');
-            window.location.href = '/pricelist';
+            // window.location.href = '/pricelist';
         }, errMsg => {
             appUtil.errorTip(errMsg);
         });
