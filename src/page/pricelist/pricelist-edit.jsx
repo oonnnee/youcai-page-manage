@@ -217,7 +217,8 @@ class PricelistEdit extends React.Component{
         pricelistService.update(params).then(() => {
             target.innerHTML = '更新';
             appUtil.successTip('更新报价成功');
-            window.location.href = `/pricelist/detail/${this.state.guestId}/${this.state.date}`;
+            window.location.href = "/pricelist";
+            // window.location.href = `/pricelist/detail/${this.state.guestId}/${this.state.date}`;
         }, errMsg => {
             appUtil.errorTip(errMsg);
         });

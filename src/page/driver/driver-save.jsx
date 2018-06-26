@@ -83,7 +83,7 @@ class DriverSave  extends React.Component{
     onSave(){
         driverService.save(this.state).then(() => {
             appUtil.successTip('新增司机成功');
-            window.location.reload(true);
+            window.location.href = "/driver";
         }, errMsg => {
             appUtil.errorTip(errMsg);
         });

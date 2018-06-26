@@ -69,7 +69,7 @@ class DriverManage extends React.Component {
                                             <td>
                                                 <Link className="opear" to={`/driver/detail/${driver.id}`}>详情</Link>
                                                 <Link className="opear" to={`/driver/edit/${driver.id}`}>编辑</Link>
-                                                <a className="opear" href="javascript:;" onClick={() => this.onDelete()}>删除</a>
+                                                <a className="opear" href="javascript:;" onClick={() => {this.onDelete(driver.id)}}>删除</a>
                                             </td>
                                         </tr>
                                     );
@@ -129,9 +129,9 @@ class DriverManage extends React.Component {
         });
     }
 
-    onDelete(){
+    onDelete(productId){
         if (confirm('确认删除吗？')){
-            driverService.delete(this.state.id).then(() => {
+            driverService.delete(productId).then(() => {
                 appUtil.successTip('删除成功');
                 window.location.href = '/driver';
             }, err => {

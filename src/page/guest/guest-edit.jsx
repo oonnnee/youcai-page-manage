@@ -144,7 +144,7 @@ class GuestEdit  extends React.Component{
     onUpdate(){
         guestService.update(this.state).then(data => {
             appUtil.successTip('更新客户信息成功');
-            window.location.reload(true);
+            window.location.href = "/guest";
         }, errMsg => {
             appUtil.errorTip(errMsg);
         });

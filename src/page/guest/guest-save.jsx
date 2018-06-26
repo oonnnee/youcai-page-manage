@@ -123,7 +123,7 @@ class GuestSave  extends React.Component{
     onSave(){
         guestService.save(this.state).then(() => {
             appUtil.successTip('新增客户成功');
-            window.location.reload(true);
+            window.location.href = "/guest";
         }, errMsg => {
             appUtil.errorTip(errMsg);
         });

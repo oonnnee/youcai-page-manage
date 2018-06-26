@@ -142,7 +142,7 @@ class ProductSave extends React.Component{
         }
         productService.save(params).then(data => {
             appUtil.successTip("新增产品成功");
-            window.location.reload(true);
+            window.location.href = '/product';
         }, errMsg => {
             appUtil.errorTip(errMsg);
         })

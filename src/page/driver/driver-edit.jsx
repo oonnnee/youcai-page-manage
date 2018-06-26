@@ -108,7 +108,7 @@ class DriverEdit  extends React.Component{
     onUpdate(){
         driverService.update(this.state).then(data => {
             appUtil.successTip('更新司机信息成功');
-            window.location.reload(true);
+            window.location.href = "/driver";
         }, errMsg => {
             appUtil.errorTip(errMsg);
         });
