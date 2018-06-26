@@ -109,12 +109,9 @@ class UserEdit extends React.Component{
             note: this.state.note
         }
         guestService.update(guest).then(() =>  {
-            appUtil.successTip('更新用户信息成功, 请重新登录');
-            loginService.logout().then(() => {
-                appUtil.doLogin();
-            }, errMsg => {
-                appUtil.errorTip(errMsg);
-            });
+            appUtil.setStorage('user', this.state);
+            appUtil.successTip('更新用户信息成功');
+            window.location.href = '/user/profile';;
         }, errMsg => {
             appUtil.errorTip(errMsg);
         });
