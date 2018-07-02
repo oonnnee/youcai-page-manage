@@ -34,19 +34,19 @@ class OrderService{
         });
     }
 
-    findCategories(guestId, date){
+    findStatesByGuestIdAndDate(guestId, date){
         return appUtil.request({
             type    : 'get',
-            url     : '/manage/order/findOneWithCategories',
+            url     : '/manage/order/findStatesByGuestIdAndDate',
             data    : {guestId: guestId, date: date}
         });
     }
 
-    delete(guestId, date){
+    findCategories(guestId, date, state){
         return appUtil.request({
-            type    : 'post',
-            url     : '/manage/order/delete',
-            data    : {guestId: guestId, date: date}
+            type    : 'get',
+            url     : '/manage/order/findOneWithCategories',
+            data    : {guestId: guestId, date: date, state: state}
         });
     }
 

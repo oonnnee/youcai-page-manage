@@ -19,6 +19,16 @@ body {
     margin-top: 60px;
 }
 
+.margin-right-sm{
+    margin-right: 10px;
+}
+.margin-right-md{
+    margin-right: 20px;
+}
+.margin-right-lg{
+    margin-right: 40px;
+}
+
 /*-------------------------------
         登录页面
 -------------------------------*/

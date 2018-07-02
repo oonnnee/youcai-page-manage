@@ -85,7 +85,7 @@ class ProductSave extends React.Component{
                                                     this.state.images.length ? this.state.images.map(
                                                         (image, index) => (
                                                             <div className="img-con" key={index}>
-                                                                <img className="img" src={"http://www.yangyawen.top:8080/manage/"+image} />
+                                                                <img className="img" src={"http://localhost:8080/manage/"+image} />
                                                                 <i className="fa fa-close" index={index} onClick={(e) => this.onImageDelete(e)}></i>
                                                             </div>)
                                                     ) : (<div>请上传图片</div>)

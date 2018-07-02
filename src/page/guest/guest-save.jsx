@@ -32,7 +32,7 @@ class GuestSave  extends React.Component{
                     <PageTitle title="新增客户" />
                     <BreadCrumb path={[{href: '/guest', name: '客户管理'}]} current="新增客户"/>
                     <div className="row">
-                        <div className="col-md-12 column">
+                        <div className="col-md-12">
                             <div className="form-horizontal">
                                 <div className="form-group">
                                     <label htmlFor="pwd" className="col-sm-2 control-label">密码</label>

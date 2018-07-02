@@ -23,6 +23,7 @@ class DeliverSave extends React.Component{
         this.state = {
             guestId: this.props.match.params.guestId,
             odate: this.props.match.params.odate,
+            state: this.props.match.params.state,
             guestName: '',
             driverId: '',
             ddate: appUtil.getDateString(new Date()),
@@ -48,7 +49,7 @@ class DeliverSave extends React.Component{
     }
 
     loadCategories(){
-        orderService.findCategories(this.state.guestId, this.state.odate)
+        orderService.findCategories(this.state.guestId, this.state.odate, this.state.state)
             .then(data => {
                 this.setState({
                     categories: data

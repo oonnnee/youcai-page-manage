@@ -40,7 +40,7 @@ class PricelistDetail extends React.Component{
                 <div id="page-inner">
                     <PageTitle title="报价详情" >
                         <div className="page-header-right">
-                            <a href={"http://www.yangyawen.top:8080/manage/pricelist/export?guestId="+this.state.guestId+"&"+"date="+this.state.date} target="_blank" className="btn btn-primary">
+                            <a href={"http://localhost:8080/manage/pricelist/export?guestId="+this.state.guestId+"&"+"date="+this.state.date} target="_blank" className="btn btn-primary">
                                 <i className="fa fa-cloud-download"></i>&nbsp;
                                 <span>导出excel</span>
                             </a>

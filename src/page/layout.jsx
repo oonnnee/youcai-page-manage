@@ -79,7 +79,7 @@ class Layout extends React.Component{
                         {/*----- 送货 -----*/}
                         <Route exact path="/deliver" component={DeliverManage}/>
                         <Route exact path="/deliver/detail/:guestId/:driverId/:date" component={DeliverDetail}/>
-                        <Route exact path="/deliver/new/:guestId/:odate" component={DeliverSave}/>
+                        <Route exact path="/deliver/new/:guestId/:odate/:state" component={DeliverSave}/>
                         {/*----- 送货司机 -----*/}
                         <Route exact path="/driver" component={DriverManage}/>
                         <Route exact path="/driver/detail/:id" component={DriverDetail}/>
