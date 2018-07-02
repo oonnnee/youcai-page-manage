@@ -159,39 +159,36 @@ class OrderDetail extends React.Component{
                     </PageTitle>
                     <BreadCrumb path={[{href: '/order', name: '采购管理'}]} current="采购详情"/>
                     <div className="row">
-                        <div className="col-md-12">
-                            <div className="form-inline">
-                                <div className="form-group col-md-6">
-                                    <label htmlFor="guestId" className="col-md-2">客户id</label>
-                                    <div className="col-md-10">
+                        <div className="col-md-6">
+                            <div className="form-horizontal">
+                                <div className="form-group">
+                                    <label htmlFor="guestId" className="col-md-3">客户id</label>
+                                    <div className="col-md-9">
                                         <input className="form-control" id="guestId" type="text"
                                                value={this.state.guestId} readOnly/>
                                     </div>
-
                                 </div>
-                                <div className="form-group col-md-6">
-                                    <label htmlFor="guestName" className="col-md-2">客户名称</label>
-                                    <div className="col-md-10">
-                                        <input className="form-control" id="guestName" type="text"
-                                               value={this.state.guestName} readOnly />
+                                <div className="form-group">
+                                    <label htmlFor="date" className="col-md-3">采购日期&nbsp;</label>
+                                    <div className="col-md-9">
+                                        {date}
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div className="row ">
-                            <div className="col-md-12 margin-top-sm">
-                                <div className="form-inline">
-                                    <div className="form-group col-md-6">
-                                        <label htmlFor="date" className="col-md-2">采购日期&nbsp;</label>
-                                        <div className="col-md-10">
-                                            {date}
-                                        </div>
+                        <div className="col-md-6">
+                            <div className="form-horizontal">
+                                <div className="form-group">
+                                    <label htmlFor="guestName" className="col-md-3">客户名称</label>
+                                    <div className="col-md-9">
+                                        <input className="form-control" id="guestName" type="text"
+                                               value={this.state.guestName} readOnly />
                                     </div>
-                                    <div className="form-group col-md-6">
-                                        <label htmlFor="state" className="col-md-2">状态&nbsp;</label>
-                                        <div className="col-md-10">
-                                            {stat}
-                                        </div>
+                                </div>
+                                <div className="form-group">
+                                    <label htmlFor="state" className="col-md-3">状态&nbsp;</label>
+                                    <div className="col-md-9">
+                                        {stat}
                                     </div>
                                 </div>
                             </div>
