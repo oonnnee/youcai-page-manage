@@ -37,7 +37,7 @@ class DataGrid extends React.Component{
         let tableBody = listBody.length > 0 ? listBody : listInfo;
         return (
             <div className="row">
-                <div className="col-md-12">
+                <div className="col-md-12 table-responsive">
                     <table className="table table-striped table-bordered">
                         <thead>
                         <tr>

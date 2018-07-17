@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 
 import PageTitle from 'page/part/page-title.jsx';
 import BreadCrumb from 'page/part/bread-crumb.jsx';
+import DataGrid from 'page/part/data-grid.jsx';
 
 import AppUtil from 'util/app-util.jsx';
 import OrderService from 'service/order-service.jsx';
@@ -26,23 +27,12 @@ class OrderDetail extends React.Component{
             dates: [],
             state: '',
             states: [],
-            categories: [],
+            products: [],
         }
     }
 
     componentDidMount(){
-        this.loadGuestName();
         this.loadDates();
-    }
-
-    loadGuestName(){
-        guestService.findById(this.state.guestId).then(guest => {
-            this.setState({
-                guestName: guest.name
-            })
-        }, errMsg => {
-            appUtil.errorTip(errMsg);
-        })
     }
 
     loadDates(){
@@ -69,19 +59,17 @@ class OrderDetail extends React.Component{
                 states: states,
                 state: states[0]
             }, () => {
-                this.loadCategories();
+                this.findOne();
             })
         }, errMsg => {
             appUtil.errorTip(errMsg);
         })
     }
 
-    loadCategories(){
-        orderService.findCategories(this.state.guestId, this.state.date, this.state.state)
+    findOne(){
+        orderService.findOne(this.state.guestId, this.state.date, this.state.state)
             .then(data => {
-                this.setState({
-                    categories: data
-                })
+                this.setState(data)
             }, errMsg => {
                 appUtil.errorTip(errMsg);
             })
@@ -99,7 +87,7 @@ class OrderDetail extends React.Component{
         this.setState({
             state: e.target.value
         }, () => {
-            this.loadCategories();
+            this.findOne();
         })
     }
 
@@ -140,6 +128,14 @@ class OrderDetail extends React.Component{
                 </select>
             );
         }
+        const tableHeads = [
+            {name: '产品id', width: '15%'},
+            {name: '产品名称', width: '25%'},
+            {name: '单价', width: '10%'},
+            {name: '数量', width: '10%'},
+            {name: '金额', width: '15%'},
+            {name: '备注', width: '25%'}
+        ];
         return (
             <div id="page-wrapper">
                 <div id="page-inner">
@@ -158,7 +154,7 @@ class OrderDetail extends React.Component{
                         </div>
                     </PageTitle>
                     <BreadCrumb path={[{href: '/order', name: '采购管理'}]} current="采购详情"/>
-                    <div className="row">
+                    <div className="row margin-bottom-md">
                         <div className="col-md-6">
                             <div className="form-horizontal">
                                 <div className="form-group">
@@ -194,85 +190,22 @@ class OrderDetail extends React.Component{
                             </div>
                         </div>
                     </div>
-                    <div className="panel-group margin-top-md" id="accordion" role="tablist" aria-multiselectable="true">
+                    <DataGrid tableHeads={tableHeads}>
                         {
-                            this.state.categories.map((category, categoryindex) => {
+                            this.state.products.map((product, index) => {
                                 return (
-                                    <div className="panel panel-default" key={categoryindex}>
-                                        <div className="panel-heading" role="tab" id="headingOne">
-                                            <h4 className="panel-title">
-                                                <a role="button" data-toggle="collapse" data-parent="#accordion" href={'#'+categoryindex}
-                                                   aria-expanded="true" aria-controls="collapseOne">
-                                                    {category.name}
-                                                </a>
-                                            </h4>
-                                        </div>
-                                        <div id={categoryindex} className="panel-collapse collapse in" role="tabpanel"
-                                             aria-labelledby="headingOne">
-                                            <div className="panel-body">
-                                                {
-                                                    category.products.map((product, productindex) => {
-                                                        return (
-                                                            <div className="col-md-4" key={productindex}>
-                                                                <div className="panel panel-default">
-                                                                    <div className="form-horizontal">
-                                                                        <div className="panel-body">
-                                                                            <div className="form-group">
-                                                                                <label htmlFor="productId" className="col-sm-4 control-label">id</label>
-                                                                                <div className="col-sm-8">
-                                                                                    <input type="text" className="form-control" id="productId"
-                                                                                           value={product.id} readOnly />
-                                                                                </div>
-                                                                            </div>
-                                                                            <div className="form-group">
-                                                                                <label htmlFor="productName" className="col-sm-4 control-label">名称</label>
-                                                                                <div className="col-sm-8">
-                                                                                    <input type="text" className="form-control" id="productName"
-                                                                                           value={product.name} readOnly />
-                                                                                </div>
-                                                                            </div>
-                                                                            <div className="form-group">
-                                                                                <label htmlFor="price" className="col-sm-4 control-label">单价/元</label>
-                                                                                <div className="col-sm-8">
-                                                                                    <input type="text" className="form-control" id="price"
-                                                                                           value={product.price} readOnly />
-                                                                                </div>
-                                                                            </div>
-                                                                            <div className="form-group">
-                                                                                <label htmlFor="num" className="col-sm-4 control-label"><br/>({product.unit})</label>
-                                                                                <div className="col-sm-8">
-                                                                                    <input type="text" className="form-control" id="num"
-                                                                                           value={product.num} readOnly />
-                                                                                </div>
-                                                                            </div>
-                                                                            <div className="form-group">
-                                                                                <label htmlFor="amount" className="col-sm-4 control-label">金额/元</label>
-                                                                                <div className="col-sm-8">
-                                                                                    <input type="text" className="form-control" id="amount"
-                                                                                           value={product.amount} readOnly />
-                                                                                </div>
-                                                                            </div>
-                                                                            <div className="form-group">
-                                                                                <label htmlFor="note" className="col-sm-4 control-label">备注</label>
-                                                                                <div className="col-sm-8">
-                                                                                    <input type="text" className="form-control" id="note"
-                                                                                           value={product.note} readOnly />
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        );
-                                                    })
-                                                }
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <tr key={index}>
+                                        <td>{product.id}</td>
+                                        <td>{product.name}</td>
+                                        <td>{product.price}</td>
+                                        <td>{product.num}&nbsp;<span className="badge">{product.unit}</span></td>
+                                        <td>{product.amount}</td>
+                                        <td>{product.note}</td>
+                                    </tr>
                                 );
                             })
                         }
-                    </div>
+                    </DataGrid>
                 </div>
             </div>
         );

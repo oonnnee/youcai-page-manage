@@ -71,6 +71,13 @@ class ProductService{
             url     : '/manage/product/countAll',
         });
     }
+
+    findList(){
+        return appUtil.request({
+            type    : 'get',
+            url     : '/manage/product/findList',
+        });
+    }
 }
 
 export default ProductService;

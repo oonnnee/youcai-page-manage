@@ -50,6 +50,14 @@ class OrderService{
         });
     }
 
+    findOne(guestId, date, state){
+        return appUtil.request({
+            type    : 'get',
+            url     : '/manage/order/findOne',
+            data    : {guestId: guestId, date: date, state: state}
+        });
+    }
+
 }
 
 export default OrderService;

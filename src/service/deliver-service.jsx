@@ -49,6 +49,14 @@ class DeliverService{
             data    : {guestId: guestId, driverId: driverId, date: date}
         });
     }
+
+    findOne(guestId, driverId, date){
+        return appUtil.request({
+            type    : 'get',
+            url     : '/manage/deliver/findOne',
+            data    : {guestId: guestId, driverId: driverId, date: date}
+        });
+    }
 }
 
 export default DeliverService;

@@ -58,6 +58,14 @@ class PricelistService{
         });
     }
 
+    findOne(guestId, date){
+        return appUtil.request({
+            type    : 'get',
+            url     : '/manage/pricelist/findOne',
+            data    : {guestId: guestId, date: date}
+        });
+    }
+
     delete(guestId, date){
         return appUtil.request({
             type    : 'post',
