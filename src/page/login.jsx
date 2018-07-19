@@ -12,8 +12,8 @@ class Login extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            id: 'admin',
-            pwd: 'admin'
+            id: '',
+            pwd: ''
         }
     }
 
