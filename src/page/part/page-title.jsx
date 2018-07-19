@@ -17,7 +17,9 @@ class PageTitle extends React.Component{
                     <h2 className="page-header">
                         {this.props.title}
                     </h2>
-                    {this.props.children}
+                    <div className="page-header-right">
+                        {this.props.children}
+                    </div>
                 </div>
             </div>
         );

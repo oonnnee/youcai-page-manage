@@ -37,10 +37,9 @@ class PricelistManage extends React.Component {
 
     render() {
         const tableHeads = [
-            {name: '客户id', width: '15%'},
-            {name: '客户名称', width: '40%'},
+            {name: '客户名称', width: '50%'},
             {name: '报价日期(最近一次)', width15: '30%'},
-            {name: '操作', width: '15%'},
+            {name: '操作', width: '20%'},
         ];
         return (
             <div id="page-wrapper">
@@ -71,7 +70,6 @@ class PricelistManage extends React.Component {
                                 }
                                 return (
                                     <tr key={index}>
-                                        <td>{pricelist.guestId}</td>
                                         <td>{pricelist.guestName}</td>
                                         {date}
                                         <td>

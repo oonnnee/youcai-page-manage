@@ -85,45 +85,54 @@ class PricelistDetail extends React.Component{
             <div id="page-wrapper">
                 <div id="page-inner">
                     <PageTitle title="报价详情" >
-                        <div className="page-header-right">
-                            <a href={"http://localhost:8080/manage/pricelist/export?guestId="+this.state.guestId+"&"+"date="+this.state.date} target="_blank" className="btn btn-primary">
-                                <i className="fa fa-cloud-download"></i>&nbsp;
-                                <span>导出excel</span>
-                            </a>
-                            <Link to={"/pricelist/edit/"+this.state.guestId+"/"+this.state.date} className="btn btn-primary">
-                                <i className="fa fa-edit"></i>&nbsp;
-                                <span>编辑</span>
-                            </Link>
-                            <a href="javascript:;" className="btn btn-danger" onClick={() => this.onDelete()}>
-                                <i className="fa fa-trash-o"></i>&nbsp;
-                                <span>删除</span>
-                            </a>
-                        </div>
+                        <a href={`http://${appUtil.getDeployAddress()}:8080/manage/pricelist/export?guestId=${this.state.guestId}&date=${this.state.date}`}
+                             target="_blank" className="btn btn-primary">
+                            <i className="fa fa-cloud-download"></i>
+                            <span>导出excel</span>
+                        </a>
+                        <Link to={"/pricelist/edit/"+this.state.guestId+"/"+this.state.date} className="btn btn-primary">
+                            <i className="fa fa-edit"></i>
+                            <span>编辑</span>
+                        </Link>
+                        <a href="javascript:;" className="btn btn-danger" onClick={() => this.onDelete()}>
+                            <i className="fa fa-trash-o"></i>
+                            <span>删除</span>
+                        </a>
                     </PageTitle>
                     <BreadCrumb path={[{href: '/pricelist', name: '报价管理'}]} current="报价详情"/>
                     <div className="row margin-bottom-md">
-                        <div className="col-md-12">
-                            <div className="form-inline">
-                                <div className="form-group" style={{marginRight: '20px'}}>
-                                    <label htmlFor="guestId">客户id&nbsp;</label>
-                                    <input className="form-control" id="guestId" type="text"
-                                           value={this.state.guestId} readOnly/>
-                                </div>
-                                <div className="form-group" style={{marginRight: '20px'}}>
-                                    <label htmlFor="guestName">客户名称&nbsp;</label>
-                                    <input className="form-control" id="guestName" type="text"
-                                           value={this.state.guestName} readOnly />
+                        <div className="col-md-6">
+                            <div className="form-horizontal">
+                                <div className="form-group">
+                                    <label htmlFor="guestId" className="col-sm-4 control-label">客户id</label>
+                                    <div className="col-sm-8">
+                                        <input className="form-control" id="guestId" type="text"
+                                               value={this.state.guestId} readOnly />
+                                    </div>
                                 </div>
                                 <div className="form-group">
-                                    <label htmlFor="date">报价日期&nbsp;</label>
-                                    <select id="date" value={this.state.date} className="form-control"
-                                            onChange={e => this.onDateChange(e)}>
-                                        {
-                                            this.state.dates.map((value, index) => {
-                                                return <option key={index} value={value}>{value}</option>
-                                            })
-                                        }
-                                    </select>
+                                    <label htmlFor="date" className="col-sm-4 control-label">报价日期</label>
+                                    <div className="col-sm-8">
+                                        <select id="date" value={this.state.date} className="form-control"
+                                                onChange={e => this.onDateChange(e)}>
+                                            {
+                                                this.state.dates.map((value, index) => {
+                                                    return <option key={index} value={value}>{value}</option>
+                                                })
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="col-md-6">
+                            <div className="form-horizontal">
+                                <div className="form-group">
+                                    <label htmlFor="date" className="col-sm-4 control-label">客户名称</label>
+                                    <div className="col-sm-8">
+                                        <input className="form-control" id="guestName" type="text"
+                                               value={this.state.guestName} readOnly />
+                                    </div>
                                 </div>
                             </div>
                         </div>

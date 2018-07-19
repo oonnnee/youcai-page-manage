@@ -1,18 +1,20 @@
-import React from 'react'
-import {Link} from 'react-router-dom'
+import React from 'react';
+import {Link} from 'react-router-dom';
 
-import PageTitle from 'page/part/page-title.jsx'
-import DataGrid from 'page/part/data-grid.jsx'
-import Pagination from 'page/part/pagination.jsx'
+import PageTitle from 'page/part/page-title.jsx';
+import DataGrid from 'page/part/data-grid.jsx';
+import Pagination from 'page/part/pagination.jsx';
 import Search from 'page/order/order-manage-search.jsx';
 import BreadCrumb from 'page/part/bread-crumb.jsx';
 
-import OrderService from 'service/order-service.jsx'
-import AppUtil from 'util/app-util.jsx'
+import OrderService from 'service/order-service.jsx';
+import AppUtil from 'util/app-util.jsx';
+import OrderUtil from 'util/order-util.jsx';
 
 
 const orderService = new OrderService();
 const appUtil = new AppUtil();
+const orderUtil = new OrderUtil();
 
 class OrderManage extends React.Component {
 
@@ -27,68 +29,15 @@ class OrderManage extends React.Component {
             size: 10,
             first: false,
             numberOfElements: 0,
-            type: 'list'
+            type: 'list',
+
+            pendingCount: 0
         };
     }
 
     componentDidMount() {
         this.loadList();
-    }
-
-    render() {
-        const tableHeads = [
-            {name: '客户id', width: '15%'},
-            {name: '客户名称', width: '40%'},
-            {name: '采购日期(最近一次)', width15: '30%'},
-            {name: '操作', width: '15%'},
-        ];
-        return (
-            <div id="page-wrapper">
-                <div id="page-inner">
-                    <PageTitle title="采购管理" />
-                    <BreadCrumb path={[]} current="采购管理"/>
-                    <Search onSearch={(searchType, searchKeyword) => {this.onSearch(searchType, searchKeyword)}}/>
-                    <DataGrid tableHeads={tableHeads}>
-                        {
-                            this.state.content.map((order, index) => {
-                                let date;
-                                let detail;
-                                if (order.dates.length != 0){
-                                    let d = appUtil.getDateString(new Date(order.dates[0]));
-                                    date = (
-                                        <td>{d}</td>
-                                    );
-                                    detail = (
-                                        <Link className="opear" to={`/order/detail/${order.guestId}/${appUtil.getDateString(new Date(order.dates[0]))}`}>查看</Link>
-                                    );
-                                } else {
-                                    date = (
-                                        <td>暂无采购</td>
-                                    );
-                                    detail = (
-                                        <span className="opear">查看</span>
-                                    );
-                                }
-                                return (
-                                    <tr key={index}>
-                                        <td>{order.guestId}</td>
-                                        <td>{order.guestName}</td>
-                                        {date}
-                                        <td>
-                                            {detail}
-                                        </td>
-                                    </tr>
-                                )
-                            })
-                        }
-                    </DataGrid>
-                    <Pagination current={this.state.number + 1}
-                                total={this.state.totalElements}
-                                onChange={(current, pageSize) => this.onChange(current, pageSize)}
-                                onShowSizeChange={(current, pageSize) => this.onChange(current, pageSize)}/>
-                </div>
-            </div>
-        );
+        this.loadPendingCount();
     }
 
     // 加载列表
@@ -113,6 +62,16 @@ class OrderManage extends React.Component {
         });
     }
 
+    loadPendingCount(){
+        orderService.countByState(orderUtil.getStatePending().state).then(data => {
+            this.setState({
+                pendingCount: data
+            });
+        }, errMsg => {
+            appUtil.errorTip(errMsg);
+        })
+    }
+
     // 搜索
     onSearch(searchType, searchKeyword){
         let type = searchKeyword === '' ? 'list' : 'search';
@@ -134,6 +93,65 @@ class OrderManage extends React.Component {
         }, () => {
             this.loadList();
         });
+    }
+
+    showNoPendingHint(){
+        alert('没有需要处理的采购单哦');
+    }
+
+    render() {
+        const tableHeads = [
+            {name: '客户名称', width: '50%'},
+            {name: '采购日期(最近一次)', width: '30%'},
+            {name: '操作', width: '20%'},
+        ];
+
+        let pending;
+        if (this.state.pendingCount != 0){
+            pending = (
+                <Link to="/order/pending" className="btn btn-danger" type="button">
+                    {orderUtil.getStatePending().note}
+                    <span className="badge">{this.state.pendingCount}</span>
+                </Link>
+            );
+        } else {
+            pending = (
+                <button className="btn btn-primary" type="button" onClick={() => this.showNoPendingHint()}>
+                    {orderUtil.getStatePending().note}
+                </button>
+            );
+        }
+
+        return (
+            <div id="page-wrapper">
+                <div id="page-inner">
+                    <PageTitle title="采购管理" >
+                        {pending}
+                    </PageTitle>
+                    <BreadCrumb path={[]} current="采购管理"/>
+                    <Search onSearch={(searchType, searchKeyword) => {this.onSearch(searchType, searchKeyword)}}/>
+                    <DataGrid tableHeads={tableHeads}>
+                        {
+                            this.state.content.map((order, index) => {
+                                return (
+                                    <tr key={index}>
+                                        <td>{order.guestName}</td>
+                                        <td>{order.dates[0]}</td>
+                                        <td>
+                                            <Link className="opear" to={`/order/detail/${order.guestId}/${order.dates[0]}`}>查看</Link>
+                                        </td>
+                                    </tr>
+                                )
+                            })
+                        }
+                    </DataGrid>
+                    <Pagination current={this.state.number + 1}
+                                total={this.state.totalElements}
+                                onChange={(current, pageSize) => this.onChange(current, pageSize)}
+                                onShowSizeChange={(current, pageSize) => this.onChange(current, pageSize)}/>
+                </div>
+            </div>
+        );
     }
 
 }

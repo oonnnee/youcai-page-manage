@@ -5,6 +5,7 @@ import BreadCrumb from 'page/part/bread-crumb.jsx';
 import DataGrid from 'page/part/data-grid.jsx';
 
 import AppUtil from 'util/app-util.jsx';
+import OrderUtil from 'util/order-util.jsx';
 import DeliverService from 'service/deliver-service.jsx';
 import DriverService from 'service/driver-service.jsx';
 import GuestService from 'service/guest-service.jsx';
@@ -16,6 +17,7 @@ const driverService = new DriverService();
 const deliverService = new DeliverService();
 const orderService = new OrderService();
 const appUtil = new AppUtil();
+const orderUtil = new OrderUtil();
 
 class DeliverSave extends React.Component{
 
@@ -23,13 +25,13 @@ class DeliverSave extends React.Component{
         super(props);
         this.state = {
             guestId: this.props.match.params.guestId,
-            odate: this.props.match.params.odate,
-            state: this.props.match.params.state,
+            state: orderUtil.getStateNew().state,
             guestName: '',
             driverId: '',
-            ddate: appUtil.getDateString(new Date()),
             products: [],
-            drivers: []
+            drivers: [],
+
+            orderDate: this.props.match.params.odate,
         }
     }
 
@@ -39,7 +41,7 @@ class DeliverSave extends React.Component{
     }
 
     loadOrders(){
-        orderService.findOne(this.state.guestId, this.state.odate, this.state.state)
+        orderService.findOne(this.state.guestId, this.state.orderDate, this.state.state)
             .then(data => {
                 this.setState(data);
             }, err => {
@@ -55,12 +57,6 @@ class DeliverSave extends React.Component{
             });
         }, err => {
             appUtil.errorTip(err);
-        })
-    }
-
-    onDdateChange(e){
-        this.setState({
-            ddate: e.target.value
         })
     }
 
@@ -88,8 +84,8 @@ class DeliverSave extends React.Component{
 
         params.guestId = this.state.guestId;
         params.driverId = this.state.driverId;
-        params.date = this.state.ddate;
         params.products = JSON.stringify(products);
+        params.orderDate = this.state.orderDate;
 
         let target = e.target;
         target.innerHTML = '创建中...';
@@ -124,40 +120,46 @@ class DeliverSave extends React.Component{
                         {href: `/order/detail/${this.state.guestId}/${this.state.date}`, name: '采购详情'}]}
                                 current="创建送货单"/>
                     <div className="row margin-bottom-md">
-                        <div className="form-horizontal">
-                            <div className="form-group">
-                                <label htmlFor="guestId" className="col-md-2 control-label">客户id</label>
-                                <div className="col-md-6">
-                                    <input className="form-control" id="guestId" type="text"
-                                           value={this.state.guestId} readOnly/>
+                        <div className="col-md-6">
+                            <div className="form-horizontal">
+                                <div className="form-group">
+                                    <label htmlFor="guestId" className="col-md-4 control-label">客户id</label>
+                                    <div className="col-md-8">
+                                        <input className="form-control" id="guestId" type="text"
+                                               value={this.state.guestId} readOnly/>
+                                    </div>
+                                </div>
+                                <div className="form-group">
+                                    <label htmlFor="guestName" className="col-md-4 control-label">客户名称</label>
+                                    <div className="col-md-8">
+                                        <input className="form-control" id="guestName" type="text"
+                                               value={this.state.guestName} readOnly/>
+                                    </div>
                                 </div>
                             </div>
-                            <div className="form-group">
-                                <label htmlFor="guestName" className="col-md-2 control-label">客户名称</label>
-                                <div className="col-md-6">
-                                    <input className="form-control" id="guestName" type="text"
-                                           value={this.state.guestName} readOnly/>
+                        </div>
+                        <div className="col-md-6">
+                            <div className="form-horizontal">
+                                <div className="form-group">
+                                    <label htmlFor="ddate" className="col-sm-4 control-label">送货日期</label>
+                                    <div className="col-sm-8">
+                                        <input className="form-control" id="ddate" type="date"
+                                               value={appUtil.getDateString(new Date())} readOnly/>
+                                    </div>
                                 </div>
-                            </div>
-                            <div className="form-group">
-                                <label htmlFor="guestName" className="col-md-2 control-label">送货司机</label>
-                                <div className="col-md-6">
-                                    <select className="form-control" onChange={e => {this.onDriverChange(e)}}>
-                                        {
-                                            this.state.drivers.map((driver, index) => {
-                                                return (
-                                                    <option key={index} value={driver.id}>{driver.name}</option>
-                                                );
-                                            })
-                                        }
-                                    </select>
-                                </div>
-                            </div>
-                            <div className="form-group">
-                                <label htmlFor="ddate" className="col-md-2 control-label">送货日期</label>
-                                <div className="col-md-6">
-                                    <input className="form-control" id="ddate" type="date"
-                                           value={this.state.ddate} onChange={e => this.onDdateChange(e)}/>
+                                <div className="form-group">
+                                    <label htmlFor="guestName" className="col-md-4 control-label">送货司机</label>
+                                    <div className="col-md-8">
+                                        <select className="form-control" onChange={e => {this.onDriverChange(e)}}>
+                                            {
+                                                this.state.drivers.map((driver, index) => {
+                                                    return (
+                                                        <option key={index} value={driver.id}>{driver.name}</option>
+                                                    );
+                                                })
+                                            }
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -170,7 +172,7 @@ class DeliverSave extends React.Component{
                                         <td>{product.id}</td>
                                         <td>{product.name}</td>
                                         <td>{product.price}</td>
-                                        <td>{product.num}&nbsp;<span className="badge">{product.unit}</span></td>
+                                        <td>{product.num}<span className="badge">{product.unit}</span></td>
                                         <td>{product.amount}</td>
                                         <td><input type="text" className="form-control" name='note'
                                                    value={product.note} onChange={e => this.onInputChange(e)} /></td>

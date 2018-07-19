@@ -37,10 +37,9 @@ class DeliverManage extends React.Component {
 
     render() {
         const tableHeads = [
-            {name: '客户名称', width: '40%'},
-            {name: '司机名称', width: '15%'},
-            {name: '送货日期', width15: '30%'},
-            {name: '操作', width: '15%'},
+            {name: '客户名称', width: '50%'},
+            {name: '送货日期(最近一次)', width15: '30%'},
+            {name: '操作', width: '20%'},
         ];
         return (
             <div id="page-wrapper">
@@ -54,10 +53,9 @@ class DeliverManage extends React.Component {
                                 return (
                                     <tr key={index}>
                                         <td>{deliver.guestName}</td>
-                                        <td>{deliver.driverName}</td>
-                                        <td>{appUtil.getDateString(new Date(deliver.date))}</td>
+                                        <td>{deliver.dates[0]}</td>
                                         <td>
-                                            <Link className="opear" to={`/deliver/detail/${deliver.guestId}/${deliver.driverId}/${appUtil.getDateString(new Date(deliver.date))}`}>查看</Link>
+                                            <Link className="opear" to={`/deliver/detail/${deliver.guestId}/${deliver.dates[0]}`}>查看</Link>
                                         </td>
                                     </tr>
                                 )

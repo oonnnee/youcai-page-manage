@@ -58,6 +58,30 @@ class OrderService{
         });
     }
 
+
+    countByState(state){
+        return appUtil.request({
+            type    : 'get',
+            url     : '/manage/order/countByState',
+            data    : {state: state}
+        });
+    }
+
+    findPendingList(state){
+        return appUtil.request({
+            type    : 'get',
+            url     : '/manage/order/findPendingList',
+            data    : {state: state}
+        });
+    }
+
+    back(guestId, date, state){
+        return appUtil.request({
+            type    : 'post',
+            url     : '/manage/order/back',
+            data    : {guestId: guestId, date: date, state: state}
+        });
+    }
 }
 
 export default OrderService;

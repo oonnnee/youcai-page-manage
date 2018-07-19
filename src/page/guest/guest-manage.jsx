@@ -47,12 +47,10 @@ class GuestManage extends React.Component {
             <div id="page-wrapper">
                 <div id="page-inner">
                     <PageTitle title="客户管理">
-                        <div className="page-header-right">
-                            <Link to="/guest/save" className="btn btn-primary">
-                                <i className="fa fa-plus"></i>&nbsp;
-                                <span>新增客户</span>
-                            </Link>
-                        </div>
+                        <Link to="/guest/save" className="btn btn-primary">
+                            <i className="fa fa-plus"></i>
+                            <span>新增客户</span>
+                        </Link>
                     </PageTitle>
                     <BreadCrumb path={[]} current="客户管理"/>
                     <Search onSearch={(searchType, searchKeyword) => {this.onSearch(searchType, searchKeyword)}}/>

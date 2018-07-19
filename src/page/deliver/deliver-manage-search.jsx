@@ -4,16 +4,15 @@ class Search extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            searchType      : 'guestName', //guestName / driverName
+            searchType      : 'guestName',
             searchKeyword   : ''
         }
     }
     // 数据变化的时候
     onValueChange(e){
-        let name    = e.target.name,
-            value   = e.target.value.trim();
+        const value = e.target.value.trim();
         this.setState({
-            [name] : value
+            'searchKeyword' : value
         });
     }
     // 点击搜索按钮的时候
@@ -32,18 +31,10 @@ class Search extends React.Component{
                 <div className="col-md-12">
                     <div className="form-inline">
                         <div className="form-group">
-                            <select className="form-control"
-                                    name="searchType"
-                                    onChange={(e) => this.onValueChange(e)}>
-                                <option value="guestName">按客户名称查询</option>
-                                <option value="driverName">按司机名称查询</option>
-                            </select>
-                        </div>
-                        <div className="form-group">
                             <input type="text"
                                    className="form-control"
-                                   placeholder="关键词"
-                                   name="searchKeyword"
+                                   placeholder="客户名称"
+                                   name="guestName"
                                    onKeyUp={(e) => this.onSearchKeywordKeyUp(e)}
                                    onChange={(e) => this.onValueChange(e)}/>
                         </div>

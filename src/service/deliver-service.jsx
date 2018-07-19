@@ -9,14 +9,8 @@ class DeliverService{
             data    = {};
         data.page = param.page;
         data.size = param.size;
-        if(param.type === 'list'){
-            url = '/manage/deliver/findPage';
-        }else if(param.type === 'search'){
-            if (param.searchType === 'driverName'){
-                url = '/manage/deliver/findPageByDriverNameLike';
-            }else if (param.searchType === 'guestName'){
-                url = '/manage/deliver/findPageByGuestNameLike';
-            }
+        url = '/manage/deliver/findPage';
+        if(param.type === 'search'){
             data[param.searchType]  = param.keyword;
         }
         return appUtil.request({
@@ -50,11 +44,20 @@ class DeliverService{
         });
     }
 
-    findOne(guestId, driverId, date){
+    findOne(guestId, date){
         return appUtil.request({
             type    : 'get',
             url     : '/manage/deliver/findOne',
-            data    : {guestId: guestId, driverId: driverId, date: date}
+            data    : {guestId: guestId, date: date}
+        });
+    }
+
+
+    findDatesByGuestId(guestId){
+        return appUtil.request({
+            type    : 'get',
+            url     : '/manage/deliver/findDatesByGuestId',
+            data    : {guestId: guestId}
         });
     }
 }

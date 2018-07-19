@@ -121,23 +121,33 @@ class PricelistSave extends React.Component{
                     <PageTitle title="新增报价" />
                     <BreadCrumb path={[{href: '/pricelist', name: '报价管理'}]} current="新增报价"/>
                     <div className="row margin-bottom-md">
-                        <div className="col-md-12">
-                            <div className="form-inline">
-                                <div className="form-group" style={{marginRight: '20px'}}>
-                                    <label htmlFor="guestId">客户id&nbsp;</label>
-                                    <input className="form-control" id="guestId" type="text"
-                                           value={this.state.guestId} readOnly/>
-                                </div>
-                                <div className="form-group" style={{marginRight: '20px'}}>
-                                    <label htmlFor="guestName">客户名称&nbsp;</label>
-                                    <input className="form-control" id="guestName" type="text"
-                                           value={this.state.guestName} readOnly/>
+                        <div className="col-md-6">
+                            <div className="form-horizontal">
+                                <div className="form-group">
+                                    <label htmlFor="guestId" className="col-sm-4 control-label">客户id</label>
+                                    <div className="col-sm-8">
+                                        <input className="form-control" id="guestId" type="text"
+                                               value={this.state.guestId} readOnly />
+                                    </div>
                                 </div>
                                 <div className="form-group">
-                                    <label htmlFor="date">报价日期&nbsp;</label>
-                                    <input className="form-control" id="date" type="date"
-                                           value={this.state.date}
-                                           onChange={e => this.onDateChange(e)}/>
+                                    <label htmlFor="date" className="col-sm-4 control-label">报价日期</label>
+                                    <div className="col-sm-8">
+                                        <input className="form-control" id="date" type="date"
+                                               value={this.state.date}
+                                               onChange={e => this.onDateChange(e)}/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="col-md-6">
+                            <div className="form-horizontal">
+                                <div className="form-group">
+                                    <label htmlFor="date" className="col-sm-4 control-label">客户名称</label>
+                                    <div className="col-sm-8">
+                                        <input className="form-control" id="guestName" type="text"
+                                               value={this.state.guestName} readOnly />
+                                    </div>
                                 </div>
                             </div>
                         </div>

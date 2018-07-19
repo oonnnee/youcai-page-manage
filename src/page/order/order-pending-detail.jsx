@@ -18,54 +18,21 @@ const orderService = new OrderService();
 const appUtil = new AppUtil();
 const orderUtil = new OrderUtil();
 
-class OrderDetail extends React.Component{
+class OrderPendingDetail extends React.Component{
 
     constructor(props){
         super(props);
         this.state = {
             guestId: this.props.match.params.guestId,
             date: this.props.match.params.date,
+            state: this.props.match.params.state,
             guestName: '',
-            dates: [],
-            state: '',
-            states: [],
             products: [],
         }
     }
 
     componentDidMount(){
-        this.loadDates();
-    }
-
-    loadDates(){
-        orderService.findDatesByGuestId(this.state.guestId).then(dates => {
-            if (dates==null || dates.length==0){
-                return;
-            }
-            this.setState({
-                dates: dates
-            }, () => {
-                this.loadStates();
-            })
-        }, errMsg => {
-            appUtil.errorTip(errMsg);
-        })
-    }
-
-    loadStates(){
-        orderService.findStatesByGuestIdAndDate(this.state.guestId, this.state.date).then(states => {
-            if (states==null || states.length==0){
-                return;
-            }
-            this.setState({
-                states: states,
-                state: states[0]
-            }, () => {
-                this.findOne();
-            })
-        }, errMsg => {
-            appUtil.errorTip(errMsg);
-        })
+        this.findOne();
     }
 
     findOne(){
@@ -77,54 +44,19 @@ class OrderDetail extends React.Component{
             })
     }
 
-    onDateChange(e){
-        this.setState({
-            date: e.target.value
-        }, () => {
-            this.loadStates();
-        })
-    }
-
-    onStateChange(e){
-        this.setState({
-            state: e.target.value
-        }, () => {
-            this.findOne();
-        })
+    confirmBack(){
+        if( confirm('确认退回此采购单吗？\n之后此采购单状态将变为（已退回）') ){
+            orderService.back(this.state.guestId, this.state.date, this.state.state)
+                .then(() => {
+                    appUtil.successTip('退回成功');
+                    window.location.href = "/order/pending";
+                }, errMsg => {
+                    appUtil.errorTip(errMsg);
+                })
+        }
     }
 
     render(){
-        let date;
-        if (this.state.dates.length === 0){
-            date = <input type="text" className="form-control" value="暂无采购单" readOnly />
-        }else{
-            date = (
-                <select id="date" value={this.state.date} className="form-control"
-                        onChange={e => this.onDateChange(e)}>
-                    {
-                        this.state.dates.map((value, index) => {
-                            return <option key={index} value={value}>{value}</option>
-                        })
-                    }
-                </select>
-            );
-        }
-        let stat;
-        if (this.state.states.length === 0){
-            stat = <input type="text" className="form-control" value="暂无" readOnly />
-        } else{
-            stat = (
-                <select id="state" value={this.state.state} className="form-control"
-                        onChange={e => this.onStateChange(e)}>
-                    {
-                        this.state.states.map((value, index) => {
-                            let show = orderUtil.getShow(value);
-                            return <option key={index} value={value}>{show}</option>
-                        })
-                    }
-                </select>
-            );
-        }
         const tableHeads = [
             {name: '产品id', width: '15%'},
             {name: '产品名称', width: '25%'},
@@ -133,22 +65,41 @@ class OrderDetail extends React.Component{
             {name: '金额', width: '15%'},
             {name: '备注', width: '25%'}
         ];
+        let pageTitle;
+        if (this.state.state == orderUtil.getStateNew().state) {
+            pageTitle = (
+                <PageTitle title="采购详情" >
+                    <Link to={`/deliver/new/${this.state.guestId}/${this.state.date}`}
+                          className="btn btn-primary">
+                        <i className="fa fa-truck"></i>
+                        <span>创建送货单</span>
+                    </Link>
+                    <a href={`http://${appUtil.getDeployAddress()}:8080/manage/order/export?guestId=${this.state.guestId}&date=${this.state.date}`}
+                       target="_blank" className="btn btn-primary" >
+                        <i className="fa fa-cloud-download"></i>
+                        <span>导出excel</span>
+                    </a>
+                </PageTitle>
+            );
+        } else if (this.state.state[0] == orderUtil.getStateBacking().state) {
+            pageTitle = (
+                <PageTitle title="采购详情" >
+                    <button className="btn btn-danger" onClick={() => this.confirmBack()}>
+                        <i className="fa fa-check"></i>
+                        <span>确认退回</span>
+                    </button>
+                </PageTitle>
+            );
+        } else {
+            pageTitle = (
+                <PageTitle title="采购详情" />
+            );
+        }
         return (
             <div id="page-wrapper">
                 <div id="page-inner">
-                    <PageTitle title="采购详情" >
-                        <Link to={`/deliver/new/${this.state.guestId}/${this.state.date}`}
-                              className="btn btn-primary" disabled={this.state.state != orderUtil.getStateNew().state}>
-                            <i className="fa fa-truck"></i>
-                            <span>创建送货单</span>
-                        </Link>
-                        <a href={`http://${appUtil.getDeployAddress()}:8080/manage/order/export?guestId=${this.state.guestId}&date=${this.state.date}`}
-                           target="_blank" className="btn btn-primary" disabled={this.state.state != orderUtil.getStateNew().state}>
-                            <i className="fa fa-cloud-download"></i>
-                            <span>导出excel</span>
-                        </a>
-                    </PageTitle>
-                    <BreadCrumb path={[{href: '/order', name: '采购管理'}]} current="采购详情"/>
+                    {pageTitle}
+                    <BreadCrumb path={[{href: '/order', name: '采购管理'},{href: '/order/pending', name: orderUtil.getStatePending().note}]} current="采购详情"/>
                     <div className="row margin-bottom-md">
                         <div className="col-md-6">
                             <div className="form-horizontal">
@@ -162,7 +113,8 @@ class OrderDetail extends React.Component{
                                 <div className="form-group">
                                     <label htmlFor="date" className="col-md-4 control-label">采购日期</label>
                                     <div className="col-md-8">
-                                        {date}
+                                        <input className="form-control" id="date" type="text"
+                                               value={this.state.date} readOnly/>
                                     </div>
                                 </div>
                             </div>
@@ -179,7 +131,8 @@ class OrderDetail extends React.Component{
                                 <div className="form-group">
                                     <label htmlFor="state" className="col-md-4 control-label">状态</label>
                                     <div className="col-md-8">
-                                        {stat}
+                                        <input className="form-control" id="state" type="text"
+                                               value={orderUtil.getShow(this.state.state)} readOnly/>
                                     </div>
                                 </div>
                             </div>
@@ -208,4 +161,4 @@ class OrderDetail extends React.Component{
 }
 
 
-export default OrderDetail;
+export default OrderPendingDetail;

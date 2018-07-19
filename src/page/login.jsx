@@ -12,8 +12,8 @@ class Login extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            id: '',
-            pwd: ''
+            id: 'admin',
+            pwd: 'admin'
         }
     }
 
@@ -40,10 +40,12 @@ class Login extends React.Component{
                     <div className="panel-body">
                         <div className="form-group">
                             <input type="text" name="id" className="form-control" placeholder="请输入用户名"
+                                   value={this.state.id}
                                    onChange={e => this.handleInputChange(e)} />
                         </div>
                         <div className="form-group">
                             <input type="password" name="pwd" className="form-control" placeholder="请输入密码"
+                                   value={this.state.pwd}
                                    onChange={e => this.handleInputChange(e)} onKeyUp={e => this.onLoginKeyUp(e)} />
                         </div>
                         <button className="btn btn-lg btn-primary btn-block"

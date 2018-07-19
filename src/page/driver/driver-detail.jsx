@@ -39,16 +39,14 @@ class DriverDetail  extends React.Component{
             <div id="page-wrapper">
                 <div id="page-inner">
                     <PageTitle title="司机详情" >
-                        <div className="page-header-right">
-                            <Link to={"/driver/edit/"+this.state.id} className="btn btn-primary">
-                                <i className="fa fa-edit"></i>&nbsp;
-                                <span>编辑</span>
-                            </Link>
-                            <a href="javascript:;" className="btn btn-danger" onClick={() => this.onDelete()}>
-                                <i className="fa fa-trash-o"></i>&nbsp;
-                                <span>删除</span>
-                            </a>
-                        </div>
+                        <Link to={"/driver/edit/"+this.state.id} className="btn btn-primary">
+                            <i className="fa fa-edit"></i>
+                            <span>编辑</span>
+                        </Link>
+                        <a href="javascript:;" className="btn btn-danger" onClick={() => this.onDelete()}>
+                            <i className="fa fa-trash-o"></i>
+                            <span>删除</span>
+                        </a>
                     </PageTitle>
                     <BreadCrumb path={[{href: '/driver', name: '司机管理'}]} current="司机详情"/>
                     <div className="row">

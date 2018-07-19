@@ -6,6 +6,7 @@ import BreadCrumb from 'page/part/bread-crumb.jsx';
 import DataGrid from 'page/part/data-grid.jsx';
 
 import AppUtil from 'util/app-util.jsx';
+import DeliverUtil from 'util/deliver-util.jsx';
 import DeliverService from 'service/deliver-service.jsx';
 import GuestService from 'service/guest-service.jsx';
 import DriverService from 'service/driver-service.jsx';
@@ -15,6 +16,7 @@ const guestService = new GuestService();
 const deliverService = new DeliverService();
 const driverService = new DriverService();
 const appUtil = new AppUtil();
+const deliverUtil = new DeliverUtil();
 
 class DeliverDetail extends React.Component{
 
@@ -22,20 +24,24 @@ class DeliverDetail extends React.Component{
         super(props);
         this.state = {
             guestId: this.props.match.params.guestId,
-            driverId: this.props.match.params.driverId,
+            driverId: '',
             date: this.props.match.params.date,
             guestName: '',
             driverName: '',
+            state: '',
             products: [],
+
+            dates: [],
         }
     }
 
     componentDidMount(){
         this.findOne();
+        this.loadDates();
     }
 
     findOne(){
-        deliverService.findOne(this.state.guestId, this.state.driverId, this.state.date)
+        deliverService.findOne(this.state.guestId, this.state.date)
             .then(data => {
                 this.setState(data);
             }, errMsg => {
@@ -43,17 +49,38 @@ class DeliverDetail extends React.Component{
             })
     }
 
-    onDelete(){
-        if (confirm('确认删除此送货单吗？')) {
-            deliverService.delete(this.state.guestId, this.state.driverId, this.state.date)
-                .then(() => {
-                    appUtil.successTip('删除成功');
-                    window.location.href = '/deliver';
-                }, errMsg => {
-                    appUtil.errorTip(errMsg);
-                })
-        }
+    loadDates(){
+        deliverService.findDatesByGuestId(this.state.guestId).then(dates => {
+            if (dates==null || dates.length==0){
+                return;
+            }
+            this.setState({
+                dates: dates
+            })
+        }, errMsg => {
+            appUtil.errorTip(errMsg);
+        })
     }
+
+    onDateChange(e){
+        this.setState({
+            date: e.target.value
+        }, () => {
+            this.findOne();
+        })
+    }
+
+    // onDelete(){
+    //     if (confirm('确认删除此送货单吗？')) {
+    //         deliverService.delete(this.state.guestId, this.state.driverId, this.state.date)
+    //             .then(() => {
+    //                 appUtil.successTip('删除成功');
+    //                 window.location.href = '/deliver';
+    //             }, errMsg => {
+    //                 appUtil.errorTip(errMsg);
+    //             })
+    //     }
+    // }
 
     render(){
         const tableHeads = [
@@ -68,35 +95,57 @@ class DeliverDetail extends React.Component{
             <div id="page-wrapper">
                 <div id="page-inner">
                     <PageTitle title="送货详情" >
-                        <div className="page-header-right">
-                            <a href={"http://localhost:8080/manage/deliver/export?guestId="+this.state.guestId+"&driverId="+this.state.driverId+"&date="+this.state.date} target="_blank" className="btn btn-primary">
-                                <i className="fa fa-cloud-download"></i>&nbsp;
-                                <span>导出excel</span>
-                            </a>
-                            <a href="javascript:;" className="btn btn-danger" onClick={() => this.onDelete()}>
-                                <i className="fa fa-trash-o"></i>&nbsp;
-                                <span>删除</span>
-                            </a>
-                        </div>
+                        <a href={`http://${appUtil.getDeployAddress()}:8080/manage/deliver/export?guestId=${this.state.guestId}&date=${this.state.date}`}
+                           target="_blank" className="btn btn-primary">
+                            <i className="fa fa-cloud-download"></i>
+                            <span>导出excel</span>
+                        </a>
+                        {/*<a href="javascript:;" className="btn btn-danger" onClick={() => this.onDelete()}>*/}
+                            {/*<i className="fa fa-trash-o"></i>*/}
+                            {/*<span>删除</span>*/}
+                        {/*</a>*/}
                     </PageTitle>
                     <BreadCrumb path={[{href: '/deliver', name: '送货管理'}]} current="送货详情"/>
                     <div className="row margin-bottom-md">
-                        <div className="col-md-12">
-                            <div className="form-inline">
-                                <div className="form-group" style={{marginRight: '20px'}}>
-                                    <label htmlFor="guestName">客户名称&nbsp;</label>
-                                    <input className="form-control" id="guestName" type="text"
+                        <div className="col-md-6">
+                            <div className="form-horizontal">
+                                <div className="form-group">
+                                    <label htmlFor="guestName" className="col-sm-4 control-label">客户名称</label>
+                                    <div className="col-sm-8">
+                                        <input className="form-control" id="guestName" type="text"
                                            value={this.state.guestName} readOnly />
-                                </div>
-                                <div className="form-group" style={{marginRight: '20px'}}>
-                                    <label htmlFor="guestName">司机名称&nbsp;</label>
-                                    <input className="form-control" id="driverName" type="text"
-                                           value={this.state.driverName} readOnly />
+                                    </div>
                                 </div>
                                 <div className="form-group">
-                                    <label htmlFor="date">送货日期&nbsp;</label>
-                                    <input className="form-control" id="date" type="text"
-                                           value={this.state.date} readOnly />
+                                    <label htmlFor="driverName" className="col-sm-4 control-label">司机名称</label>
+                                    <div className="col-sm-8">
+                                        <input className="form-control" id="driverName" type="text"
+                                               value={this.state.driverName} readOnly />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="col-md-6">
+                            <div className="form-horizontal">
+                                <div className="form-group">
+                                    <label htmlFor="date" className="col-sm-4 control-label">送货日期</label>
+                                    <div className="col-sm-8">
+                                        <select id="date" value={this.state.date} className="form-control"
+                                                onChange={e => this.onDateChange(e)}>
+                                            {
+                                                this.state.dates.map((value, index) => {
+                                                    return <option key={index} value={value}>{value}</option>
+                                                })
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+                                <div className="form-group">
+                                    <label htmlFor="state" className="col-sm-4 control-label">状态</label>
+                                    <div className="col-sm-8">
+                                        <input className="form-control" id="state" type="text"
+                                               value={deliverUtil.getShow(this.state.state)} readOnly />
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -109,7 +158,7 @@ class DeliverDetail extends React.Component{
                                         <td>{product.id}</td>
                                         <td>{product.name}</td>
                                         <td>{product.price}</td>
-                                        <td>{product.num}&nbsp;<span className="badge">{product.unit}</span></td>
+                                        <td>{product.num}<span className="badge">{product.unit}</span></td>
                                         <td>{product.amount}</td>
                                         <td>{product.note}</td>
                                     </tr>

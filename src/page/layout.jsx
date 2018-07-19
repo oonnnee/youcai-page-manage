@@ -31,6 +31,8 @@ import PricelistEdit from 'page/pricelist/pricelist-edit.jsx';
 /*----- 采购 -----*/
 import OrderManage from 'page/order/order-manage.jsx';
 import OrderDetail from 'page/order/order-detail.jsx';
+import OrderPendingList from 'page/order/order-pending-list.jsx';
+import OrderPendingDetail from 'page/order/order-pending-detail.jsx';
 
 /*----- 送货 -----*/
 import DeliverManage from 'page/deliver/deliver-manage.jsx';
@@ -75,11 +77,13 @@ class Layout extends React.Component{
                         <Route exact path="/pricelist/edit/:guestId/:date" component={PricelistEdit}/>
                         {/*----- 采购 -----*/}
                         <Route exact path="/order" component={OrderManage}/>
+                        <Route exact path="/order/detail/:guestId/:date/:state" component={OrderPendingDetail}/>
                         <Route exact path="/order/detail/:guestId/:date" component={OrderDetail}/>
+                        <Route exact path="/order/pending" component={OrderPendingList}/>
                         {/*----- 送货 -----*/}
                         <Route exact path="/deliver" component={DeliverManage}/>
-                        <Route exact path="/deliver/detail/:guestId/:driverId/:date" component={DeliverDetail}/>
-                        <Route exact path="/deliver/new/:guestId/:odate/:state" component={DeliverSave}/>
+                        <Route exact path="/deliver/detail/:guestId/:date" component={DeliverDetail}/>
+                        <Route exact path="/deliver/new/:guestId/:odate" component={DeliverSave}/>
                         {/*----- 送货司机 -----*/}
                         <Route exact path="/driver" component={DriverManage}/>
                         <Route exact path="/driver/detail/:id" component={DriverDetail}/>

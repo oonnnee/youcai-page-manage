@@ -28,16 +28,14 @@ class UserProfile extends React.Component{
             <div id="page-wrapper">
                 <div id="page-inner">
                     <PageTitle title="用户信息" >
-                        <div className="page-header-right">
-                            <Link to="/user/edit" className="btn btn-primary" style={{marginRight: '20px'}}>
-                                <i className="fa fa-edit"></i>&nbsp;
-                                <span>编辑</span>
-                            </Link>
-                            <Link to="/user/updatePwd" className="btn btn-primary">
-                                <i className="fa fa-key"></i>&nbsp;
-                                <span>修改密码</span>
-                            </Link>
-                        </div>
+                        <Link to="/user/edit" className="btn btn-primary" style={{marginRight: '20px'}}>
+                            <i className="fa fa-edit"></i>
+                            <span>编辑</span>
+                        </Link>
+                        <Link to="/user/updatePwd" className="btn btn-primary">
+                            <i className="fa fa-key"></i>
+                            <span>修改密码</span>
+                        </Link>
                     </PageTitle>
                     <div className="row">
                         <div className="col-md-12 column">

@@ -48,12 +48,10 @@ class ProductManage extends React.Component {
             <div id="page-wrapper">
                 <div id="page-inner">
                     <PageTitle title="产品管理">
-                        <div className="page-header-right">
-                            <Link to="/product/save" className="btn btn-primary">
-                                <i className="fa fa-plus"></i>&nbsp;
-                                <span>新增产品</span>
-                            </Link>
-                        </div>
+                        <Link to="/product/save" className="btn btn-primary">
+                            <i className="fa fa-plus"></i>
+                            <span>新增产品</span>
+                        </Link>
                     </PageTitle>
                     <BreadCrumb path={[]} current="产品管理"/>
                     <Search onSearch={(PCodes, name) => {this.onSearch(PCodes, name)}}/>

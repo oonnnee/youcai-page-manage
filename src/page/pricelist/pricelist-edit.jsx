@@ -112,30 +112,38 @@ class PricelistEdit extends React.Component{
                     <PageTitle title="更新报价" />
                     <BreadCrumb path={[{href: '/pricelist', name: '报价管理'}]} current="更新报价"/>
                     <div className="row margin-bottom-md">
-                        <div className="col-md-12">
-                            <div className="form-inline">
-                                <div className="form-group" style={{marginRight: '20px'}}>
-                                    <label htmlFor="guestId">客户id&nbsp;</label>
-                                    <input className="form-control" id="guestId" type="text"
-                                           value={this.state.guestId} readOnly
-                                           readOnly />
-                                </div>
-                                <div className="form-group" style={{marginRight: '20px'}}>
-                                    <label htmlFor="guestName">客户名称&nbsp;</label>
-                                    <input className="form-control" id="guestName" type="text"
-                                           value={this.state.guestName} readOnly
-                                           readOnly />
+                        <div className="col-md-6">
+                            <div className="form-horizontal">
+                                <div className="form-group">
+                                    <label htmlFor="guestId" className="col-sm-4 control-label">客户id</label>
+                                    <div className="col-sm-8">
+                                        <input className="form-control" id="guestId" type="text"
+                                               value={this.state.guestId} readOnly />
+                                    </div>
                                 </div>
                                 <div className="form-group">
-                                    <label htmlFor="date">报价日期&nbsp;</label>
-                                    <select id="date" value={this.state.date} className="form-control"
-                                            onChange={e => this.onDateChange(e)}>
-                                        {
-                                            this.state.dates.map((value, index) => {
-                                                return <option key={index} value={value}>{value}</option>
-                                            })
-                                        }
-                                    </select>
+                                    <label htmlFor="date" className="col-sm-4 control-label">报价日期</label>
+                                    <div className="col-sm-8">
+                                        <select id="date" value={this.state.date} className="form-control"
+                                                onChange={e => this.onDateChange(e)}>
+                                            {
+                                                this.state.dates.map((value, index) => {
+                                                    return <option key={index} value={value}>{value}</option>
+                                                })
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="col-md-6">
+                            <div className="form-horizontal">
+                                <div className="form-group">
+                                    <label htmlFor="date" className="col-sm-4 control-label">客户名称</label>
+                                    <div className="col-sm-8">
+                                        <input className="form-control" id="guestName" type="text"
+                                               value={this.state.guestName} readOnly />
+                                    </div>
                                 </div>
                             </div>
                         </div>

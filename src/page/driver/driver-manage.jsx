@@ -47,12 +47,10 @@ class DriverManage extends React.Component {
             <div id="page-wrapper">
                 <div id="page-inner">
                     <PageTitle title="司机管理">
-                        <div className="page-header-right">
-                            <Link to="/driver/save" className="btn btn-primary">
-                                <i className="fa fa-plus"></i>&nbsp;
-                                <span>新增司机</span>
-                            </Link>
-                        </div>
+                        <Link to="/driver/save" className="btn btn-primary">
+                            <i className="fa fa-plus"></i>
+                            <span>新增司机</span>
+                        </Link>
                     </PageTitle>
                     <BreadCrumb path={[]} current={"司机管理"}/>
                     <Search onSearch={(driverName) => {this.onSearch(driverName)}}/>

@@ -125,6 +125,10 @@ class AppUtil{
         }
         return `${date.getFullYear()+'-'+f.format(date.getMonth()+1)+'-'+f.format(date.getDate())}`;
     }
+
+    getDeployAddress(){
+        return 'localhost';
+    }
 }
 
 
