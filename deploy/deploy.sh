@@ -1,7 +1,7 @@
 
 
-GIT_HOME=/developer/git-repository/
-DEST_PATH=/product
+GIT_HOME=/youcai/git-repository
+DEST_PATH=/youcai/front
 
 if [ ! -n "$1" ];
 then
@@ -13,7 +13,7 @@ fi
 if [ $1 = "youcai-page-manage" ];
 then
     echo -e "---------Enter Project--------"
-    cd $GIT_HOME$1
+    cd $GIT_HOME/$1
 else
     echo -e "Invalid Project Name!"
     exit
@@ -38,7 +38,7 @@ then
     rm -rf $DEST_PATH/$1/dist
 
     echo -e "---------copy Dest--------"
-    cp -R ./dist $DEST_PATH/$1/dist
+    cp -R ./dist/* $DEST_PATH/$1/dist
 
     echo -e "---------Deploy Success--------"
 else
