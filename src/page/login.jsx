@@ -62,14 +62,9 @@ class Login extends React.Component{
     -------------------------------*/
     handleInputChange(e){
         const target = e.target;
-        switch (target.name){
-            case 'id':{
-                this.state.id = target.value;
-            }break;
-            case 'pwd':{
-                this.state.pwd = target.value;
-            }break;
-        }
+        this.setState({
+            [target.name]: target.value
+        });
     }
 
     /*-------------------------------
