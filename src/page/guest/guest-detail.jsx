@@ -37,11 +37,27 @@ class GuestDetail  extends React.Component{
             appUtil.errorTip(errMsg);
         })
     }
+
+    delete(){
+        if (confirm('确认删除此客户吗？')){
+            guestService.delete(this.state.id).then(data => {
+                appUtil.successTip(data);
+                window.location.href = "/guest";
+            }, errMsg => {
+                appUtil.errorTip(errMsg);
+            })
+        }
+    }
     render(){
         return (
             <div id="page-wrapper">
                 <div id="page-inner">
-                    <PageTitle title="客户详情" />
+                    <PageTitle title="客户详情" >
+                        <button className="btn btn-danger" onClick={() => this.delete()}>
+                            <i className="fa fa-trash"></i>
+                            <span>删除</span>
+                        </button>
+                    </PageTitle>
                     <BreadCrumb path={[{href: '/guest', name: '客户管理'}]} current="客户详情"/>
                     <div className="row">
                         <div className="col-md-12 column">

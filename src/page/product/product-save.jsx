@@ -157,7 +157,7 @@ class ProductSave extends React.Component{
     }
 
     onUploadError(errMsg){
-        appUtil.errorTip(errMsg);
+        appUtil.errorTip('图片大小不能超过10M');
     }
 
     // 删除图片

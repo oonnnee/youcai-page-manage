@@ -83,6 +83,14 @@ class GuestService{
         });
     }
 
+    delete(id){
+        return appUtil.request({
+            type    : 'post',
+            url     : '/manage/guest/delete',
+            data    : {id: id}
+        });
+    }
+
     count(){
         return appUtil.request({
             type    : 'get',
