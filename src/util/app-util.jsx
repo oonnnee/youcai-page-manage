@@ -127,8 +127,8 @@ class AppUtil{
     }
 
     getDeployAddress(){
-        return 'localhost';
-        // return 'www.yawena.cn';
+        // return 'localhost';
+        return '123.206.13.129';
     }
 }
 
