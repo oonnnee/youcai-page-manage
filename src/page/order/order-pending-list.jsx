@@ -8,12 +8,6 @@ import DataGrid from 'page/part/data-grid.jsx';
 import AppUtil from 'util/app-util.jsx';
 import OrderUtil from 'util/order-util.jsx';
 import OrderService from 'service/order-service.jsx';
-import GuestService from 'service/guest-service.jsx';
-import CategoryService from 'service/category-service.jsx';
-
-
-const guestService = new GuestService();
-const categoryService = new CategoryService();
 const orderService = new OrderService();
 const appUtil = new AppUtil();
 const orderUtil = new OrderUtil();
@@ -53,7 +47,6 @@ class OrderPendingList extends React.Component{
 
     render(){
         const tableHeads = [
-            {name: '客户id', width: '15%'},
             {name: '客户名称', width: '30%'},
             {name: '采购日期', width: '15%'},
             {name: '状态', width: '30%'},
@@ -96,8 +89,7 @@ class OrderPendingList extends React.Component{
                                 }
                                 return (
                                     <tr key={index}>
-                                        <td>{order.guestId}</td>
-                                        <td>{order.guestName}</td>
+                                        <td><Link to={`/guest/detail/${order.guestId}`} target="_blank">{order.guestName}</Link></td>
                                         <td>{order.date}</td>
                                         <td>{stateShow}</td>
                                         <td>

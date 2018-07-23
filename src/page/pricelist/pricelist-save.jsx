@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 
 import PageTitle from 'page/part/page-title.jsx';
 import BreadCrumb from 'page/part/bread-crumb.jsx';
@@ -96,21 +97,21 @@ class PricelistSave extends React.Component{
         params.date = this.state.date;
         params.products = JSON.stringify(products);
 
-        let target = e.target;
-        target.innerHTML = '新增中...';
-        target.disabled = true;
-        pricelistService.update(params).then(() => {
-            target.innerHTML = '新增';
+        const text = '新增';
+        const target = e.target;
+        appUtil.disable(target, text);
+        pricelistService.save(params).then(() => {
+            appUtil.enable(target, text);
             appUtil.successTip('新增报价成功');
             window.location.href = "/pricelist";
         }, errMsg => {
             appUtil.errorTip(errMsg);
+            appUtil.enable(target, text);
         });
     }
 
     render(){
         const tableHeads = [
-            {name: '产品id', width: '15%'},
             {name: '产品名称', width: '30%'},
             {name: '单价', width: '15%'},
             {name: '备注', width: '40%'}
@@ -124,12 +125,15 @@ class PricelistSave extends React.Component{
                         <div className="col-md-6">
                             <div className="form-horizontal">
                                 <div className="form-group">
-                                    <label htmlFor="guestId" className="col-sm-4 control-label">客户id</label>
+                                    <label htmlFor="date" className="col-sm-4 control-label">客户名称</label>
                                     <div className="col-sm-8">
-                                        <input className="form-control" id="guestId" type="text"
-                                               value={this.state.guestId} readOnly />
+                                        <Link className="form-control" to={`/guest/detail/${this.state.guestId}`} target="_blank" readOnly>{this.state.guestName}</Link>
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+                        <div className="col-md-6">
+                            <div className="form-horizontal">
                                 <div className="form-group">
                                     <label htmlFor="date" className="col-sm-4 control-label">报价日期</label>
                                     <div className="col-sm-8">
@@ -140,25 +144,13 @@ class PricelistSave extends React.Component{
                                 </div>
                             </div>
                         </div>
-                        <div className="col-md-6">
-                            <div className="form-horizontal">
-                                <div className="form-group">
-                                    <label htmlFor="date" className="col-sm-4 control-label">客户名称</label>
-                                    <div className="col-sm-8">
-                                        <input className="form-control" id="guestName" type="text"
-                                               value={this.state.guestName} readOnly />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                     <DataGrid tableHeads={tableHeads}>
                         {
                             this.state.products.map((product, index) => {
                                 return (
                                     <tr key={index} aria-rowindex={index}>
-                                        <td>{product.id}</td>
-                                        <td>{product.name}</td>
+                                        <td><Link to={`/product/detail/${product.id}`} target="_blank">{product.name}</Link></td>
                                         <td><input type="text" className="form-control" name='price'
                                                    value={product.price} onChange={e => this.onInputChange(e)} /></td>
                                         <td><input type="text" className="form-control" name='note'

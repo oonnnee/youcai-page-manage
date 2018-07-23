@@ -52,7 +52,7 @@ class DeliverManage extends React.Component {
                             this.state.content.map((deliver, index) => {
                                 return (
                                     <tr key={index}>
-                                        <td>{deliver.guestName}</td>
+                                        <td><Link to={`/guest/detail/${deliver.guestId}`} target="_blank">{deliver.guestName}</Link></td>
                                         <td>{deliver.dates[0]}</td>
                                         <td>
                                             <Link className="opear" to={`/deliver/detail/${deliver.guestId}/${deliver.dates[0]}`}>查看</Link>

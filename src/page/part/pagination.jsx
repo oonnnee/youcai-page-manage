@@ -17,7 +17,8 @@ class Pagination extends React.Component{
                                   selectComponentClass={Select}
                                   showSizeChanger
                                   defaultPageSize={10}
-                                  showQuickJumper/>
+                                  showQuickJumper
+                                  hideOnSinglePage={true}/>
                 </div>
             </div>
         );

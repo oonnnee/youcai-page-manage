@@ -135,7 +135,7 @@ class OrderManage extends React.Component {
                             this.state.content.map((order, index) => {
                                 return (
                                     <tr key={index}>
-                                        <td>{order.guestName}</td>
+                                        <td><Link to={`/guest/detail/${order.guestId}`} target="_blank">{order.guestName}</Link></td>
                                         <td>{order.dates[0]}</td>
                                         <td>
                                             <Link className="opear" to={`/order/detail/${order.guestId}/${order.dates[0]}`}>查看</Link>

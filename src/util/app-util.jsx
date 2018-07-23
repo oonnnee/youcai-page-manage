@@ -114,21 +114,32 @@ class AppUtil{
         }
     }
 
-    /*-------------------------------
-            日期转换
-    -------------------------------*/
     getDateString(date){
         const f = {
             format: data => {
                 return data<10 ? `0${data}`:`${data}`;
             }
         }
-        return `${date.getFullYear()+'-'+f.format(date.getMonth()+1)+'-'+f.format(date.getDate())}`;
+        return `${date.getFullYear()}-${f.format(date.getMonth()+1)}-${f.format(date.getDate())}`;
     }
+
+    getYearStartString(date){
+        return `${date.getFullYear()}-01-01`;
+    }
+
 
     getDeployAddress(){
         // return 'localhost';
         return '123.206.13.129';
+    }
+
+    disable(target, text){
+        target.disabled = true;
+        target.innerHTML = text+"中...";
+    }
+    enable(target, text){
+        target.disabled = false;
+        target.innerHTML = text;
     }
 }
 

@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 
 import PageTitle from 'page/part/page-title.jsx';
 import BreadCrumb from 'page/part/bread-crumb.jsx';
@@ -87,14 +88,15 @@ class DeliverSave extends React.Component{
         params.products = JSON.stringify(products);
         params.orderDate = this.state.orderDate;
 
-        let target = e.target;
-        target.innerHTML = '创建中...';
-        target.disabled = true;
+        const target = e.target;
+        const text = '创建';
+        appUtil.disable(target, text);
         deliverService.save(params).then(() => {
-            target.innerHTML = '创建';
+            appUtil.enable(target, text);
             appUtil.successTip('创建送货单成功');
             window.location.href = '/order';
         }, errMsg => {
+            appUtil.enable(target, text);
             appUtil.errorTip(errMsg);
         });
     }
@@ -105,7 +107,6 @@ class DeliverSave extends React.Component{
 
     render(){
         const tableHeads = [
-            {name: '产品id', width: '15%'},
             {name: '产品名称', width: '25%'},
             {name: '单价', width: '10%'},
             {name: '数量', width: '10%'},
@@ -123,23 +124,12 @@ class DeliverSave extends React.Component{
                         <div className="col-md-6">
                             <div className="form-horizontal">
                                 <div className="form-group">
-                                    <label htmlFor="guestId" className="col-md-4 control-label">客户id</label>
-                                    <div className="col-md-8">
-                                        <input className="form-control" id="guestId" type="text"
-                                               value={this.state.guestId} readOnly/>
-                                    </div>
-                                </div>
-                                <div className="form-group">
                                     <label htmlFor="guestName" className="col-md-4 control-label">客户名称</label>
                                     <div className="col-md-8">
-                                        <input className="form-control" id="guestName" type="text"
-                                               value={this.state.guestName} readOnly/>
+                                        <Link className="form-control" to={`/guest/detail/${this.state.guestId}`}
+                                              target="_blank" readOnly>{this.state.guestName}</Link>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div className="col-md-6">
-                            <div className="form-horizontal">
                                 <div className="form-group">
                                     <label htmlFor="ddate" className="col-sm-4 control-label">送货日期</label>
                                     <div className="col-sm-8">
@@ -147,6 +137,10 @@ class DeliverSave extends React.Component{
                                                value={appUtil.getDateString(new Date())} readOnly/>
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+                        <div className="col-md-6">
+                            <div className="form-horizontal">
                                 <div className="form-group">
                                     <label htmlFor="guestName" className="col-md-4 control-label">送货司机</label>
                                     <div className="col-md-8">
@@ -169,8 +163,7 @@ class DeliverSave extends React.Component{
                             this.state.products.map((product, index) => {
                                 return (
                                     <tr key={index} aria-rowindex={index}>
-                                        <td>{product.id}</td>
-                                        <td>{product.name}</td>
+                                        <td><Link to={`/product/detail/${product.id}`} target="_blank">{product.name}</Link></td>
                                         <td>{product.price}</td>
                                         <td>{product.num}<span className="badge">{product.unit}</span></td>
                                         <td>{product.amount}</td>

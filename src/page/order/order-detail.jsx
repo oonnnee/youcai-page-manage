@@ -126,7 +126,6 @@ class OrderDetail extends React.Component{
             );
         }
         const tableHeads = [
-            {name: '产品id', width: '15%'},
             {name: '产品名称', width: '25%'},
             {name: '单价', width: '10%'},
             {name: '数量', width: '10%'},
@@ -153,10 +152,10 @@ class OrderDetail extends React.Component{
                         <div className="col-md-6">
                             <div className="form-horizontal">
                                 <div className="form-group">
-                                    <label htmlFor="guestId" className="col-md-4 control-label">客户id</label>
+                                    <label htmlFor="guestName" className="col-md-4 control-label">客户名称</label>
                                     <div className="col-md-8">
-                                        <input className="form-control" id="guestId" type="text"
-                                               value={this.state.guestId} readOnly/>
+                                        <Link className="form-control" to={`/guest/detail/${this.state.guestId}`}
+                                              target="_blank" readOnly>{this.state.guestName}</Link>
                                     </div>
                                 </div>
                                 <div className="form-group">
@@ -169,13 +168,6 @@ class OrderDetail extends React.Component{
                         </div>
                         <div className="col-md-6">
                             <div className="form-horizontal">
-                                <div className="form-group">
-                                    <label htmlFor="guestName" className="col-md-4 control-label">客户名称</label>
-                                    <div className="col-md-8">
-                                        <input className="form-control" id="guestName" type="text"
-                                               value={this.state.guestName} readOnly />
-                                    </div>
-                                </div>
                                 <div className="form-group">
                                     <label htmlFor="state" className="col-md-4 control-label">状态</label>
                                     <div className="col-md-8">
@@ -190,8 +182,7 @@ class OrderDetail extends React.Component{
                             this.state.products.map((product, index) => {
                                 return (
                                     <tr key={index}>
-                                        <td>{product.id}</td>
-                                        <td>{product.name}</td>
+                                        <td><Link to={`/product/detail/${product.id}`} target="_blank">{product.name}</Link></td>
                                         <td>{product.price}</td>
                                         <td>{product.num}<span className="badge">{product.unit}</span></td>
                                         <td>{product.amount}</td>

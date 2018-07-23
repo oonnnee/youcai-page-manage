@@ -84,7 +84,6 @@ class DeliverDetail extends React.Component{
 
     render(){
         const tableHeads = [
-            {name: '产品id', width: '15%'},
             {name: '产品名称', width: '25%'},
             {name: '单价', width: '10%'},
             {name: '数量', width: '10%'},
@@ -112,15 +111,15 @@ class DeliverDetail extends React.Component{
                                 <div className="form-group">
                                     <label htmlFor="guestName" className="col-sm-4 control-label">客户名称</label>
                                     <div className="col-sm-8">
-                                        <input className="form-control" id="guestName" type="text"
-                                           value={this.state.guestName} readOnly />
+                                        <Link className="form-control" to={`/guest/detail/${this.state.guestId}`}
+                                              target="_blank" readOnly>{this.state.guestName}</Link>
                                     </div>
                                 </div>
                                 <div className="form-group">
                                     <label htmlFor="driverName" className="col-sm-4 control-label">司机名称</label>
                                     <div className="col-sm-8">
-                                        <input className="form-control" id="driverName" type="text"
-                                               value={this.state.driverName} readOnly />
+                                        <Link className="form-control" to={`/driver/detail/${this.state.driverId}`}
+                                              target="_blank" readOnly>{this.state.driverName}</Link>
                                     </div>
                                 </div>
                             </div>
@@ -155,8 +154,7 @@ class DeliverDetail extends React.Component{
                             this.state.products.map((product, index) => {
                                 return (
                                     <tr key={index}>
-                                        <td>{product.id}</td>
-                                        <td>{product.name}</td>
+                                        <td><Link to={`/product/detail/${product.id}`} target="_blank">{product.name}</Link></td>
                                         <td>{product.price}</td>
                                         <td>{product.num}<span className="badge">{product.unit}</span></td>
                                         <td>{product.amount}</td>

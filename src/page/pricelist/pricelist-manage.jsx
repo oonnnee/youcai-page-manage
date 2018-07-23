@@ -53,12 +53,12 @@ class PricelistManage extends React.Component {
                                 let date;
                                 let detail;
                                 if (pricelist.dates.length != 0){
-                                    let d = appUtil.getDateString(new Date(pricelist.dates[0]));
+                                    let d = pricelist.dates[0];
                                     date = (
                                         <td>{d}</td>
                                     );
                                     detail = (
-                                        <Link className="opear" to={`/pricelist/detail/${pricelist.guestId}/${appUtil.getDateString(new Date(pricelist.dates[0]))}`}>查看</Link>
+                                        <Link className="opear" to={`/pricelist/detail/${pricelist.guestId}/${pricelist.dates[0]}`}>查看</Link>
                                     );
                                 } else {
                                     date = (
@@ -70,7 +70,7 @@ class PricelistManage extends React.Component {
                                 }
                                 return (
                                     <tr key={index}>
-                                        <td>{pricelist.guestName}</td>
+                                        <td><Link to={`/guest/detail/${pricelist.guestId}`} target="_blank">{pricelist.guestName}</Link></td>
                                         {date}
                                         <td>
                                             {detail}
