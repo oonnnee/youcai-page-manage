@@ -11,6 +11,13 @@ class StatService{
             data: {startDate: startDate, endDate: endDate}
         });
     }
+
+    getDataYear(){
+        return appUtil.request({
+            type: 'get',
+            url: '/manage/stat/year',
+        });
+    }
 }
 
 export default StatService;

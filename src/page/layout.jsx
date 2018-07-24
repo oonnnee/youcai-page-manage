@@ -47,6 +47,7 @@ import DriverSave from 'page/driver/driver-save.jsx';
 
 /*----- 统计 -----*/
 import StatRange from 'page/stat/stat-range.jsx';
+import StatYear from 'page/stat/stat-year.jsx';
 
 
 class Layout extends React.Component{
@@ -94,6 +95,7 @@ class Layout extends React.Component{
                         <Route exact path="/driver/save" component={DriverSave}/>
                         {/*----- 统计 -----*/}
                         <Route exact path="/stat/range" component={StatRange}/>
+                        <Route exact path="/stat/year" component={StatYear}/>
                     </Switch>
                 </div>
             </Router>

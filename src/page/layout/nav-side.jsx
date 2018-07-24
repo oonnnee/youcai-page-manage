@@ -69,7 +69,31 @@ class NavSide extends React.Component{
                             <NavLink activeClassName="active-menu" to="/deliver"><i className="fa fa-truck"></i>送货单</NavLink>
                         </li>
                         <li>
-                            <NavLink activeClassName="active-menu" to="/stat/range"><i className="fa fa-bar-chart"></i>统计</NavLink>
+                            <a href="#">
+                                <i className="fa fa-bar-chart"></i> 统计<span className="fa arrow"></span>
+                            </a>
+                            <ul className="nav nav-second-level">
+                                <li>
+                                    <NavLink activeClassName="active-menu" to="/stat/range">按时间范围</NavLink>
+                                </li>
+                                <li>
+                                    <a href="#">按统计维度<span className="fa arrow"></span></a>
+                                    <ul className="nav nav-third-level">
+                                        <li>
+                                            <a href="#">周报</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">月报</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">季报</a>
+                                        </li>
+                                        <li>
+                                            <NavLink activeClassName="active-menu" to="/stat/year">年报</NavLink>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
                         </li>
                     </ul>
 
@@ -80,6 +104,5 @@ class NavSide extends React.Component{
     }
 
 }
-
 
 export default NavSide;
