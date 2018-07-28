@@ -12,8 +12,8 @@ class GuestService{
         if(param.type === 'list'){
             url = '/manage/guest/findPage';
         }else if(param.type === 'search'){
-            if (param.searchType === 'id'){
-                url = '/manage/guest/findPageByIdLike';
+            if (param.searchType === 'phone'){
+                url = '/manage/guest/findPageByPhoneLike';
             }else if (param.searchType === 'name'){
                 url = '/manage/guest/findPageByNameLike';
             }

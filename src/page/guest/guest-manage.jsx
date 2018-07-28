@@ -37,11 +37,10 @@ class GuestManage extends React.Component {
 
     render() {
         const tableHeads = [
-            {name: 'id', width: '15%'},
-            {name: '名称', width: '27%'},
-            {name: '地址', width: '25%'},
+            {name: '名称', width: '25%'},
+            {name: '地址', width: '45%'},
             {name: '手机号', width: '15%'},
-            {name: '操作', width: '18%'},
+            {name: '操作', width: '15%'},
         ];
         return (
             <div id="page-wrapper">
@@ -60,8 +59,7 @@ class GuestManage extends React.Component {
                                 if(guest.id !== 'admin'){
                                     return (
                                         <tr key={index}>
-                                            <td>{guest.id}</td>
-                                            <td>{guest.name}</td>
+                                            <td><Link to={`/guest/detail/${guest.id}`}>{guest.name}</Link></td>
                                             <td>{guest.addr}</td>
                                             <td>{guest.phone}</td>
                                             <td>

@@ -126,6 +126,7 @@ class OrderDetail extends React.Component{
             );
         }
         const tableHeads = [
+            {name: '产品分类', width: '15%'},
             {name: '产品名称', width: '25%'},
             {name: '单价', width: '10%'},
             {name: '数量', width: '10%'},
@@ -182,6 +183,7 @@ class OrderDetail extends React.Component{
                             this.state.products.map((product, index) => {
                                 return (
                                     <tr key={index}>
+                                        <td>{product.category}</td>
                                         <td><Link to={`/product/detail/${product.id}`} target="_blank">{product.name}</Link></td>
                                         <td>{product.price}</td>
                                         <td>{product.num}<span className="badge">{product.unit}</span></td>

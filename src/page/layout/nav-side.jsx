@@ -80,13 +80,13 @@ class NavSide extends React.Component{
                                     <a href="#">按统计维度<span className="fa arrow"></span></a>
                                     <ul className="nav nav-third-level">
                                         <li>
-                                            <a href="#">周报</a>
+                                            <NavLink activeClassName="active-menu" to="/stat/week">周报</NavLink>
                                         </li>
                                         <li>
-                                            <a href="#">月报</a>
+                                            <NavLink activeClassName="active-menu" to="/stat/month">月报</NavLink>
                                         </li>
                                         <li>
-                                            <a href="#">季报</a>
+                                            <NavLink activeClassName="active-menu" to="/stat/quarter">季报</NavLink>
                                         </li>
                                         <li>
                                             <NavLink activeClassName="active-menu" to="/stat/year">年报</NavLink>

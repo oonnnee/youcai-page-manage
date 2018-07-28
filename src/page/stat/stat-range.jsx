@@ -31,6 +31,14 @@ class StatRange extends React.Component{
     }
 
     onSubmit(){
+        if (this.state.startDate == ''){
+            appUtil.errorTip('起始日期为空');
+            return;
+        }
+        if (this.state.endDate == ''){
+            appUtil.errorTip('结束日期为空');
+            return;
+        }
         if (this.state.endDate < this.state.startDate){
             appUtil.errorTip('结束日期不能小于起始日期');
             return;

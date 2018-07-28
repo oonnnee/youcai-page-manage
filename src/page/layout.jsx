@@ -48,9 +48,16 @@ import DriverSave from 'page/driver/driver-save.jsx';
 /*----- 统计 -----*/
 import StatRange from 'page/stat/stat-range.jsx';
 import StatYear from 'page/stat/stat-year.jsx';
+import StatQuarter from 'page/stat/stat-quarter.jsx';
+import StatMonth from 'page/stat/stat-month.jsx';
+import StatWeek from 'page/stat/stat-week.jsx';
 
 
 class Layout extends React.Component{
+
+    componentDidMount(){
+        document.body.style.background = '#f3f3f3';
+    }
 
     render(){
         return (
@@ -96,6 +103,9 @@ class Layout extends React.Component{
                         {/*----- 统计 -----*/}
                         <Route exact path="/stat/range" component={StatRange}/>
                         <Route exact path="/stat/year" component={StatYear}/>
+                        <Route exact path="/stat/quarter" component={StatQuarter}/>
+                        <Route exact path="/stat/month" component={StatMonth}/>
+                        <Route exact path="/stat/week" component={StatWeek}/>
                     </Switch>
                 </div>
             </Router>

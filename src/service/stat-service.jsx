@@ -18,6 +18,24 @@ class StatService{
             url: '/manage/stat/year',
         });
     }
+    getDataQuarter(){
+        return appUtil.request({
+            type: 'get',
+            url: '/manage/stat/quarter',
+        });
+    }
+    getDataMonth(){
+        return appUtil.request({
+            type: 'get',
+            url: '/manage/stat/month',
+        });
+    }
+    getDataWeek(){
+        return appUtil.request({
+            type: 'get',
+            url: '/manage/stat/week',
+        });
+    }
 }
 
 export default StatService;

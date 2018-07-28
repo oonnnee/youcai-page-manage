@@ -3,7 +3,6 @@
 ------------------------------------------------*/
 body {
     font-family: 'Open Sans', sans-serif;
-    background: #f3f3f3;
 }
 
 /*-------------------------------
@@ -68,6 +67,18 @@ a.form-control{
 
 th,td{
     text-align: center;
+}
+
+caption{
+    padding-bottom: 20px;
+    color: #555;
+    font-size: 26px;
+    text-align: center;
+}
+
+.children-pull-right a,.children-pull-right button{
+    float: right !important;
+    margin-left: 20px;
 }
 
 /*-------------------------------

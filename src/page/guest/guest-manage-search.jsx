@@ -4,7 +4,7 @@ class Search extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            searchType      : 'id', //id / name
+            searchType      : 'name', //phone / name
             searchKeyword   : ''
         }
     }
@@ -35,8 +35,8 @@ class Search extends React.Component{
                             <select className="form-control"
                                     name="searchType"
                                     onChange={(e) => this.onValueChange(e)}>
-                                <option value="id">按id查询</option>
                                 <option value="name">按名称查询</option>
+                                <option value="phone">按手机号查询</option>
                             </select>
                         </div>
                         <div className="form-group">

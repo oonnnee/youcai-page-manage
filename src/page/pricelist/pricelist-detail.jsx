@@ -72,9 +72,11 @@ class PricelistDetail extends React.Component{
 
     render(){
         const tableHeads = [
+            {name: '产品分类', width: '15%'},
             {name: '产品名称', width: '30%'},
+            {name: '单位', width: '10%'},
             {name: '单价（元）', width: '15%'},
-            {name: '备注', width: '40%'}
+            {name: '备注', width: '30%'}
         ];
         return (
             <div id="page-wrapper">
@@ -130,8 +132,10 @@ class PricelistDetail extends React.Component{
                             this.state.products.map((product, index) => {
                                 return (
                                     <tr key={index}>
+                                        <td>{product.category}</td>
                                         <td><Link to={`/product/detail/${product.id}`} target="_blank">{product.name}</Link></td>
-                                        <td>{product.price}</td>
+                                        <td>{product.unit}</td>
+                                        <td>{product.guestPrice}</td>
                                         <td>{product.note}</td>
                                     </tr>
                                 );

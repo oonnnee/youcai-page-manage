@@ -17,6 +17,10 @@ class Login extends React.Component{
         }
     }
 
+    componentDidMount(){
+        document.body.background = require('img/bg.png');
+    }
+
     onLoginKeyUp(e){
         if (e.keyCode == 13){
             this.handleLogin();

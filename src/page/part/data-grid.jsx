@@ -39,6 +39,7 @@ class DataGrid extends React.Component{
             <div className="row">
                 <div className="col-md-12 table-responsive">
                     <table className="table table-striped table-bordered">
+                        {this.props.tableCaption}
                         <thead>
                         <tr>
                             {tableHeader}

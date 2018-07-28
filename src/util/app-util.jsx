@@ -129,8 +129,8 @@ class AppUtil{
 
 
     getDeployAddress(){
-        // return 'localhost';
-        return '123.206.13.129';
+        return 'localhost';
+        // return '123.206.13.129';
     }
 
     disable(target, text){
@@ -140,6 +140,10 @@ class AppUtil{
     enable(target, text){
         target.disabled = false;
         target.innerHTML = text;
+    }
+
+    numberFormat(number){
+        return number==null ? number : number.toFixed(2);
     }
 }
 

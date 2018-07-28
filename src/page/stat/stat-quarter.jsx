@@ -11,7 +11,7 @@ const appUtil = new AppUtil();
 
 const statService = new StatService();
 
-class StatYear extends React.Component{
+class StatQuarter extends React.Component{
     constructor(props){
         super(props);
         this.state = {
@@ -24,7 +24,7 @@ class StatYear extends React.Component{
     }
 
     loadData(){
-        statService.getDataYear().then(data => {
+        statService.getDataQuarter().then(data => {
             this.setState({
                 data: data
             });
@@ -35,31 +35,22 @@ class StatYear extends React.Component{
 
     render(){
         const tableHeads = [
-            {name: '序号', width: '5%'},
+            {name: '序号', width: '10%'},
             {name: '客户名称', width: '25%'},
-            {name: '1月份', width: '5%'},
-            {name: '2月份', width: '5%'},
-            {name: '3月份', width: '5%'},
-            {name: '4月份', width: '5%'},
-            {name: '5月份', width: '5%'},
-            {name: '6月份', width: '5%'},
-            {name: '7月份', width: '5%'},
-            {name: '8月份', width: '5%'},
-            {name: '9月份', width: '5%'},
-            {name: '10月份', width: '6%'},
-            {name: '11月份', width: '6%'},
-            {name: '12月份', width: '6%'},
-            {name: '合计', width: '7%'},
+            {name: '第1月', width: '10%'},
+            {name: '第2月', width: '10%'},
+            {name: '第3月', width: '10%'},
+            {name: '合计', width: '15%'},
         ];
 
         const tableCaption =
-            <caption>{new Date().getFullYear()}年广东优菜农业发展有限公司销售数据统计表（单位：万元）</caption>;
+            <caption>{new Date().getFullYear()}年第{new Date().getMonth()/3+1}季度广东优菜农业发展有限公司销售数据统计表（单位：万元）</caption>;
 
         return (
             <div id="page-wrapper">
                 <div id="page-inner">
-                    <PageTitle title="按维度统计--年报" >
-                        <a href={`http://${appUtil.getDeployAddress()}:8080/manage/stat/export/year`}
+                    <PageTitle title="按维度统计--季报" >
+                        <a href={`http://${appUtil.getDeployAddress()}:8080/manage/stat/export/quarter`}
                            target="_blank" className="btn btn-primary">
                             <i className="fa fa-cloud-download"></i>
                             <span>导出excel</span>
@@ -76,15 +67,6 @@ class StatYear extends React.Component{
                                         <td>{year.month1}</td>
                                         <td>{year.month2}</td>
                                         <td>{year.month3}</td>
-                                        <td>{year.month4}</td>
-                                        <td>{year.month5}</td>
-                                        <td>{year.month6}</td>
-                                        <td>{year.month7}</td>
-                                        <td>{year.month8}</td>
-                                        <td>{year.month9}</td>
-                                        <td>{year.month10}</td>
-                                        <td>{year.month11}</td>
-                                        <td>{year.month12}</td>
                                         <td>{year.sum}</td>
                                     </tr>
                                 );
@@ -96,4 +78,4 @@ class StatYear extends React.Component{
         )
     }
 }
-export default StatYear;
+export default StatQuarter;

@@ -71,24 +71,18 @@ class Home extends React.Component{
             this.setState({
                 guestCount: guestCount
             })
-        }, () => {
-            appUtil.errorTip('获取客户总数失败');
         })
 
         productService.count().then(productCount => {
             this.setState({
                 productCount: productCount
             })
-        }, () => {
-            appUtil.errorTip('获取产品总数失败');
         })
 
         driverService.count().then(driverCount => {
             this.setState({
                 driverCount: driverCount
             })
-        }, () => {
-            appUtil.errorTip('获取司机总数失败');
         })
     }
 }
