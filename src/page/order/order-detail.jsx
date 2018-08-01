@@ -142,8 +142,9 @@ class OrderDetail extends React.Component{
                             <i className="fa fa-truck"></i>
                             <span>创建送货单</span>
                         </Link>
-                        <a href={`http://${appUtil.getDeployAddress()}:8080/manage/order/export?guestId=${this.state.guestId}&date=${this.state.date}`}
-                           target="_blank" className="btn btn-primary" disabled={this.state.state != orderUtil.getStateNew().state}>
+                        <a href={`/manage/order/export?guestId=${this.state.guestId}&date=${this.state.date}`}
+                           target="_blank" className="btn btn-primary"
+                           disabled={this.state.state!=orderUtil.getStateNew().state && this.state.state!=orderUtil.getStateDelivered().state}>
                             <i className="fa fa-cloud-download"></i>
                             <span>导出excel</span>
                         </a>
@@ -194,6 +195,13 @@ class OrderDetail extends React.Component{
                             })
                         }
                     </DataGrid>
+                    <div className="col-md-12">
+                        <Link to={`/deliver/new/${this.state.guestId}/${this.state.date}`}
+                              disabled={this.state.state != orderUtil.getStateNew().state}
+                              className="btn btn-primary btn-lg btn-block">
+                            创建送货单
+                        </Link>
+                    </div>
                 </div>
             </div>
         );

@@ -147,6 +147,13 @@ class OrderPendingDetail extends React.Component{
                             })
                         }
                     </DataGrid>
+                    <div className="col-md-12">
+                        <Link to={`/deliver/new/${this.state.guestId}/${this.state.date}`}
+                              disabled={this.state.state != orderUtil.getStateNew().state}
+                              className="btn btn-primary btn-lg btn-block">
+                            创建送货单
+                        </Link>
+                    </div>
                 </div>
             </div>
         );

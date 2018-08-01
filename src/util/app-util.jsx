@@ -129,8 +129,8 @@ class AppUtil{
 
 
     getDeployAddress(){
-        return 'localhost';
-        // return '123.206.13.129';
+        // return 'localhost';
+        return '123.206.13.129';
     }
 
     disable(target, text){

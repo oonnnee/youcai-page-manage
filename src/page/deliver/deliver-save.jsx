@@ -51,7 +51,7 @@ class DeliverSave extends React.Component{
     }
 
     loadDrivers(){
-        driverService.findAll().then(data => {
+        driverService.findAllWithState().then(data => {
             this.setState({
                 drivers: data,
                 driverId: data[0].id

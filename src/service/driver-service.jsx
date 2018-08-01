@@ -28,6 +28,12 @@ class DriverService{
             url: '/manage/driver/findList'
         });
     }
+    findAllWithState(){
+        return appUtil.request({
+            type: 'get',
+            url: '/manage/driver/findListWithState'
+        });
+    }
 
     // 获取司机详情
     findById(id){
