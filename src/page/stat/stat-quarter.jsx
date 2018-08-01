@@ -44,7 +44,7 @@ class StatQuarter extends React.Component{
         ];
 
         const tableCaption =
-            <caption>{new Date().getFullYear()}年第{new Date().getMonth()/3+1}季度广东优菜农业发展有限公司销售数据统计表（单位：万元）</caption>;
+            <caption>{new Date().getFullYear()}年第{parseInt(new Date().getMonth()/3)+1}季度广东优菜农业发展有限公司销售数据统计表（单位：万元）</caption>;
 
         return (
             <div id="page-wrapper">
