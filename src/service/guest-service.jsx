@@ -83,6 +83,14 @@ class GuestService{
         });
     }
 
+    updateUserPwd(param){
+        return appUtil.request({
+            type    : 'post',
+            url     : '/manage/guest/updateUserPwd',
+            data    : param
+        });
+    }
+
     delete(id){
         return appUtil.request({
             type    : 'post',
@@ -95,6 +103,13 @@ class GuestService{
         return appUtil.request({
             type    : 'get',
             url     : '/manage/guest/countAll',
+        });
+    }
+
+    logout(){
+        return appUtil.request({
+            type    : 'post',
+            url     : '/manage/logout'
         });
     }
 }

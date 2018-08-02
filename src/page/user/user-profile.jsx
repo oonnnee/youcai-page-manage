@@ -4,8 +4,10 @@ import {Link} from 'react-router-dom';
 import AppUtil from 'util/app-util.jsx';
 
 import PageTitle from 'page/part/page-title.jsx';
+import GuestService from 'service/guest-service.jsx';
 
 const appUtil = new AppUtil();
+const guestService = new GuestService();
 
 class UserProfile extends React.Component{
     constructor(props){
@@ -15,12 +17,40 @@ class UserProfile extends React.Component{
             name: '',
             addr: '',
             phone: '',
-            note: ''
+            note: '',
+
+            oldPwd: '',
+            newPwd: '',
+            reNewPwd: ''
         }
     }
 
     componentDidMount(){
         this.loadProfile();
+    }
+
+    onTextChange(e){
+        this.setState({
+            [e.target.id]: e.target.value
+        });
+    }
+
+    updatePwd(){
+        guestService.updateUserPwd({
+            oldPwd: this.state.oldPwd,
+            newPwd: this.state.newPwd,
+            reNewPwd: this.state.reNewPwd
+        }).then(() => {
+            guestService.logout().then(() => {
+                appUtil.removeStorage('user');
+                appUtil.successTip('更新密码成功，请重新登录');
+                window.location.href = "/login";
+            }, err => {
+                appUtil.errorTip(err);
+            })
+        }, err => {
+            appUtil.errorTip(err);
+        })
     }
 
     render(){
@@ -32,10 +62,10 @@ class UserProfile extends React.Component{
                             <i className="fa fa-edit"></i>
                             <span>编辑</span>
                         </Link>
-                        <Link to="/user/updatePwd" className="btn btn-primary">
+                        <a href="javascript:;" data-toggle="modal" data-target="#exampleModal" className="btn btn-primary">
                             <i className="fa fa-key"></i>
                             <span>修改密码</span>
-                        </Link>
+                        </a>
                     </PageTitle>
                     <div className="row">
                         <div className="col-md-12 column">
@@ -75,6 +105,39 @@ class UserProfile extends React.Component{
                                     </div>
                                 </div>
                             </form>
+                        </div>
+                    </div>
+                </div>
+                {/*----- update password modal -----*/}
+                <div className="modal fade" id="exampleModal" tabIndex="-1" role="dialog"
+                     aria-labelledby="exampleModalLabel">
+                    <div className="modal-dialog" role="document">
+                        <div className="modal-content">
+                            <div className="modal-header">
+                                <button type="button" className="close" data-dismiss="modal" aria-label="Close"><span
+                                    aria-hidden="true">&times;</span></button>
+                                <h4 className="modal-title" id="exampleModalLabel">修改密码</h4>
+                            </div>
+                            <div className="modal-body">
+                                <form>
+                                    <div className="form-group">
+                                        <input type="password" className="form-control" id="oldPwd" placeholder="原密码"
+                                               onChange={e => this.onTextChange(e)}/>
+                                    </div>
+                                    <div className="form-group">
+                                        <input type="password" className="form-control" id="newPwd" placeholder="新密码"
+                                               onChange={e => this.onTextChange(e)}/>
+                                    </div>
+                                    <div className="form-group">
+                                        <input type="password" className="form-control" id="reNewPwd" placeholder="再次输入新密码"
+                                               onChange={e => this.onTextChange(e)}/>
+                                    </div>
+                                </form>
+                            </div>
+                            <div className="modal-footer">
+                                <button type="button" className="btn btn-default" data-dismiss="modal">关闭</button>
+                                <button type="button" className="btn btn-primary" onClick={() => this.updatePwd()}>修改</button>
+                            </div>
                         </div>
                     </div>
                 </div>
