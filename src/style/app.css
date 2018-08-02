@@ -81,6 +81,13 @@ caption{
     margin-left: 20px;
 }
 
+.img-product {
+    width: 360px;
+    height: 240px;
+    border: 5px solid #fff;
+    border-radius: 5px;
+}
+
 /*-------------------------------
         登录页面
 -------------------------------*/
