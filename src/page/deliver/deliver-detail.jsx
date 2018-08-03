@@ -135,7 +135,7 @@ class DeliverDetail extends React.Component{
                         <div className="col-md-6">
                             <div className="form-horizontal">
                                 <div className="form-group">
-                                    <label htmlFor="date" className="col-sm-4 control-label">采购单日期</label>
+                                    <label htmlFor="date" className="col-sm-4 control-label">采购日期</label>
                                     <div className="col-sm-8">
                                         <select id="date" value={this.state.orderDate} className="form-control"
                                                 onChange={e => this.onDateChange(e)}>
