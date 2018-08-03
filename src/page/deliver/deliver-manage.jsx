@@ -37,8 +37,9 @@ class DeliverManage extends React.Component {
 
     render() {
         const tableHeads = [
-            {name: '客户名称', width: '50%'},
-            {name: '送货日期(最近一次)', width15: '30%'},
+            {name: '客户名称', width: '40%'},
+            {name: '采购日期(最近一次)', width: '20%'},
+            {name: '送货日期', width: '20%'},
             {name: '操作', width: '20%'},
         ];
         return (
@@ -53,9 +54,10 @@ class DeliverManage extends React.Component {
                                 return (
                                     <tr key={index}>
                                         <td><Link to={`/guest/detail/${deliver.guestId}`} target="_blank">{deliver.guestName}</Link></td>
-                                        <td>{deliver.dates[0]}</td>
+                                        <td>{deliver.orderDate}</td>
+                                        <td>{deliver.deliverDate}</td>
                                         <td>
-                                            <Link className="opear" to={`/deliver/detail/${deliver.guestId}/${deliver.dates[0]}`}>查看</Link>
+                                            <Link className="opear" to={`/deliver/detail/${deliver.guestId}/${deliver.deliverDate}`}>查看</Link>
                                         </td>
                                     </tr>
                                 )
@@ -85,6 +87,9 @@ class DeliverManage extends React.Component {
         // 请求接口
         deliverService.list(param).then(data => {
             this.setState(data);
+            this.setState({
+                a: '1'
+            });
         }, errMsg => {
             this.setState({
                 content: []

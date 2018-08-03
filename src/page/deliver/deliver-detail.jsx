@@ -123,14 +123,21 @@ class DeliverDetail extends React.Component{
                                               target="_blank" readOnly>{this.state.driverName}</Link>
                                     </div>
                                 </div>
+                                <div className="form-group">
+                                    <label htmlFor="state" className="col-sm-4 control-label">状态</label>
+                                    <div className="col-sm-8">
+                                        <input className="form-control" id="state" type="text"
+                                               value={deliverUtil.getShow(this.state.state)} readOnly />
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div className="col-md-6">
                             <div className="form-horizontal">
                                 <div className="form-group">
-                                    <label htmlFor="date" className="col-sm-4 control-label">送货日期</label>
+                                    <label htmlFor="date" className="col-sm-4 control-label">采购单日期</label>
                                     <div className="col-sm-8">
-                                        <select id="date" value={this.state.date} className="form-control"
+                                        <select id="date" value={this.state.orderDate} className="form-control"
                                                 onChange={e => this.onDateChange(e)}>
                                             {
                                                 this.state.dates.map((value, index) => {
@@ -141,10 +148,10 @@ class DeliverDetail extends React.Component{
                                     </div>
                                 </div>
                                 <div className="form-group">
-                                    <label htmlFor="state" className="col-sm-4 control-label">状态</label>
+                                    <label htmlFor="orderDate" className="col-sm-4 control-label">送货日期</label>
                                     <div className="col-sm-8">
-                                        <input className="form-control" id="state" type="text"
-                                               value={deliverUtil.getShow(this.state.state)} readOnly />
+                                        <input className="form-control" id="deliverDate" type="text"
+                                               value={this.state.deliverDate} readOnly />
                                     </div>
                                 </div>
                             </div>
