@@ -95,7 +95,7 @@ class DeliverDetail extends React.Component{
             <div id="page-wrapper">
                 <div id="page-inner">
                     <PageTitle title="送货详情" >
-                        <a href={`http://${appUtil.getDeployAddress()}:8080/manage/deliver/export?guestId=${this.state.guestId}&date=${this.state.date}`}
+                        <a href={`/manage/deliver/export?guestId=${this.state.guestId}&date=${this.state.date}`}
                            target="_blank" className="btn btn-primary">
                             <i className="fa fa-cloud-download"></i>
                             <span>导出excel</span>

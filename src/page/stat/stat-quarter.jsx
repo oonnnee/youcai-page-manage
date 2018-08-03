@@ -50,7 +50,7 @@ class StatQuarter extends React.Component{
             <div id="page-wrapper">
                 <div id="page-inner">
                     <PageTitle title="按维度统计--季报" >
-                        <a href={`http://${appUtil.getDeployAddress()}:8080/manage/stat/export/quarter`}
+                        <a href={`/manage/stat/export/quarter`}
                            target="_blank" className="btn btn-primary">
                             <i className="fa fa-cloud-download"></i>
                             <span>导出excel</span>

@@ -142,7 +142,7 @@ class OrderDetail extends React.Component{
                             <i className="fa fa-truck"></i>
                             <span>创建送货单</span>
                         </Link>
-                        <a href={`/manage/order/export?guestId=${this.state.guestId}&date=${this.state.date}`}
+                        <a href={`/manage/order/export?guestId=${this.state.guestId}&date=${this.state.date}&state=${this.state.state}`}
                            target="_blank" className="btn btn-primary"
                            disabled={this.state.state!=orderUtil.getStateNew().state && this.state.state!=orderUtil.getStateDelivered().state}>
                             <i className="fa fa-cloud-download"></i>

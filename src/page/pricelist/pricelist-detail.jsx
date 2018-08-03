@@ -82,7 +82,7 @@ class PricelistDetail extends React.Component{
             <div id="page-wrapper">
                 <div id="page-inner">
                     <PageTitle title="报价详情" >
-                        <a href={`http://${appUtil.getDeployAddress()}:8080/manage/pricelist/export?guestId=${this.state.guestId}&date=${this.state.date}`}
+                        <a href={`/manage/pricelist/export?guestId=${this.state.guestId}&date=${this.state.date}`}
                              target="_blank" className="btn btn-primary">
                             <i className="fa fa-cloud-download"></i>
                             <span>导出excel</span>

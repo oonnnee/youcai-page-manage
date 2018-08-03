@@ -59,7 +59,7 @@ class StatYear extends React.Component{
             <div id="page-wrapper">
                 <div id="page-inner">
                     <PageTitle title="按维度统计--年报" >
-                        <a href={`http://${appUtil.getDeployAddress()}:8080/manage/stat/export/year`}
+                        <a href={`/manage/stat/export/year`}
                            target="_blank" className="btn btn-primary">
                             <i className="fa fa-cloud-download"></i>
                             <span>导出excel</span>
