@@ -73,6 +73,14 @@ class PricelistService{
             data    : {guestId: guestId, date: date}
         });
     }
+
+    findLatest(guestId){
+        return appUtil.request({
+            type    : 'get',
+            url     : '/manage/pricelist/findLatest',
+            data    : {guestId: guestId}
+        });
+    }
 }
 
 export default PricelistService;

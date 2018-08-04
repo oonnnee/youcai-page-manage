@@ -125,7 +125,7 @@ class OrderDetail extends React.Component{
                 </select>
             );
         }
-        const tableHeads = [
+        const tableHeads = [             {name: '编号', width: '5%'},
             {name: '产品分类', width: '15%'},
             {name: '产品名称', width: '25%'},
             {name: '单价', width: '10%'},
@@ -137,6 +137,11 @@ class OrderDetail extends React.Component{
             <div id="page-wrapper">
                 <div id="page-inner">
                     <PageTitle title="采购详情" >
+                        <Link to={"/order/edit/"+this.state.guestId+"/"+this.state.date} className="btn btn-primary"
+                              disabled={this.state.state != orderUtil.getStateNew().state}>
+                            <i className="fa fa-edit"></i>
+                            <span>编辑</span>
+                        </Link>
                         <Link to={`/deliver/new/${this.state.guestId}/${this.state.date}`}
                               className="btn btn-primary" disabled={this.state.state != orderUtil.getStateNew().state}>
                             <i className="fa fa-truck"></i>
@@ -184,6 +189,7 @@ class OrderDetail extends React.Component{
                             this.state.products.map((product, index) => {
                                 return (
                                     <tr key={index}>
+                                        <td>{index+1}</td>
                                         <td>{product.category}</td>
                                         <td><Link to={`/product/detail/${product.id}`} target="_blank">{product.name}</Link></td>
                                         <td>{product.price}</td>

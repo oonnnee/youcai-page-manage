@@ -101,18 +101,22 @@ class PricelistEdit extends React.Component{
     }
 
     render(){
-        const tableHeads = [
+        const tableHeads = [             {name: '编号', width: '5%'},
             {name: '产品分类', width: '15%'},
             {name: '产品名称', width: '30%'},
             {name: '单位', width: '10%'},
-            {name: '单价（元）', width: '15%'},
+            {name: '市场价（元）', width: '15%'},
+            {name: '优惠价（元）', width: '15%'},
             {name: '备注', width: '30%'}
         ];
         return (
             <div id="page-wrapper">
                 <div id="page-inner">
                     <PageTitle title="更新报价" />
-                    <BreadCrumb path={[{href: '/pricelist', name: '报价管理'}]} current="更新报价"/>
+                    <BreadCrumb path={[
+                        {href: '/pricelist', name: '报价管理'},
+                        {href: `/pricelist/detail/${this.state.guestId}/${this.state.date}`, name: '报价详情'}
+                        ]} current="更新报价"/>
                     <div className="row margin-bottom-md">
                         <div className="col-md-6">
                             <div className="form-horizontal">
@@ -147,9 +151,11 @@ class PricelistEdit extends React.Component{
                         this.state.products.map((product, index) => {
                             return (
                                 <tr key={index} aria-rowindex={index}>
+                                    <td>{index+1}</td>
                                     <td>{product.category}</td>
                                     <td><Link to={`/product/detail/${product.id}`} target="_blank">{product.name}</Link></td>
                                     <td>{product.unit}</td>
+                                    <td>{product.marketPrice}</td>
                                     <td><input type="number" className="form-control" name='guestPrice'
                                                value={product.guestPrice} onChange={e => this.onInputChange(e)} /></td>
                                     <td><input type="text" className="form-control" name='note'

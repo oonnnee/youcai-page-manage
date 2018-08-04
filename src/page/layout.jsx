@@ -31,6 +31,7 @@ import PricelistEdit from 'page/pricelist/pricelist-edit.jsx';
 /*----- 采购 -----*/
 import OrderManage from 'page/order/order-manage.jsx';
 import OrderDetail from 'page/order/order-detail.jsx';
+import OrderEdit from 'page/order/order-edit.jsx';
 import OrderPendingList from 'page/order/order-pending-list.jsx';
 import OrderPendingDetail from 'page/order/order-pending-detail.jsx';
 
@@ -90,6 +91,7 @@ class Layout extends React.Component{
                         <Route exact path="/order" component={OrderManage}/>
                         <Route exact path="/order/detail/:guestId/:date/:state" component={OrderPendingDetail}/>
                         <Route exact path="/order/detail/:guestId/:date" component={OrderDetail}/>
+                        <Route exact path="/order/edit/:guestId/:date" component={OrderEdit}/>
                         <Route exact path="/order/pending" component={OrderPendingList}/>
                         {/*----- 送货 -----*/}
                         <Route exact path="/deliver" component={DeliverManage}/>

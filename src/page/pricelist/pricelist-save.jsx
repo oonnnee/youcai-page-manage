@@ -44,17 +44,9 @@ class PricelistSave extends React.Component{
     }
 
     loadProducts(){
-        productService.findList().then(products => {
-            let dest = [];
-            for (let i=0; i<products.length; i++){
-                dest.push({});
-                dest[i].id = products[i].id;
-                dest[i].name = products[i].name;
-                dest[i].price = products[i].price;
-                dest[i].note = '';
-            }
+        pricelistService.findLatest(this.state.guestId).then(data => {
             this.setState({
-                products: dest
+                products: data
             })
         }, errMsg => {
             appUtil.errorTip(errMsg);
@@ -68,9 +60,11 @@ class PricelistSave extends React.Component{
     }
 
     onInputChange(e){
-        const index = e.target.parentElement.parentElement.getAttribute('aria-rowindex');
         const name = e.target.getAttribute('name');
+        const index = e.target.parentElement.parentElement.getAttribute('aria-rowindex');
+
         let products = this.state.products;
+
         products[index][name] = e.target.value;
         this.setState({
             products: products
@@ -84,11 +78,15 @@ class PricelistSave extends React.Component{
         for (let i=0; i<this.state.products.length; i++){
             products.push({});
             products[i].id = this.state.products[i].id;
-            products[i].price = this.state.products[i].price;
+            products[i].price = this.state.products[i].guestPrice;
             products[i].note = this.state.products[i].note;
-            const price = Number(this.state.products[i].price);
+            const price = Number(this.state.products[i].guestPrice);
             if (isNaN(price)){
                 appUtil.errorTip(`第${i+1}行产品名称为'${this.state.products[i].name}'的单价非数字`);
+                return;
+            }
+            if (price < 0){
+                appUtil.errorTip(`第${i+1}行产品名称为'${this.state.products[i].name}'的单价小于0`);
                 return;
             }
         }
@@ -111,10 +109,13 @@ class PricelistSave extends React.Component{
     }
 
     render(){
-        const tableHeads = [
+        const tableHeads = [             {name: '编号', width: '5%'},
+            {name: '产品分类', width: '15%'},
             {name: '产品名称', width: '30%'},
-            {name: '单价', width: '15%'},
-            {name: '备注', width: '40%'}
+            {name: '单位', width: '10%'},
+            {name: '市场价（元）', width: '15%'},
+            {name: '优惠价（元）', width: '15%'},
+            {name: '备注', width: '25%'}
         ];
         return (
             <div id="page-wrapper">
@@ -150,9 +151,15 @@ class PricelistSave extends React.Component{
                             this.state.products.map((product, index) => {
                                 return (
                                     <tr key={index} aria-rowindex={index}>
+                                        <td>{index+1}</td>
+                                        <td>{product.category}</td>
                                         <td><Link to={`/product/detail/${product.id}`} target="_blank">{product.name}</Link></td>
-                                        <td><input type="text" className="form-control" name='price'
-                                                   value={product.price} onChange={e => this.onInputChange(e)} /></td>
+                                        <td>{product.unit}</td>
+                                        <td>{product.marketPrice}</td>
+                                        <td>
+                                            <input type="number" className="form-control" name='guestPrice'
+                                                   value={product.guestPrice} onChange={e => this.onInputChange(e)} />
+                                        </td>
                                         <td><input type="text" className="form-control" name='note'
                                                    value={product.note} onChange={e => this.onInputChange(e)} /></td>
                                     </tr>

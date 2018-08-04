@@ -57,6 +57,14 @@ class OrderService{
             data    : {guestId: guestId, date: date, state: state}
         });
     }
+    findOneWithZero(guestId, date){
+        return appUtil.request({
+            type    : 'get',
+            url     : '/manage/order/findOneWithZero',
+            data    : {guestId: guestId, date: date}
+        });
+    }
+
 
 
     countByState(state){
@@ -80,6 +88,14 @@ class OrderService{
             type    : 'post',
             url     : '/manage/order/back',
             data    : {guestId: guestId, date: date, state: state}
+        });
+    }
+
+    update(guestId, date, products){
+        return appUtil.request({
+            type    : 'post',
+            url     : '/manage/order/update',
+            data    : {guestId: guestId, date: date, products: products}
         });
     }
 }

@@ -46,7 +46,7 @@ class OrderPendingList extends React.Component{
     }
 
     render(){
-        const tableHeads = [
+        const tableHeads = [             {name: '编号', width: '5%'},
             {name: '客户名称', width: '30%'},
             {name: '采购日期', width: '15%'},
             {name: '状态', width: '30%'},
@@ -89,6 +89,7 @@ class OrderPendingList extends React.Component{
                                 }
                                 return (
                                     <tr key={index}>
+                                        <td>{index+1}</td>
                                         <td><Link to={`/guest/detail/${order.guestId}`} target="_blank">{order.guestName}</Link></td>
                                         <td>{order.date}</td>
                                         <td>{stateShow}</td>

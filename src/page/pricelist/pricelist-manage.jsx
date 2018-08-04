@@ -36,7 +36,7 @@ class PricelistManage extends React.Component {
     }
 
     render() {
-        const tableHeads = [
+        const tableHeads = [             {name: '编号', width: '5%'},
             {name: '客户名称', width: '50%'},
             {name: '报价日期(最近一次)', width15: '30%'},
             {name: '操作', width: '20%'},
@@ -70,6 +70,7 @@ class PricelistManage extends React.Component {
                                 }
                                 return (
                                     <tr key={index}>
+                                        <td>{index+1}</td>
                                         <td><Link to={`/guest/detail/${pricelist.guestId}`} target="_blank">{pricelist.guestName}</Link></td>
                                         {date}
                                         <td>

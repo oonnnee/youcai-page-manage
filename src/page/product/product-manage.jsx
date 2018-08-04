@@ -36,7 +36,7 @@ class ProductManage extends React.Component {
     }
 
     render() {
-        const tableHeads = [
+        const tableHeads = [             {name: '编号', width: '5%'},
             {name: '名称', width: '30%'},
             {name: '大类', width: '15%'},
             {name: '单位', width: '14%'},
@@ -59,6 +59,7 @@ class ProductManage extends React.Component {
                             this.state.content.map((product, index) => {
                                 return (
                                     <tr key={index}>
+                                        <td>{index+1}</td>
                                         <td><Link to={`/product/detail/${product.id}`}>{product.name}</Link></td>
                                         <td>{product.pcodeName}</td>
                                         <td>{product.unit}</td>

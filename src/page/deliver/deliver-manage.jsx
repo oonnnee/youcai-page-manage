@@ -36,7 +36,7 @@ class DeliverManage extends React.Component {
     }
 
     render() {
-        const tableHeads = [
+        const tableHeads = [             {name: '编号', width: '5%'},
             {name: '客户名称', width: '40%'},
             {name: '采购日期(最近一次)', width: '20%'},
             {name: '送货日期', width: '20%'},
@@ -53,6 +53,7 @@ class DeliverManage extends React.Component {
                             this.state.content.map((deliver, index) => {
                                 return (
                                     <tr key={index}>
+                                        <td>{index+1}</td>
                                         <td><Link to={`/guest/detail/${deliver.guestId}`} target="_blank">{deliver.guestName}</Link></td>
                                         <td>{deliver.orderDate}</td>
                                         <td>{deliver.deliverDate}</td>

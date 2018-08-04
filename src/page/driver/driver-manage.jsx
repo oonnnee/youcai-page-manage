@@ -36,7 +36,7 @@ class DriverManage extends React.Component {
     }
 
     render() {
-        const tableHeads = [
+        const tableHeads = [             {name: '编号', width: '5%'},
             {name: '姓名', width: '20%'},
             {name: '身份证', width: '30%'},
             {name: '手机号', width: '20%'},
@@ -59,6 +59,7 @@ class DriverManage extends React.Component {
                                 if(driver.id !== 'admin'){
                                     return (
                                         <tr key={index}>
+                                            <td>{index+1}</td>
                                             <td><Link to={`/driver/detail/${driver.id}`}>{driver.name}</Link></td>
                                             <td>{driver.cardid}</td>
                                             <td>{driver.mobile}</td>

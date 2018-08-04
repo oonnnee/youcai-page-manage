@@ -100,7 +100,7 @@ class OrderManage extends React.Component {
     }
 
     render() {
-        const tableHeads = [
+        const tableHeads = [             {name: '编号', width: '5%'},
             {name: '客户名称', width: '50%'},
             {name: '采购日期(最近一次)', width: '30%'},
             {name: '操作', width: '20%'},
@@ -135,6 +135,7 @@ class OrderManage extends React.Component {
                             this.state.content.map((order, index) => {
                                 return (
                                     <tr key={index}>
+                                        <td>{index+1}</td>
                                         <td><Link to={`/guest/detail/${order.guestId}`} target="_blank">{order.guestName}</Link></td>
                                         <td>{order.dates[0]}</td>
                                         <td>
