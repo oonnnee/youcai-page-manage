@@ -58,7 +58,7 @@ class DeliverManage extends React.Component {
                                         <td>{deliver.orderDate}</td>
                                         <td>{deliver.deliverDate}</td>
                                         <td>
-                                            <Link className="opear" to={`/deliver/detail/${deliver.guestId}/${deliver.deliverDate}`}>查看</Link>
+                                            <Link className="opear" to={`/deliver/detail/${deliver.guestId}/${deliver.orderDate}`}>查看</Link>
                                         </td>
                                     </tr>
                                 )

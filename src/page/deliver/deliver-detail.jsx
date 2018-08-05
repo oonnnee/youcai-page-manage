@@ -25,10 +25,12 @@ class DeliverDetail extends React.Component{
         this.state = {
             guestId: this.props.match.params.guestId,
             driverId: '',
-            date: this.props.match.params.date,
+            orderDate: this.props.match.params.date,
+            deliverDate: '',
             guestName: '',
             driverName: '',
             state: '',
+            total: 0,
             products: [],
 
             dates: [],
@@ -41,7 +43,7 @@ class DeliverDetail extends React.Component{
     }
 
     findOne(){
-        deliverService.findOne(this.state.guestId, this.state.date)
+        deliverService.findOne(this.state.guestId, this.state.orderDate)
             .then(data => {
                 this.setState(data);
             }, errMsg => {
@@ -64,7 +66,7 @@ class DeliverDetail extends React.Component{
 
     onDateChange(e){
         this.setState({
-            date: e.target.value
+            orderDate: e.target.value
         }, () => {
             this.findOne();
         })
@@ -95,7 +97,7 @@ class DeliverDetail extends React.Component{
             <div id="page-wrapper">
                 <div id="page-inner">
                     <PageTitle title="送货详情" >
-                        <a href={`/manage/deliver/export?guestId=${this.state.guestId}&date=${this.state.date}`}
+                        <a href={`/manage/deliver/export?guestId=${this.state.guestId}&date=${this.state.orderDate}`}
                            target="_blank" className="btn btn-primary">
                             <i className="fa fa-cloud-download"></i>
                             <span>导出excel</span>
@@ -135,9 +137,9 @@ class DeliverDetail extends React.Component{
                         <div className="col-md-6">
                             <div className="form-horizontal">
                                 <div className="form-group">
-                                    <label htmlFor="date" className="col-sm-4 control-label">采购日期</label>
+                                    <label htmlFor="orderDate" className="col-sm-4 control-label">采购日期</label>
                                     <div className="col-sm-8">
-                                        <select id="date" value={this.state.orderDate} className="form-control"
+                                        <select id="orderDate" value={this.state.orderDate} className="form-control"
                                                 onChange={e => this.onDateChange(e)}>
                                             {
                                                 this.state.dates.map((value, index) => {
@@ -148,10 +150,17 @@ class DeliverDetail extends React.Component{
                                     </div>
                                 </div>
                                 <div className="form-group">
-                                    <label htmlFor="orderDate" className="col-sm-4 control-label">送货日期</label>
+                                    <label htmlFor="deliverDate" className="col-sm-4 control-label">送货日期</label>
                                     <div className="col-sm-8">
                                         <input className="form-control" id="deliverDate" type="text"
                                                value={this.state.deliverDate} readOnly />
+                                    </div>
+                                </div>
+                                <div className="form-group">
+                                    <label htmlFor="total" className="col-sm-4 control-label">总计</label>
+                                    <div className="col-sm-8">
+                                        <input type="text" className="form-control" id="total"
+                                               value={this.state.total+' 元'} readOnly />
                                     </div>
                                 </div>
                             </div>

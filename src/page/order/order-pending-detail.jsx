@@ -27,6 +27,7 @@ class OrderPendingDetail extends React.Component{
             date: this.props.match.params.date,
             state: this.props.match.params.state,
             guestName: '',
+            total: 0,
             products: [],
         }
     }
@@ -132,6 +133,13 @@ class OrderPendingDetail extends React.Component{
                                     <div className="col-md-8">
                                         <input className="form-control" id="state" type="text"
                                                value={orderUtil.getShow(this.state.state)} readOnly/>
+                                    </div>
+                                </div>
+                                <div className="form-group">
+                                    <label htmlFor="total" className="col-sm-4 control-label">总计</label>
+                                    <div className="col-sm-8">
+                                        <input type="text" className="form-control" id="total"
+                                               value={this.state.total+' 元'} readOnly />
                                     </div>
                                 </div>
                             </div>
