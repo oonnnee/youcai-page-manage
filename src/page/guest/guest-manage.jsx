@@ -64,7 +64,7 @@ class GuestManage extends React.Component {
                                             <td>{guest.addr}</td>
                                             <td>{guest.phone}</td>
                                             <td>
-                                                <Link className="opear" to={`/guest/detail/${guest.id}`}>详情</Link>
+                                                <Link className="opear" to={`/guest/detail/${guest.id}`}>详情4</Link>
                                                 <Link className="opear" to={`/guest/edit/${guest.id}`}>编辑</Link>
                                                 <Link className="opear" to={`/guest/updatePwd/${guest.id}`}>修改密码</Link>
                                             </td>

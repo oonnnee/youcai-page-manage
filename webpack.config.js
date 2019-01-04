@@ -100,7 +100,7 @@ module.exports = {
         },
         proxy : {
             '/manage': {
-                target: 'http://localhost:8080',
+                target: 'http://localhost:8888',
                 changeOrigin: true
             }
         },
